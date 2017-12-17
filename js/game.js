@@ -10,6 +10,7 @@ const cols = 10;
 
 const perkStyles = [8000, 8100, 8200, 8300, 8400];
 
+var sprites = {};
 
 // Initialize Phaser, and creates a 750x750px game
 var game = new Phaser.Game(750, 750, Phaser.AUTO, 'phaser');
@@ -26,7 +27,6 @@ game_state.main.prototype = {
                 game.load.image(''+perkIDs[i][j], 'resources/runes/perk/'+perkIDs[i][j]+'.png');
             }
         }
-
 
         //Load rune category images.
         for (var i=0 ; i < perkStyles.length; i++) {
@@ -50,23 +50,43 @@ game_state.main.prototype = {
     }
 };
 
+function onClickTest(text) {
+    alert(text);
+}
+
+// Params: int spriteId
+function mouseOver(spriteId) {
+    sprites[spriteId].tint =  0x203470;
+}
+
+// Params: int spriteId
+function mouseOut(spriteId) {
+    sprites[spriteId].tint = 0xffffff;
+}
 
 game_state.game = function() {};
 game_state.game.prototype = {
 
     create: function() {
+        this.sprites = {};
+
         for (var i = 0; i < rows; i++) {
             for (var j = 0; j < cols; j++) {
                 const runeCategory = Math.floor(Math.random() * perkIDs.length);
                 const rune = Math.floor(Math.random() * perkIDs[runeCategory].length);
 
                 var sprite = game.add.sprite(750 * i / rows, 750 * j / cols, '' + perkIDs[runeCategory][rune]);
-                sprite.width = 75;
-                sprite.height = 75;
+                var spriteId = i.toString() + j.toString();
+                sprite.width = 75; sprite.height = 75;
+                sprite.inputEnabled = true;
+                sprite.events.onInputDown.add(function(){onClickTest(perkIDs[runeCategory][rune])}, this); //onInputUp is for when click is released
+                sprite.events.onInputOver.add(function(){mouseOver(spriteId)});
+                sprite.events.onInputOut.add(function(){mouseOut(spriteId)}, this);
+                //Save sprite to sprite dict
+                sprites[spriteId] = sprite;
             }
         }
     }
-
 };
 
 // Add and start the 'main' state to start the game
