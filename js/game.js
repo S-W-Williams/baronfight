@@ -5,6 +5,9 @@ const perkIDs = [[8005, 8008, 8009, 8014, 8017, 8021],
                 [8410, 8429, 8430, 8435, 8437, 8439, 8444, 8446, 8451, 8453, 8463, 8465],
                 [9101, 9103, 9104, 9105, 9111]];
 
+const rows = 10;
+const cols = 10;
+
 const perkStyles = [8000, 8100, 8200, 8300, 8400];
 
 
@@ -16,30 +19,60 @@ var game_state = {};
 game_state.main = function() { };  
 game_state.main.prototype = {
 
-    preload: function() { 
+    preload: function() {
+        //Load individual rune images.
         for (var i=0 ; i < perkIDs.length; i++) {
             for (var j=0 ; j < perkIDs[i].length; j++) {
                 game.load.image(''+perkIDs[i][j], 'resources/runes/perk/'+perkIDs[i][j]+'.png');
             }
         }
 
+
+        //Load rune category images.
         for (var i=0 ; i < perkStyles.length; i++) {
             game.load.image(''+perkStyles[i], 'resources/runes/perkStyle/'+perkStyles[i]+'.png');
         }
-        
     },
 
-    create: function() { 
+    create: function() {
+        //Random stuff here for now...
         this.testRune = game.add.sprite(250, 300, '9101');
         this.testRune2 = game.add.sprite(400, 500, '8100');
+
+        var style = { font: "bold 32px Arial", fill: "white", boundsAlignH: "center", boundsAlignV: "middle" };
+        var text = game.add.text(375, 375, "Loading...", style);
+        text.anchor.setTo(0.5, 0.5);
     },
     
     update: function() {
         this.testRune.angle += 1;
         this.testRune2.angle -= 1;
-    },
+    }
+};
+
+
+game_state.game = function() {};
+game_state.game.prototype = {
+
+    create: function() {
+        for (var i = 0; i < rows; i++) {
+            for (var j = 0; j < cols; j++) {
+                const runeCategory = Math.floor(Math.random() * perkIDs.length);
+                const rune = Math.floor(Math.random() * perkIDs[runeCategory].length);
+
+                var sprite = game.add.sprite(750 * i / rows, 750 * j / cols, '' + perkIDs[runeCategory][rune]);
+                sprite.width = 75;
+                sprite.height = 75;
+            }
+        }
+    }
+
 };
 
 // Add and start the 'main' state to start the game
-game.state.add('main', game_state.main);  
-game.state.start('main'); 
+game.state.add('main', game_state.main);
+game.state.add('game', game_state.game);
+game.state.start('main');
+
+//Start Game after 5 seconds.
+setTimeout(() => game.state.start('game'), 5000);
