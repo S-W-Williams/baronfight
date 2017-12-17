@@ -57,6 +57,7 @@ function onClickTest(text) {
 // Params: int spriteId
 function mouseOver(spriteId) {
     sprites[spriteId].tint =  0x203470;
+    var test = game.board[0][0];
 }
 
 // Params: int spriteId
@@ -68,9 +69,10 @@ game_state.game = function() {};
 game_state.game.prototype = {
 
     create: function() {
-        this.sprites = {};
+        game.board =  [];
 
         for (var i = 0; i < rows; i++) {
+            var row = [];
             for (var j = 0; j < cols; j++) {
                 const runeCategory = Math.floor(Math.random() * perkIDs.length);
                 const rune = Math.floor(Math.random() * perkIDs[runeCategory].length);
@@ -84,7 +86,9 @@ game_state.game.prototype = {
                 sprite.events.onInputOut.add(function(){mouseOut(spriteId)}, this);
                 //Save sprite to sprite dict
                 sprites[spriteId] = sprite;
+                row.push(spriteId);
             }
+            game.board.push(row);
         }
     }
 };
