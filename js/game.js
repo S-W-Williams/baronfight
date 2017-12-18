@@ -7,13 +7,17 @@ const perkIDs = [[8005, 8008, 8009, 8014, 8017, 8021],
 const perkStyles = [8000, 8100, 8200, 8300, 8400];
 
 
-const rows = 6;
-const cols = 6;
+const GAME_NUM_ROWS = 6;
+const GAME_NUM_COLS = 6;
+const GAME_WIDTH = 500;
+const GAME_HEIGHT = 500;
+
+const GAME_SPRITE_WIDTH = GAME_WIDTH / GAME_NUM_COLS;
+const GAME_SPRITE_HEIGHT = GAME_HEIGHT / GAME_NUM_ROWS;
 
 var sprites = [];
 
-// Initialize Phaser, and creates a 750x750px game
-var game = new Phaser.Game(500, 500, Phaser.AUTO, 'phaser');
+var game = new Phaser.Game(GAME_WIDTH, GAME_HEIGHT, Phaser.AUTO, 'phaser');
 var game_state = {};
 
 // Creates a new 'main' state that wil contain the game
@@ -38,12 +42,14 @@ game_state.main.prototype = {
 
     create: function() {
         //Random stuff here for now...
-        this.testRune = game.add.sprite(250, 300, '9101');
-        this.testRune2 = game.add.sprite(400, 500, '8100');
+        this.testRune = game.add.sprite(100, 200, '9101');
+        this.testRune2 = game.add.sprite(300, 400, '8100');
 
         var style = { font: "bold 32px Arial", fill: "white", boundsAlignH: "center", boundsAlignV: "middle" };
-        var text = game.add.text(375, 375, "Loading...", style);
+        var text = game.add.text(GAME_WIDTH/2, GAME_HEIGHT/2, "Loading...", style);
         text.anchor.setTo(0.5, 0.5);
+
+        game.stage.backgroundColor = "#DDD";
     },
     
     update: function() {
@@ -76,22 +82,27 @@ game_state.game.prototype = {
     create: function() {
         game.board =  [];
 
-        for (var i = 0; i < rows; i++) {
+        for (var i = 0; i < GAME_NUM_ROWS; i++) {
             var row = [];
-            for (var j = 0; j < cols; j++) {
+            for (var j = 0; j < GAME_NUM_COLS; j++) {
+                const rowPosition = i;
+                const colPosition = j;
                 if (attackOrRune()) {
                     const runeCategory = Math.floor(Math.random() * perkIDs.length);
                     const rune = Math.floor(Math.random() * perkIDs[runeCategory].length);
 
-                    var sprite = game.add.sprite(500 * i / rows, 500 * j / cols, '' + perkIDs[runeCategory][rune]);
+                    var sprite = game.add.sprite(GAME_WIDTH * rowPosition / GAME_NUM_COLS, GAME_HEIGHT * colPosition / GAME_NUM_ROWS, '' + perkIDs[runeCategory][rune]);
 
                 } else {
-                    var sprite = game.add.sprite(500 * i / rows, 500 * j / cols, "attack");
+                    var sprite = game.add.sprite(GAME_WIDTH * rowPosition / GAME_NUM_COLS, GAME_HEIGHT * colPosition / GAME_NUM_ROWS, "attack");
                 }
-                sprite.width = 75; sprite.height = 75;
+                const key = sprite.key;
+                sprite.width = GAME_SPRITE_WIDTH; sprite.height = GAME_SPRITE_HEIGHT;
                 sprite.inputEnabled = true;
 
-                sprite.events.onInputUp.add(() => onClickTest("Clicked Rune ID: " + sprite.key + " Row " + i + " Column " + j));
+
+
+                sprite.events.onInputUp.add(() => onClickTest("Clicked Rune ID: " + key + " Row " + rowPosition + " Column " + colPosition));
                 sprite.events.onInputOver.add(mouseOver);
                 sprite.events.onInputOut.add(mouseOut);
                 //Save sprite to sprite dict
