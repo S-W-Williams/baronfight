@@ -64,12 +64,27 @@ function onClickTest(text) {
 
 // Params: int spriteId
 function mouseOver(sprite) {
+
+    untintAll();
+
+    //Tint the selected sprite.
     sprite.tint =  0x203470;
 }
 
 // Params: int spriteId
-function mouseOut(sprite) {
-    sprite.tint = 0xffffff;
+function mouseOut() {
+
+    untintAll();
+
+}
+
+function untintAll() {
+    //Untint all other sprites.
+    var sprites = game.world.children;
+
+    for (var i = 0; i < sprites.length; i++) {
+        sprites[i].tint = 0xffffff;
+    }
 }
 
 function attackOrRune() {
