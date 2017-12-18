@@ -4,13 +4,13 @@ const perkIDs = [[8005, 8008, 8009, 8014, 8017, 8021],
                 [8304, 8306, 8313, 8316, 8321, 8326, 8339, 8345, 8347, 8351, 8359],
                 [8410, 8429, 8430, 8435, 8437, 8439, 8444, 8446, 8451, 8453, 8463, 8465],
                 [9101, 9103, 9104, 9105, 9111]];
+const perkStyles = [8000, 8100, 8200, 8300, 8400];
+
 
 const rows = 10;
 const cols = 10;
 
-const perkStyles = [8000, 8100, 8200, 8300, 8400];
-
-var sprites = {};
+var sprites = [];
 
 // Initialize Phaser, and creates a 750x750px game
 var game = new Phaser.Game(750, 750, Phaser.AUTO, 'phaser');
@@ -55,14 +55,13 @@ function onClickTest(text) {
 }
 
 // Params: int spriteId
-function mouseOver(spriteId) {
-    sprites[spriteId].tint =  0x203470;
-    var test = game.board[0][0];
+function mouseOver(sprite) {
+    sprite.tint =  0x203470;
 }
 
 // Params: int spriteId
-function mouseOut(spriteId) {
-    sprites[spriteId].tint = 0xffffff;
+function mouseOut(sprite) {
+    sprite.tint = 0xffffff;
 }
 
 game_state.game = function() {};
@@ -78,17 +77,16 @@ game_state.game.prototype = {
                 const rune = Math.floor(Math.random() * perkIDs[runeCategory].length);
 
                 var sprite = game.add.sprite(750 * i / rows, 750 * j / cols, '' + perkIDs[runeCategory][rune]);
-                var spriteId = i.toString() + j.toString();
                 sprite.width = 75; sprite.height = 75;
                 sprite.inputEnabled = true;
-                sprite.events.onInputDown.add(function(){onClickTest(perkIDs[runeCategory][rune])}, this); //onInputUp is for when click is released
-                sprite.events.onInputOver.add(function(){mouseOver(spriteId)});
-                sprite.events.onInputOut.add(function(){mouseOut(spriteId)}, this);
+
+                sprite.events.onInputUp.add(() => onClickTest("Clicked Rune ID: " + sprite.key + " Row " + i + " Column " + j));
+                sprite.events.onInputOver.add(mouseOver);
+                sprite.events.onInputOut.add(mouseOut);
                 //Save sprite to sprite dict
-                sprites[spriteId] = sprite;
-                row.push(spriteId);
+                row[j] = sprite;
             }
-            game.board.push(row);
+            sprites[i] = row;
         }
     }
 };
