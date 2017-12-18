@@ -7,13 +7,13 @@ const perkIDs = [[8005, 8008, 8009, 8014, 8017, 8021],
 const perkStyles = [8000, 8100, 8200, 8300, 8400];
 
 
-const rows = 10;
-const cols = 10;
+const rows = 6;
+const cols = 6;
 
 var sprites = [];
 
 // Initialize Phaser, and creates a 750x750px game
-var game = new Phaser.Game(750, 750, Phaser.AUTO, 'phaser');
+var game = new Phaser.Game(500, 500, Phaser.AUTO, 'phaser');
 var game_state = {};
 
 // Creates a new 'main' state that wil contain the game
@@ -32,6 +32,8 @@ game_state.main.prototype = {
         for (var i=0 ; i < perkStyles.length; i++) {
             game.load.image(''+perkStyles[i], 'resources/runes/perkStyle/'+perkStyles[i]+'.png');
         }
+
+        game.load.image("attack", "resources/images/attack.png");
     },
 
     create: function() {
@@ -64,6 +66,10 @@ function mouseOut(sprite) {
     sprite.tint = 0xffffff;
 }
 
+function attackOrRune() {
+    return (Math.random() < 0.5 ? true : false);
+}
+
 game_state.game = function() {};
 game_state.game.prototype = {
 
@@ -73,10 +79,15 @@ game_state.game.prototype = {
         for (var i = 0; i < rows; i++) {
             var row = [];
             for (var j = 0; j < cols; j++) {
-                const runeCategory = Math.floor(Math.random() * perkIDs.length);
-                const rune = Math.floor(Math.random() * perkIDs[runeCategory].length);
+                if (attackOrRune()) {
+                    const runeCategory = Math.floor(Math.random() * perkIDs.length);
+                    const rune = Math.floor(Math.random() * perkIDs[runeCategory].length);
 
-                var sprite = game.add.sprite(750 * i / rows, 750 * j / cols, '' + perkIDs[runeCategory][rune]);
+                    var sprite = game.add.sprite(500 * i / rows, 500 * j / cols, '' + perkIDs[runeCategory][rune]);
+
+                } else {
+                    var sprite = game.add.sprite(500 * i / rows, 500 * j / cols, "attack");
+                }
                 sprite.width = 75; sprite.height = 75;
                 sprite.inputEnabled = true;
 
@@ -85,6 +96,7 @@ game_state.game.prototype = {
                 sprite.events.onInputOut.add(mouseOut);
                 //Save sprite to sprite dict
                 row[j] = sprite;
+
             }
             sprites[i] = row;
         }
