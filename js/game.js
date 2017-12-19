@@ -152,6 +152,9 @@ function mouseOver(sprite) {
 
     //Tint the selected sprite.
     sprite.tint =  0x203470;
+    var runeInfoBox = $('#runeInfo');
+    runeInfoBox.show();
+    runeInfoBox.text(sprite.name);
 }
 
 
@@ -163,7 +166,8 @@ function mouseOut(sprite) {
 function mouseOut() {
 
     untintAll();
-
+    var runeInfoBox = $('#runeInfo');
+    runeInfoBox.hide();
 }
 
 function untintAll() {
