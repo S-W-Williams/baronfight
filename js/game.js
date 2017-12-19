@@ -152,11 +152,10 @@ function mouseOver(sprite) {
     sprite.tint =  0x203470;
 }
 
-<<<<<<< HEAD
 
 function mouseOut(sprite) {
     sprite.tint = 0xffffff;
-=======
+}
 // Params: int spriteId
 function mouseOut() {
 
@@ -171,7 +170,6 @@ function untintAll() {
     for (var i = 0; i < sprites.length; i++) {
         sprites[i].tint = 0xffffff;
     }
->>>>>>> origin/master
 }
 
 function attackOrRune() {
