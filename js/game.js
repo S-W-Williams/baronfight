@@ -15,10 +15,15 @@ const GAME_HEIGHT = 500;
 const GAME_SPRITE_WIDTH = GAME_WIDTH / GAME_NUM_COLS;
 const GAME_SPRITE_HEIGHT = GAME_HEIGHT / GAME_NUM_ROWS;
 
-var sprites = [];
-
 var game = new Phaser.Game(GAME_WIDTH, GAME_HEIGHT, Phaser.AUTO, 'phaser');
 var game_state = {};
+
+var SELECTED_RUNE_A = null;
+var SELECTED_RUNE_B = null;
+
+var HEALTH_BAR = $('.health-bar');
+var BAR = HEALTH_BAR.find('.bar');
+var HIT = HEALTH_BAR.find('.hit');
 
 // Creates a new 'main' state that wil contain the game
 game_state.main = function() { };  
@@ -58,16 +63,92 @@ game_state.main.prototype = {
     }
 };
 
+
+game_state.game = function() {};
+game_state.game.prototype = {create: create};
+
+function create() {
+    game.board =  [];
+
+    for (var i = 0; i < GAME_NUM_ROWS; i++) {
+        var row = [];
+        for (var j = 0; j < GAME_NUM_COLS; j++) {
+            const rowPosition = i;
+            const colPosition = j;
+            if (attackOrRune()) {
+                const runeCategory = Math.floor(Math.random() * perkIDs.length);
+                const rune = Math.floor(Math.random() * perkIDs[runeCategory].length);
+                var sprite = game.add.sprite(GAME_WIDTH * rowPosition / GAME_NUM_COLS, GAME_HEIGHT * colPosition / GAME_NUM_ROWS, '' + perkIDs[runeCategory][rune]);
+                sprite.isRune = true;
+
+            } else {
+                var sprite = game.add.sprite(GAME_WIDTH * rowPosition / GAME_NUM_COLS, GAME_HEIGHT * colPosition / GAME_NUM_ROWS, "attack");
+                sprite.isRune = false;
+            }
+            const key = sprite.key;
+            sprite.name = i.toString() + j.toString();
+            sprite.width = GAME_SPRITE_WIDTH; sprite.height = GAME_SPRITE_HEIGHT;
+            sprite.inputEnabled = true;
+            sprite.events.onInputDown.add(selectRune, this);
+            sprite.events.onInputOver.add(mouseOver);
+            sprite.events.onInputOut.add(mouseOut);
+            row[j] = sprite;
+
+        }
+        //sprites[i] = row;
+    }
+    game.turn = 0;
+    //game.input.addMoveCallback(makeMove, this);
+}
+
+function selectRune(sprite) {
+    if (SELECTED_RUNE_A) {
+        SELECTED_RUNE_B = sprite;
+        makeMove();
+        SELECTED_RUNE_A = null;
+        SELECTED_RUNE_B = null;
+    } else {
+        SELECTED_RUNE_A = sprite;
+    }
+
+}
+
+function makeMove(pointer, x, y) {
+    if (!SELECTED_RUNE_A.isRune && !SELECTED_RUNE_B.isRune) {
+        var total = HEALTH_BAR.data('total');
+        var value = HEALTH_BAR.data('value');
+        var damage = 100;
+        var newValue = value - damage;
+
+        // calculate the percentage of the total width
+        var barWidth = (newValue / total) * 100;
+        var hitWidth = (damage / value) * 100 + "%";
+
+        // show hit bar and set the width
+        HIT.css('width', hitWidth);
+        HEALTH_BAR.data('value', newValue);
+
+        setTimeout(function(){
+            HIT.css({'width': '0'});
+            BAR.css('width', barWidth + "%");
+        }, 500);
+    }
+}
+
+function cpuMove() {
+
+}
+
 function onClickTest(text) {
     alert(text);
 }
 
-// Params: int spriteId
+
 function mouseOver(sprite) {
     sprite.tint =  0x203470;
 }
 
-// Params: int spriteId
+
 function mouseOut(sprite) {
     sprite.tint = 0xffffff;
 }
@@ -75,44 +156,6 @@ function mouseOut(sprite) {
 function attackOrRune() {
     return (Math.random() < 0.5 ? true : false);
 }
-
-game_state.game = function() {};
-game_state.game.prototype = {
-
-    create: function() {
-        game.board =  [];
-
-        for (var i = 0; i < GAME_NUM_ROWS; i++) {
-            var row = [];
-            for (var j = 0; j < GAME_NUM_COLS; j++) {
-                const rowPosition = i;
-                const colPosition = j;
-                if (attackOrRune()) {
-                    const runeCategory = Math.floor(Math.random() * perkIDs.length);
-                    const rune = Math.floor(Math.random() * perkIDs[runeCategory].length);
-
-                    var sprite = game.add.sprite(GAME_WIDTH * rowPosition / GAME_NUM_COLS, GAME_HEIGHT * colPosition / GAME_NUM_ROWS, '' + perkIDs[runeCategory][rune]);
-
-                } else {
-                    var sprite = game.add.sprite(GAME_WIDTH * rowPosition / GAME_NUM_COLS, GAME_HEIGHT * colPosition / GAME_NUM_ROWS, "attack");
-                }
-                const key = sprite.key;
-                sprite.width = GAME_SPRITE_WIDTH; sprite.height = GAME_SPRITE_HEIGHT;
-                sprite.inputEnabled = true;
-
-
-
-                sprite.events.onInputUp.add(() => onClickTest("Clicked Rune ID: " + key + " Row " + rowPosition + " Column " + colPosition));
-                sprite.events.onInputOver.add(mouseOver);
-                sprite.events.onInputOut.add(mouseOut);
-                //Save sprite to sprite dict
-                row[j] = sprite;
-
-            }
-            sprites[i] = row;
-        }
-    }
-};
 
 // Add and start the 'main' state to start the game
 game.state.add('main', game_state.main);
