@@ -105,10 +105,12 @@ function selectRune(sprite) {
     if (SELECTED_RUNE_A) {
         SELECTED_RUNE_B = sprite;
         makeMove();
+        SELECTED_RUNE_A.tint = 0xffffff;
         SELECTED_RUNE_A = null;
         SELECTED_RUNE_B = null;
     } else {
         SELECTED_RUNE_A = sprite;
+        SELECTED_RUNE_A.tint = 0x00FF00;
     }
 
 }
@@ -156,6 +158,7 @@ function mouseOver(sprite) {
 function mouseOut(sprite) {
     sprite.tint = 0xffffff;
 }
+
 // Params: int spriteId
 function mouseOut() {
 
@@ -168,7 +171,8 @@ function untintAll() {
     var sprites = game.world.children;
 
     for (var i = 0; i < sprites.length; i++) {
-        sprites[i].tint = 0xffffff;
+        if (sprites[i].tint != 0x00FF00)
+            sprites[i].tint = 0xffffff;
     }
 }
 
