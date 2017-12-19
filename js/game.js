@@ -145,12 +145,33 @@ function onClickTest(text) {
 
 
 function mouseOver(sprite) {
+
+    untintAll();
+
+    //Tint the selected sprite.
     sprite.tint =  0x203470;
 }
 
+<<<<<<< HEAD
 
 function mouseOut(sprite) {
     sprite.tint = 0xffffff;
+=======
+// Params: int spriteId
+function mouseOut() {
+
+    untintAll();
+
+}
+
+function untintAll() {
+    //Untint all other sprites.
+    var sprites = game.world.children;
+
+    for (var i = 0; i < sprites.length; i++) {
+        sprites[i].tint = 0xffffff;
+    }
+>>>>>>> origin/master
 }
 
 function attackOrRune() {
