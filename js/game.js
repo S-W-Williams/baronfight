@@ -121,32 +121,42 @@ function selectRune(sprite) {
 
 function makeMove(pointer, x, y) {
     if (!SELECTED_RUNE_A.isRune && !SELECTED_RUNE_B.isRune) {
-        var total = HEALTH_BAR.data('total');
-        var value = HEALTH_BAR.data('value');
-        var damage = 100;
-        var newValue = value - damage;
-
-        // calculate the percentage of the total width
-        var barWidth = (newValue / total) * 100;
-        var hitWidth = (damage / value) * 100 + "%";
-
-        // show hit bar and set the width
-        HIT.css('width', hitWidth);
-        HEALTH_BAR.data('value', newValue);
-
-        setTimeout(function(){
-            HIT.css({'width': '0'});
-            BAR.css('width', barWidth + "%");
-        }, 500);
+        //damageCharacter(100, true);
+        damageCharacter(100, false);
     }
+}
+
+
+///Player is true if player takes damage;
+///Player is false if CPU takes damage.
+function damageCharacter(damage, player) {
+
+    var playerNumber = (player ? 0 : 1);
+
+    var total = HEALTH_BAR[playerNumber].dataset.total;
+    var value = HEALTH_BAR[playerNumber].dataset.value;
+    var newValue = value - damage;
+    
+    if (newValue < 0) {
+        newValue = 0;
+    }
+
+    // calculate the percentage of the total width
+    var barWidth = (newValue / total) * 100;
+    var hitWidth = (damage / value) * 100 + "%";
+
+    // show hit bar and set the width
+    HIT[playerNumber].style.width = hitWidth;
+    HEALTH_BAR[playerNumber].dataset.value = newValue;
+
+    setTimeout(function(){
+        HIT[playerNumber].style.width = "0";
+        BAR[playerNumber].style.width = barWidth + "%";
+    }, 500);
 }
 
 function cpuMove() {
 
-}
-
-function onClickTest(text) {
-    alert(text);
 }
 
 
