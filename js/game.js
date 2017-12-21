@@ -70,6 +70,9 @@ game_state.game.prototype = {create: create};
 function create() {
     game.board =  [];
 
+    //Untint all when mouse leaves game board.
+    document.body.onmouseover = mouseOut;
+
     for (var i = 0; i < GAME_NUM_ROWS; i++) {
         var row = [];
         for (var j = 0; j < GAME_NUM_COLS; j++) {
@@ -85,8 +88,9 @@ function create() {
                 var sprite = game.add.sprite(GAME_WIDTH * rowPosition / GAME_NUM_COLS, GAME_HEIGHT * colPosition / GAME_NUM_ROWS, "attack");
                 sprite.isRune = false;
             }
-            const key = sprite.key;
-            sprite.name = i.toString() + j.toString();
+            //const key = sprite.key;
+            sprite.row = rowPosition;
+            sprite.col = colPosition;
             sprite.width = GAME_SPRITE_WIDTH; sprite.height = GAME_SPRITE_HEIGHT;
             sprite.inputEnabled = true;
             sprite.events.onInputDown.add(selectRune, this);
@@ -154,7 +158,7 @@ function mouseOver(sprite) {
     sprite.tint =  0x203470;
     var runeInfoBox = $('#runeInfo');
     runeInfoBox.show();
-    runeInfoBox.text(sprite.name);
+    runeInfoBox.text("Row " + sprite.row + " Column " + sprite.col);
 }
 
 
