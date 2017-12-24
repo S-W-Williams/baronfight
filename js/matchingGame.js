@@ -111,7 +111,7 @@ function addPieceToCol(col) {
 
 function shiftDownPiecesFromPosition(row, col) {
 
-    for (var i = row - 1 ; i > -GAME_NUM_ROWS ; i--) {
+    for (var i = row - 1 ; i >= -GAME_NUM_ROWS ; i--) {
 
         if (board[i][col] == null) {
             break;
@@ -153,7 +153,7 @@ function areAdjacent(a, b) {
 //params.numColors - Number of Colors
 function resetBoard() {
 
-    for (var i = -GAME_NUM_ROWS + 1 ; i < GAME_NUM_ROWS ; i++) {
+    for (var i = -GAME_NUM_ROWS ; i < GAME_NUM_ROWS ; i++) {
         board[i] = [];
     }
 
