@@ -11,8 +11,6 @@ game_state.runeSelect.prototype = {
 
     create: function() {
 
-
-        //TODO - Add Instructions to Home Screen.
         var style = { font: "bold 32px Arial", fill: "white", boundsAlignH: "center", boundsAlignV: "middle" };
         game.add.text(GAME_WIDTH/2, GAME_HEIGHT/2 - 70, "Select a Rune!", style).anchor.setTo(.5,.5);
 
@@ -36,6 +34,7 @@ game_state.runeSelect.prototype = {
 function runeSelected(rune) {
 
     console.log("Selected Rune: " + rune.runeID);
+    playerStats.currentRunes = playerStats.currentRunes.concat(rune.runeID);
 
     game.state.remove('runeSelect');
     game.state.start('game', true, false, 7)

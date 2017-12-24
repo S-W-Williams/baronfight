@@ -6,6 +6,21 @@ var currentDragColor = null;
 var selectedSprites = [];
 var numColors = COLORS.length;
 
+
+//These are the default player stats.
+//Will be augmented by runes, spells, items, etc. as game progresses.
+var playerStats = {
+    maxHP: 1000,
+    maxMP: 800,
+    armor: 20,
+    magicResist: 20,
+    moveSpeed: 300,
+    attackDamage: 80,
+    abilityPower: 0,
+    attackSpeed: 1.2,
+    currentRunes: []
+};
+
 game_state.game = function() {};
 game_state.game.prototype = {
 
