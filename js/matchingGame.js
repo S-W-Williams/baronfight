@@ -6,7 +6,7 @@ const GAME_HEIGHT = 500;
 const GAME_SPRITE_WIDTH = GAME_WIDTH / GAME_NUM_COLS;
 const GAME_SPRITE_HEIGHT = GAME_HEIGHT / GAME_NUM_ROWS;
 
-const COLORS = ["red", "orange", "yellow", "green", "blue", "purple"];
+const COLORS = ["red", "orange", "yellow", "green", "blue", "purple", "black"];
 
 const GAME_FALL_SPEED = 2;
 
@@ -27,11 +27,14 @@ var isDragging = false;
 var currentSprite = null;
 var currentDragColor = null;
 var selectedSprites = [];
+var numColors = COLORS.length;
 
 game_state.game = function() {};
 game_state.game.prototype = {
 
-    isDragging: false,
+    init: function(numberOfColors = COLORS.length) {
+        numColors = numberOfColors;
+    },
 
     preload: function() {
         for (var i = 0 ; i < COLORS.length ; i++) {
@@ -41,25 +44,10 @@ game_state.game.prototype = {
 
 
     create: function() {
-
-        for (var i = -GAME_NUM_ROWS + 1 ; i < GAME_NUM_ROWS ; i++) {
-            board[i] = [];
-        }
-
         //Untint all when mouse leaves game board.
         document.body.onmouseover = this.untintAll;
 
-        for (var i = 0; i < GAME_NUM_ROWS; i++) {
-            for (var j = 0; j < GAME_NUM_COLS; j++) {
-                const rowPosition = i;
-                const colPosition = j;
-                var sprite = generateNewOrb(rowPosition, colPosition);
-
-                //sprite.events.onInputOut.add(this.untintAll);
-                board[i][j] = sprite;
-
-            }
-        }
+        resetBoard();
     },
 
     update: function() {
@@ -85,7 +73,7 @@ game_state.game.prototype = {
 };
 
 function generateNewOrb(row, col) {
-    const color = COLORS[Math.floor(Math.random() * COLORS.length)];
+    const color = COLORS[Math.floor(Math.random() * numColors)];
     var sprite = game.add.sprite(GAME_WIDTH * col / GAME_NUM_COLS, GAME_HEIGHT * row / GAME_NUM_ROWS, color);
 
     sprite.color = color;
@@ -159,7 +147,7 @@ function shiftDownPiecesFromPosition(row, col) {
             break;
         }
 
-        console.log("Move down one row Board["+(i)+"]["+col+"]");
+        //console.log("Move down one row Board["+(i)+"]["+col+"]");
         board[i+1][col] = board[i][col];
         board[i+1][col].row = i+1;
 
@@ -192,7 +180,30 @@ function areAdjacent(a, b) {
 }
 
 
+//params.numColors - Number of Colors
+function resetBoard() {
+
+    for (var i = -GAME_NUM_ROWS + 1 ; i < GAME_NUM_ROWS ; i++) {
+        board[i] = [];
+    }
+
+    for (var i = 0; i < GAME_NUM_ROWS; i++) {
+        for (var j = 0; j < GAME_NUM_COLS; j++) {
+            const rowPosition = i;
+            const colPosition = j;
+            var sprite = generateNewOrb(rowPosition, colPosition);
+
+            //sprite.events.onInputOut.add(this.untintAll);
+            board[i][j] = sprite;
+
+        }
+    }
+}
 
 // Add and start the 'main' state to start the game
 game.state.add('game', game_state.game);
-game.state.start('game');
+
+//3 indicates the number of colors to start with.
+//game.state.start('game', false, false, 3);
+
+//To restart, use game.state.restart('game', false, false, numColors);
