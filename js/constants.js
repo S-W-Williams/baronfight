@@ -31,5 +31,5 @@ const GAME_TINT_COLOR = 0x203470;
 const GAME_UNTINT_COLOR = 0xFFFFFF;
 
 
-var game = new Phaser.Game(GAME_WIDTH, GAME_HEIGHT, Phaser.AUTO, 'phaser');
+var game = new Phaser.Game(GAME_WIDTH, GAME_HEIGHT, Phaser.CANVAS, 'phaser');
 var game_state = {};
