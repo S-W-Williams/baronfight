@@ -30,6 +30,12 @@ const GAME_AMOUNT_TO_MATCH = 3;
 const GAME_TINT_COLOR = 0x203470;
 const GAME_UNTINT_COLOR = 0xFFFFFF;
 
+var HEALTH_BAR = $('.health-bar');
+var BAR = HEALTH_BAR.find('.bar');
+var HIT = HEALTH_BAR.find('.hit');
+
+var BASE_DAMAGE = 10;
+var CPU_DAMAGE = 10;
 
 var game = new Phaser.Game(GAME_WIDTH, GAME_HEIGHT, Phaser.CANVAS, 'phaser');
 var game_state = {};

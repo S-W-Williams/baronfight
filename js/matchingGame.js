@@ -5,7 +5,9 @@ var currentSprite = null;
 var currentDragColor = null;
 var selectedSprites = [];
 var numColors = COLORS.length;
-
+var level = 1;
+var cpuAttackTimer = 0;
+var CPU_ATTACK_FREQUENCY = 2000; //Scale this with level
 
 //These are the default player stats.
 //Will be augmented by runes, spells, items, etc. as game progresses.
@@ -52,10 +54,27 @@ game_state.game.prototype = {
 
             }
         }
+        if (Number(HEALTH_BAR[1].dataset.value) === 0) {
+            //Player victory
+            //alert("You win!");
+        }
+        if (Number(HEALTH_BAR[0].dataset.value) === 0) {
+            //Player lose
+            //alert("You lose!");
+        }
 
+        if (game.time.now > cpuAttackTimer) {
+            cpuAttacks();
+        }
     }
 
 };
+
+function cpuAttacks() {
+    cpuAttackTimer = game.time.now + CPU_ATTACK_FREQUENCY;
+    var damage = CPU_DAMAGE * level;
+    applyDamage(damage, 0);
+}
 
 function generateNewOrb(row, col) {
     const color = COLORS[Math.floor(Math.random() * numColors)];
@@ -149,10 +168,41 @@ function beginDrag() {
     currentDragColor = currentSprite.color;
 }
 
+function attack(length, color) {
+    var levelDamage = BASE_DAMAGE / level; // Need to come up with better scaling equation
+    var damage = length * Math.log(length) * levelDamage; // n log n scaling for damage
+    applyDamage(damage, 1);
+}
+
+function applyDamage(damage, playerNumber) {
+    var total = HEALTH_BAR[playerNumber].dataset.total;
+    var value = HEALTH_BAR[playerNumber].dataset.value;
+    var newValue = value - damage;
+
+    if (newValue < 0) {
+        newValue = 0;
+    }
+
+    // calculate the percentage of the total width
+    var barWidth = (newValue / total) * 100;
+    var hitWidth = (damage / value) * 100 + "%";
+
+    // show hit bar and set the width
+    HIT[playerNumber].style.width = hitWidth;
+    HEALTH_BAR[playerNumber].dataset.value = newValue;
+
+    setTimeout(function(){
+        HIT[playerNumber].style.width = "0";
+        BAR[playerNumber].style.width = barWidth + "%";
+    }, 500);
+}
+
 function endDrag() {
     isDragging = false;
 
     if (selectedSprites.length >= GAME_AMOUNT_TO_MATCH) {
+        color = selectedSprites[0].color;
+        attack(selectedSprites.length, color);
         clearTinted();
     } else {
         untintAll();

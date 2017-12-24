@@ -12,7 +12,7 @@ game_state.runeSelect.prototype = {
     create: function() {
 
         var style = { font: "bold 32px Arial", fill: "white", boundsAlignH: "center", boundsAlignV: "middle" };
-        game.add.text(GAME_WIDTH/2, GAME_HEIGHT/2 - 70, "Select a Rune!", style).anchor.setTo(.5,.5);
+        game.add.text(GAME_WIDTH/2, GAME_HEIGHT/2 - 70, "Select your Rune Tree!", style).anchor.setTo(.5,.5);
 
 
         for (var i = 0 ; i < selectableRunes.length ; i++) {
