@@ -136,7 +136,7 @@ function damageCharacter(damage, player) {
     var total = HEALTH_BAR[playerNumber].dataset.total;
     var value = HEALTH_BAR[playerNumber].dataset.value;
     var newValue = value - damage;
-    
+
     if (newValue < 0) {
         newValue = 0;
     }
