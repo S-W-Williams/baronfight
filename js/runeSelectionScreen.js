@@ -16,7 +16,7 @@ game_state.runeSelect.prototype = {
 
 
         for (var i = 0 ; i < selectableRunes.length ; i++) {
-            var sprite = game.add.sprite(35 + GAME_WIDTH * i / selectableRunes.length, GAME_HEIGHT/2 + 70, '' + selectableRunes[i]);
+            var sprite = game.add.sprite((selectableRunes.length === 5 ? 0 : 35) + GAME_WIDTH * i / selectableRunes.length, GAME_HEIGHT/2 + 70, '' + selectableRunes[i]);
 
             sprite.runeID = selectableRunes[i];
 
@@ -36,7 +36,6 @@ function runeSelected(rune) {
     console.log("Selected Rune: " + rune.runeID);
     playerStats.currentRunes = playerStats.currentRunes.concat(rune.runeID);
 
-    game.state.remove('runeSelect');
     game.state.start('game', true, false, 7)
 }
 

@@ -7,7 +7,7 @@ var selectedSprites = [];
 var numColors = COLORS.length;
 var level = 1;
 var cpuAttackTimer = 0;
-var CPU_ATTACK_FREQUENCY = 2000; //Scale this with level
+var CPU_ATTACK_PERIOD = 1000; //Scale this with level
 
 //These are the default player stats.
 //Will be augmented by runes, spells, items, etc. as game progresses.
@@ -28,6 +28,9 @@ game_state.game.prototype = {
 
     init: function(numberOfColors = COLORS.length) {
         numColors = numberOfColors;
+
+        resetHealthBars();
+
     },
 
     create: function() {
@@ -54,14 +57,6 @@ game_state.game.prototype = {
 
             }
         }
-        if (Number(HEALTH_BAR[1].dataset.value) === 0) {
-            //Player victory
-            //alert("You win!");
-        }
-        if (Number(HEALTH_BAR[0].dataset.value) === 0) {
-            //Player lose
-            //alert("You lose!");
-        }
 
         if (game.time.now > cpuAttackTimer) {
             cpuAttacks();
@@ -71,7 +66,10 @@ game_state.game.prototype = {
 };
 
 function cpuAttacks() {
-    cpuAttackTimer = game.time.now + CPU_ATTACK_FREQUENCY;
+
+    //console.log("Attack at " + game.time.now);
+
+    cpuAttackTimer = game.time.now + CPU_ATTACK_PERIOD;
     var damage = CPU_DAMAGE * level;
     applyDamage(damage, 0);
 }
@@ -180,8 +178,13 @@ function applyDamage(damage, playerNumber) {
     var value = HEALTH_BAR[playerNumber].dataset.value;
     var newValue = value - damage;
 
-    if (newValue < 0) {
+    if (newValue <= 0) {
         newValue = 0;
+        if (playerNumber == 0) {
+            game.state.start("lose", true, false);
+        } else {
+            game.state.start("levelUp", false, false);
+        }
     }
 
     // calculate the percentage of the total width
@@ -196,6 +199,16 @@ function applyDamage(damage, playerNumber) {
         HIT[playerNumber].style.width = "0";
         BAR[playerNumber].style.width = barWidth + "%";
     }, 500);
+}
+
+function resetHealthBars() {
+
+    HEALTH_BAR[0].dataset.value = HEALTH_BAR[0].dataset.total;
+    HEALTH_BAR[1].dataset.value = HEALTH_BAR[1].dataset.total;
+
+    BAR[0].style.width = "100%";
+    BAR[1].style.width = "100%";
+
 }
 
 function endDrag() {

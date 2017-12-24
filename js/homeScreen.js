@@ -37,9 +37,7 @@ game_state.home.prototype = {
 };
 
 function advanceFromHome() {
-
-    game.state.remove('home');
-    game.state.start('runeSelect', true, false, [8005, 8008, 8009]);
+    game.state.start('runeSelect', true, false, [8000, 8100, 8200, 8300, 8400]);
 }
 
 game.state.add('home', game_state.home);

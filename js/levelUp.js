@@ -1,0 +1,34 @@
+var selectableRunes = [];
+
+game_state.runeSelect = function() {};
+game_state.runeSelect.prototype = {
+
+
+
+    create: function() {
+
+        var style = { font: "bold 32px Arial", fill: "white", boundsAlignH: "center", boundsAlignV: "middle" };
+
+        var graphics = game.add.graphics();
+        graphics.beginFill(0, 0.8);
+        graphics.drawRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+        graphics.endFill();
+
+
+        game.add.text(GAME_WIDTH/2, GAME_HEIGHT/2 - 70, "Level Up!", style).anchor.setTo(.5,.5);
+        game.add.text(GAME_WIDTH/2, GAME_HEIGHT/2 + 70, "Click anywhere to continue.", style).anchor.setTo(.5,.5);
+        game.input.onDown.add(nextRuneSelect);
+
+
+        //MAKE MODIFICATIONS TO PLAYER STATS, BOSS STATS, ETC. HERE.
+    }
+
+};
+
+function nextRuneSelect() {
+    game.state.start('runeSelect', true, false, [8005, 8008, 8009]);
+}
+
+
+game.state.add('levelUp', game_state.runeSelect);
+//game.state.start('lose', true, false);
