@@ -2,6 +2,26 @@ game_state.home = function() {};
 game_state.home.prototype = {
 
 
+    preload: function() {
+        //Load individual rune images.
+        for (var i=0 ; i < perkIDs.length; i++) {
+            for (var j=0 ; j < perkIDs[i].length; j++) {
+                game.load.image(''+perkIDs[i][j], 'resources/runes/perk/'+perkIDs[i][j]+'.png');
+            }
+        }
+
+        //Load rune category images.
+        for (var i=0 ; i < perkStyles.length; i++) {
+            game.load.image(''+perkStyles[i], 'resources/runes/perkStyle/'+perkStyles[i]+'.png');
+        }
+
+        //Load colored sphere images.
+        for (var i = 0 ; i < COLORS.length ; i++) {
+            game.load.image(COLORS[i], 'resources/balls/'+COLORS[i]+'.png');
+        }
+
+    },
+
     create: function() {
 
 

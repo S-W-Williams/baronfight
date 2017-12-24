@@ -1,26 +1,3 @@
-const GAME_NUM_ROWS = 10;
-const GAME_NUM_COLS = 10;
-const GAME_WIDTH = 500;
-const GAME_HEIGHT = 500;
-
-const GAME_SPRITE_WIDTH = GAME_WIDTH / GAME_NUM_COLS;
-const GAME_SPRITE_HEIGHT = GAME_HEIGHT / GAME_NUM_ROWS;
-
-const COLORS = ["red", "orange", "yellow", "green", "blue", "purple", "black"];
-
-const GAME_FALL_SPEED = 2;
-
-//Must match 3 pieces to count.
-const GAME_AMOUNT_TO_MATCH = 3;
-
-const GAME_TINT_COLOR = 0x203470;
-const GAME_UNTINT_COLOR = 0xFFFFFF;
-
-//const COLORS = ["red"];
-
-var game = new Phaser.Game(GAME_WIDTH, GAME_HEIGHT, Phaser.AUTO, 'phaser');
-var game_state = {};
-
 var board = [];
 
 var isDragging = false;
@@ -35,13 +12,6 @@ game_state.game.prototype = {
     init: function(numberOfColors = COLORS.length) {
         numColors = numberOfColors;
     },
-
-    preload: function() {
-        for (var i = 0 ; i < COLORS.length ; i++) {
-            game.load.image(COLORS[i], 'resources/balls/'+COLORS[i]+'.png');
-        }
-    },
-
 
     create: function() {
         //Untint all when mouse leaves game board.
