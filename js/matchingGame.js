@@ -170,7 +170,8 @@ function beginDrag() {
 
 function attack(length, color) {
     var levelDamage = BASE_DAMAGE / level; // Need to come up with better scaling equation
-    var damage = length * Math.log(length) * levelDamage; // n log n scaling for damage
+    //var damage = length * Math.log(length) * levelDamage; // n log n scaling for damage
+    var damage = (Math.pow(length, 2) * 2) + BASE_DAMAGE;
     applyDamage(damage, 1);
 }
 
