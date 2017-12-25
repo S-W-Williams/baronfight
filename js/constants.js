@@ -20,7 +20,9 @@ const GAME_HEIGHT = 500;
 const GAME_SPRITE_WIDTH = GAME_WIDTH / GAME_NUM_COLS;
 const GAME_SPRITE_HEIGHT = GAME_HEIGHT / GAME_NUM_ROWS;
 
-const COLORS = ["red", "orange", "yellow", "green", "blue", "purple", "black"];
+const GAME_COLORS = ["red", "orange", "yellow", "green", "blue", "purple", "black"];
+const GAME_NUM_COLORS = (level) => 2 + level;
+const GAME_LEVEL_CAP = GAME_COLORS.length - 2;
 
 const GAME_FALL_SPEED = 2;
 
@@ -29,6 +31,18 @@ const GAME_AMOUNT_TO_MATCH = 3;
 
 const GAME_TINT_COLOR = 0x203470;
 const GAME_UNTINT_COLOR = 0xFFFFFF;
+
+const GAME_DEFAULT_STATS = {
+    maxHP: 1000,
+    maxMP: 800,
+    armor: 20,
+    magicResist: 20,
+    moveSpeed: 300,
+    attackDamage: 80,
+    abilityPower: 0,
+    attackSpeed: 1.2,
+    currentRunes: []
+};
 
 var HEALTH_BAR = $('.health-bar');
 var BAR = HEALTH_BAR.find('.bar');

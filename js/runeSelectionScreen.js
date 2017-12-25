@@ -36,7 +36,7 @@ function runeSelected(rune) {
     console.log("Selected Rune: " + rune.runeID);
     playerStats.currentRunes = playerStats.currentRunes.concat(rune.runeID);
 
-    game.state.start('game', true, false, 7)
+    game.state.start('game', true, false, GAME_NUM_COLORS(level));
 }
 
 game.state.add('runeSelect', game_state.runeSelect);

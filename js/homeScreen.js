@@ -16,8 +16,8 @@ game_state.home.prototype = {
         }
 
         //Load colored sphere images.
-        for (var i = 0 ; i < COLORS.length ; i++) {
-            game.load.image(COLORS[i], 'resources/balls/'+COLORS[i]+'.png');
+        for (var i = 0 ; i < GAME_COLORS.length ; i++) {
+            game.load.image(GAME_COLORS[i], 'resources/balls/'+GAME_COLORS[i]+'.png');
         }
 
     },

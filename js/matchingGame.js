@@ -4,29 +4,18 @@ var isDragging = false;
 var currentSprite = null;
 var currentDragColor = null;
 var selectedSprites = [];
-var numColors = COLORS.length;
+var numColors = GAME_COLORS.length;
 var level = 1;
 var cpuAttackTimer = 0;
 var CPU_ATTACK_PERIOD = 1000; //Scale this with level
 
-//These are the default player stats.
 //Will be augmented by runes, spells, items, etc. as game progresses.
-var playerStats = {
-    maxHP: 1000,
-    maxMP: 800,
-    armor: 20,
-    magicResist: 20,
-    moveSpeed: 300,
-    attackDamage: 80,
-    abilityPower: 0,
-    attackSpeed: 1.2,
-    currentRunes: []
-};
+var playerStats = GAME_DEFAULT_STATS;
 
 game_state.game = function() {};
 game_state.game.prototype = {
 
-    init: function(numberOfColors = COLORS.length) {
+    init: function(numberOfColors = GAME_COLORS.length) {
         numColors = numberOfColors;
 
         resetHealthBars();
@@ -67,7 +56,7 @@ game_state.game.prototype = {
 
 function cpuAttacks() {
 
-    //console.log("Attack at " + game.time.now);
+    console.log("Attack at " + game.time.now);
 
     cpuAttackTimer = game.time.now + CPU_ATTACK_PERIOD;
     var damage = CPU_DAMAGE * level;
@@ -75,7 +64,7 @@ function cpuAttacks() {
 }
 
 function generateNewOrb(row, col) {
-    const color = COLORS[Math.floor(Math.random() * numColors)];
+    const color = GAME_COLORS[Math.floor(Math.random() * numColors)];
     var sprite = game.add.sprite(GAME_WIDTH * col / GAME_NUM_COLS, GAME_HEIGHT * row / GAME_NUM_ROWS, color);
 
     sprite.color = color;

@@ -1,7 +1,7 @@
 var selectableRunes = [];
 
-game_state.runeSelect = function() {};
-game_state.runeSelect.prototype = {
+game_state.levelUp = function() {};
+game_state.levelUp.prototype = {
 
 
 
@@ -21,14 +21,21 @@ game_state.runeSelect.prototype = {
 
 
         //MAKE MODIFICATIONS TO PLAYER STATS, BOSS STATS, ETC. HERE.
+        level++;
+
     }
 
 };
 
 function nextRuneSelect() {
-    game.state.start('runeSelect', true, false, [8005, 8008, 8009]);
+
+    if (level > GAME_LEVEL_CAP) {
+        game.state.start("win", true, false);
+    } else {
+        game.state.start('runeSelect', true, false, [8005, 8008, 8009]);
+    }
 }
 
 
-game.state.add('levelUp', game_state.runeSelect);
+game.state.add('levelUp', game_state.levelUp);
 //game.state.start('lose', true, false);
