@@ -56,7 +56,7 @@ game_state.game.prototype = {
 
 function cpuAttacks() {
 
-    console.log("Attack at " + game.time.now);
+    //console.log("Attack at " + game.time.now);
 
     cpuAttackTimer = game.time.now + CPU_ATTACK_PERIOD;
     var damage = CPU_DAMAGE * level;
