@@ -5,7 +5,12 @@ game_state.runeSelect.prototype = {
 
 
     init(runes) {
-        selectableRunes = runes;
+
+        if (runes == null) {
+            selectableRunes = runesReforged;
+        } else {
+            selectableRunes = runes;
+        }
     },
 
 
@@ -18,13 +23,13 @@ game_state.runeSelect.prototype = {
 
 
         for (var i = 0 ; i < selectableRunes.length ; i++) {
-            var sprite = game.add.sprite(GAME_WIDTH * (2*i + 1) / selectableRunes.length / 2, GAME_HEIGHT/2 + 70, '' + selectableRunes[i]);
-            var text = game.add.text(GAME_WIDTH * (2*i + 1) / selectableRunes.length / 2, GAME_HEIGHT/2 + 130, "Precision", subtitleStyle);
+            var sprite = game.add.sprite(GAME_WIDTH * (2*i + 1) / selectableRunes.length / 2, GAME_HEIGHT/2 + 70, '' + selectableRunes[i].id);
+            var text = game.add.text(GAME_WIDTH * (2*i + 1) / selectableRunes.length / 2, GAME_HEIGHT/2 + 130, selectableRunes[i].name, subtitleStyle);
 
             sprite.associatedText = text;
 
-            sprite.runeID = selectableRunes[i];
-            text.runeID = selectableRunes[i];
+            sprite.rune = selectableRunes[i];
+            text.rune = selectableRunes[i];
 
             text.anchor.setTo(0.5, 0.5);
             sprite.anchor.setTo(0.5, 0.5);
@@ -42,12 +47,12 @@ game_state.runeSelect.prototype = {
 
 function runeSelected(rune) {
 
-    console.log("Selected Rune: " + rune.runeID);
+    console.log("Selected Rune: " + rune.rune.id);
 
     ///TODO: DISPLAY INFORMATION ABOUT RUNE AS WELL.
 
     for (var i = 0 ; i < game.world.children.length ; i++) {
-        if (game.world.children[i].runeID !== rune.runeID) {
+        if (!game.world.children[i].rune || game.world.children[i].rune.id !== rune.rune.id) {
             game.add.tween(game.world.children[i]).to({alpha: 0}, 1000, Phaser.Easing.Linear.None, true);
         }
         game.world.children[i].inputEnabled = false;
@@ -68,7 +73,9 @@ function runeSelected(rune) {
 
     var style = { font: "bold 18px Arial", fill: "white", boundsAlignH: "center", boundsAlignV: "middle" };
 
-    var runeInfo = game.add.text(game.world.width * 3/4 , 50, "Super Long Paragraph Super Long Paragraph Super Long Paragraph Super Long Paragraph Super Long Paragraph Super Long Paragraph Super Long Paragraph Super Long Paragraph Super Long Paragraph Super Long Paragraph all about this rune's stats here.", style);
+
+    console.log(rune.rune);
+    var runeInfo = game.add.text(game.world.width * 3/4 , 50, rune.rune.shortDesc, style);
     runeInfo.anchor.setTo(0.5, 0);
     runeInfo.alpha = 0;
     game.add.tween(runeInfo).to({alpha: 1}, 1000, Phaser.Easing.Linear.None, true);
@@ -96,7 +103,7 @@ function runeSelected(rune) {
 function confirmSelection(rune) {
 
 
-    playerStats.currentRunes = playerStats.currentRunes.concat(rune.runeID);
+    playerStats.currentRunes = playerStats.currentRunes.concat(rune.rune);
     game.state.start('game', true, false, GAME_NUM_COLORS(level));
 
 }

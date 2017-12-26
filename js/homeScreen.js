@@ -4,15 +4,13 @@ game_state.home.prototype = {
 
     preload: function() {
         //Load individual rune images.
-        for (var i=0 ; i < perkIDs.length; i++) {
-            for (var j=0 ; j < perkIDs[i].length; j++) {
-                game.load.image(''+perkIDs[i][j], 'resources/runes/perk/'+perkIDs[i][j]+'.png');
+        for (var i=0 ; i < runesReforged.length; i++) {
+            game.load.image(''+runesReforged[i].id, 'resources/runes/perkStyle/'+runesReforged[i].id+'.png');
+            for (var j=0 ; j < runesReforged[i].slots.length; j++) {
+                for (var k = 0 ; k < runesReforged[i].slots[j].runes.length; k++) {
+                    game.load.image(''+runesReforged[i].slots[j].runes[k].id, 'resources/runes/perk/'+runesReforged[i].slots[j].runes[k].id+'.png');
+                }
             }
-        }
-
-        //Load rune category images.
-        for (var i=0 ; i < perkStyles.length; i++) {
-            game.load.image(''+perkStyles[i], 'resources/runes/perkStyle/'+perkStyles[i]+'.png');
         }
 
         //Load colored sphere images.
@@ -37,7 +35,7 @@ game_state.home.prototype = {
 };
 
 function advanceFromHome() {
-    game.state.start('runeSelect', true, false, [8000, 8100, 8200, 8300, 8400]);
+    game.state.start('runeSelect', true, false);
 }
 
 game.state.add('home', game_state.home);
