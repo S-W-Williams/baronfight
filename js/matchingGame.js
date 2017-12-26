@@ -1,6 +1,7 @@
 var board = [];
 
 var isDragging = false;
+var canMakeMove = true;
 var currentSprite = null;
 var currentDragColor = null;
 var selectedSprites = [];
@@ -29,6 +30,7 @@ game_state.game.prototype = {
     },
 
     update: function() {
+        canMakeMove = true;
         for (var i = 0 ; i < board.length ; i++) {
             for (var j = 0 ; j < board[i].length; j++) {
                 const sprite = board[i][j];
@@ -40,7 +42,8 @@ game_state.game.prototype = {
                 const correctPositionY = GAME_HEIGHT * sprite.row / GAME_NUM_ROWS;
 
                 if (sprite.y < correctPositionY) {
-                    sprite.y+= GAME_FALL_SPEED;
+                    sprite.y+= GAME_FALL_SPEED * playerStats.moveSpeed / GAME_DEFAULT_STATS.moveSpeed;
+                    canMakeMove = false;
                 }
 
             }
@@ -145,6 +148,11 @@ function shiftDownPiecesFromPosition(row, col) {
 }
 
 function beginDrag() {
+
+    if (!canMakeMove) {
+        return;
+    }
+
     isDragging = true;
 
     selectedSprites = selectedSprites.concat(currentSprite);
