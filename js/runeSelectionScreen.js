@@ -28,6 +28,9 @@ game_state.runeSelect.prototype = {
 
             sprite.associatedText = text;
 
+            text.wordWrap = true;
+            text.wordWrapWidth = text.width;
+
             sprite.rune = selectableRunes[i];
             text.rune = selectableRunes[i];
 
@@ -66,7 +69,7 @@ function runeSelected(rune) {
     }, 1000, Phaser.Easing.Linear.None, true);
 
     game.add.tween(rune.associatedText).to({
-        fontSize: 40,
+        fontSize: 30,
         x: 130,
         y: game.world.height / 2 + 124
     }, 1000, Phaser.Easing.Linear.None, true);
