@@ -10,6 +10,7 @@
     -moz-border-radius: 5px;
     border-radius: 5px;
     position: relative;
+    margin: auto;
 }
 .bar {
     background-color: #c54;
@@ -29,4 +30,18 @@
     width: 0px;
 
     transition: width .5s linear;
+}
+
+img {
+    width: 100%;
+}
+
+#phaser {
+    width: 500px;
+    margin: auto;
+}
+
+.spell {
+    width: 130px;
+    padding: 6.25px;
 }
