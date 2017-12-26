@@ -109,16 +109,25 @@ function runeSelected(rune) {
     rune.associatedText.transitionX = 100;
     rune.associatedText.transitionY = game.world.height / 2 + 150;
 
-    var style = { font: "bold 32px Arial", fill: "white", boundsAlignH: "center", boundsAlignV: "middle" };
+    var style = { font: "bold 18px Arial", fill: "white", boundsAlignH: "center", boundsAlignV: "middle" };
 
-    var confirm = game.add.text(game.world.width*3/4,game.world.height/2 - 25,"Confirm", style);
+    var runeInfo = game.add.text(game.world.width * 3/4 , 20, "Super Long Paragraph Super Long Paragraph Super Long Paragraph Super Long Paragraph Super Long Paragraph Super Long Paragraph Super Long Paragraph Super Long Paragraph Super Long Paragraph Super Long Paragraph all about this rune's stats here.", style);
+    runeInfo.anchor.setTo(0.5, 0);
+    runeInfo.alpha = 0;
+    runeInfo.transitionAlpha = 1;
+    runeInfo.wordWrap = true;
+    runeInfo.wordWrapWidth = game.world.width / 2;
+
+    var buttonStyle = { font: "bold 26px Arial", fill: "white", boundsAlignH: "center", boundsAlignV: "middle" };
+
+    var confirm = game.add.text(game.world.width*3/4,game.world.height/2 + 90,"Confirm", buttonStyle);
     confirm.anchor.setTo(0.5, 0);
     confirm.alpha = 0;
     confirm.transitionAlpha = 1;
     confirm.inputEnabled = true;
     confirm.events.onInputUp.add(() => confirmSelection(rune));
 
-    var cancel = game.add.text(game.world.width*3/4,game.world.height/2 + 25,"Cancel", style);
+    var cancel = game.add.text(game.world.width*3/4,game.world.height/2 + 120,"Cancel", buttonStyle);
     cancel.anchor.setTo(0.5, 0);
     cancel.alpha = 0;
     cancel.transitionAlpha = 1;
