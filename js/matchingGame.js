@@ -7,10 +7,9 @@ var selectedSprites = [];
 var numColors = GAME_COLORS.length;
 var level = 1;
 var cpuAttackTimer = 0;
-var CPU_ATTACK_PERIOD = 1000; //Scale this with level
 
 //Will be augmented by runes, spells, items, etc. as game progresses.
-var playerStats = GAME_DEFAULT_STATS;
+var playerStats = Object.assign({}, GAME_DEFAULT_STATS);
 
 game_state.game = function() {};
 game_state.game.prototype = {
@@ -56,10 +55,8 @@ game_state.game.prototype = {
 
 function cpuAttacks() {
 
-    //console.log("Attack at " + game.time.now);
-
-    cpuAttackTimer = game.time.now + CPU_ATTACK_PERIOD;
-    var damage = CPU_DAMAGE * level;
+    cpuAttackTimer = game.time.now + GAME_BOSS_STATS(level).attackPeriod;
+    var damage = GAME_BOSS_STATS(level).attackDamage * level * 100 / (100 + playerStats.armor);
     applyDamage(damage, 0);
 }
 
@@ -156,9 +153,7 @@ function beginDrag() {
 }
 
 function attack(length, color) {
-    var levelDamage = BASE_DAMAGE / level; // Need to come up with better scaling equation
-    //var damage = length * Math.log(length) * levelDamage; // n log n scaling for damage
-    var damage = (Math.pow(length, 2) * 2) + BASE_DAMAGE;
+    var damage = (Math.pow(length, 2) * 2) + playerStats.attackDamage * 100 / (100 + GAME_BOSS_STATS(level).armor);
     applyDamage(damage, 1);
 }
 
@@ -191,6 +186,9 @@ function applyDamage(damage, playerNumber) {
 }
 
 function resetHealthBars() {
+
+    HEALTH_BAR[0].dataset.total = playerStats.maxHP;
+    HEALTH_BAR[1].dataset.total = GAME_BOSS_STATS(level).maxHP;
 
     HEALTH_BAR[0].dataset.value = HEALTH_BAR[0].dataset.total;
     HEALTH_BAR[1].dataset.value = HEALTH_BAR[1].dataset.total;

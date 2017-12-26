@@ -30,18 +30,25 @@ const GAME_DEFAULT_STATS = {
     armor: 20,
     magicResist: 20,
     moveSpeed: 300,
-    attackDamage: 80,
+    attackDamage: 10,
     abilityPower: 0,
     attackSpeed: 1.2,
+    tenacity: 0,
     currentRunes: []
 };
+
+const GAME_BOSS_STATS = (level) => ({
+    maxHP: 200 * level,
+    armor: 5 * level,
+    magicResist: 5 * level,
+    attackDamage: 5 * level,
+    attackPeriod: 1000,
+    tenacity: 0.1 * level
+});
 
 var HEALTH_BAR = $('.health-bar');
 var BAR = HEALTH_BAR.find('.bar');
 var HIT = HEALTH_BAR.find('.hit');
-
-var BASE_DAMAGE = 10;
-var CPU_DAMAGE = 10;
 
 var game = new Phaser.Game(GAME_WIDTH, GAME_HEIGHT, Phaser.CANVAS, 'phaser');
 var game_state = {};

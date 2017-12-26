@@ -15,7 +15,7 @@ game_state.lose.prototype = {
 
         //Reset player to default stats.
         level = 1;
-        playerStats = GAME_DEFAULT_STATS;
+        playerStats = Object.assign({}, GAME_DEFAULT_STATS);
     }
 
 };
