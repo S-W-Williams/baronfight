@@ -25,6 +25,8 @@ const GAME_TINT_COLOR = 0x203470;
 const GAME_UNTINT_COLOR = 0xFFFFFF;
 
 const GAME_DEFAULT_STATS = {
+    hp: 1000,
+    mp: 800,
     maxHP: 1000,
     maxMP: 800,
     armor: 20,
@@ -34,7 +36,25 @@ const GAME_DEFAULT_STATS = {
     abilityPower: 0,
     attackSpeed: 1.2,
     tenacity: 0,
-    currentRunes: []
+    currentRunes: [],
+    abilities: {
+        Q: {
+            cost: 40,
+            cooldown: 15
+        },
+        W: {
+            cost: 5,
+            cooldown: 1
+        },
+        E: {
+            cost: 40,
+            cooldown: 15
+        },
+        R: {
+            cost: 100,
+            cooldown: 60
+        }
+    }
 };
 
 const GAME_BOSS_STATS = (level) => ({

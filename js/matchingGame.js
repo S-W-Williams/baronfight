@@ -27,6 +27,8 @@ game_state.game.prototype = {
         document.body.onmouseover = this.untintAll;
 
         resetBoard();
+
+        addAbilityListeners();
     },
 
     update: function() {
@@ -241,6 +243,52 @@ function resetBoard() {
             board[i][j] = sprite;
 
         }
+    }
+}
+
+function addAbilityListeners() {
+    var q = game.input.keyboard.addKey(Phaser.Keyboard.Q);
+    var w = game.input.keyboard.addKey(Phaser.Keyboard.W);
+    var e = game.input.keyboard.addKey(Phaser.Keyboard.E);
+    var r = game.input.keyboard.addKey(Phaser.Keyboard.R);
+
+    q.onDown.add(() => tryCast("Q"));
+    w.onDown.add(() => tryCast("W"));
+    e.onDown.add(() => tryCast("E"));
+    r.onDown.add(() => tryCast("R"));
+}
+
+function tryCast(key) {
+
+    if (key === "W" && wToggle) {
+        wToggle = false;
+        return;
+    }
+
+    if (playerStats.abilities[key].cost > playerStats.mana) {
+        console.log("Not enough mana!");
+    } else if (game.time.now < playerStats.abilities[key].cooldown * 1000 + playerStats.abilities[key].lastCastTime) {
+        console.log("You may not cast this ability yet!");
+    }
+
+    playerStats.mana -= playerStats.abilities[key].cost;
+    playerStats.abilities[key].lastCastTime = game.time.now;
+    playerStats.abilities[key].castEffect(key);
+}
+
+function castEffect(key) {
+    if (key === "Q") {
+        var damage = HEALTH_BAR[1].dataset.total * (0.1 + .001 * playerStats.abilityPower);
+        applyDamage(damage, 1);
+    } else if (key === "W") {
+        wToggle = true;
+    } else if (key === "E") {
+        cpuAttackTimer = game.time.now += 1000 * (2 + .02 * playerstats.abilityPower) + GAME_BOSS_STATS(level).attackPeriod;
+    } else if (key === "R") {
+        if (numColors > 1)  {
+            numColors--;
+        }
+        resetBoard();
     }
 }
 
