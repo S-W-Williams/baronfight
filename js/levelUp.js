@@ -32,7 +32,7 @@ function nextRuneSelect() {
     if (level > GAME_LEVEL_CAP) {
         game.state.start("win", true, false);
     } else {
-        game.state.start('runeSelect', true, false, [8005, 8008, 8009]);
+        game.state.start('runeSelect', true, false, getNextRuneOffer(playerStats.currentRunes[0], level));
     }
 }
 

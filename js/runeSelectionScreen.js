@@ -36,52 +36,6 @@ game_state.runeSelect.prototype = {
 
         }
 
-    },
-
-    update: function() {
-        for (var i = 0 ; i < game.world.children.length ; i++) {
-            var sprite = game.world.children[i];
-
-            if (Math.abs(sprite.width - sprite.transitionWidth) > 1) {
-                if (sprite.width < sprite.transitionWidth) {
-                    sprite.width++;
-                } else if (sprite.width > sprite.transitionWidth) {
-                    sprite.width--;
-                }
-            }
-
-            if (Math.abs(sprite.height - sprite.transitionHeight) > 1) {
-                if (sprite.height < sprite.transitionHeight) {
-                    sprite.height++;
-                } else if (sprite.height > sprite.transitionHeight) {
-                    sprite.height--;
-                }
-            }
-
-            if (Math.abs(sprite.x - sprite.transitionX) > 5) {
-                if (sprite.x < sprite.transitionX) {
-                    sprite.x += 5;
-                } else if (sprite.x > sprite.transitionX) {
-                    sprite.x -= 5;
-                }
-            }
-
-            if (Math.abs(sprite.y - sprite.transitionY) > 1) {
-                if (sprite.y < sprite.transitionY) {
-                    sprite.y++;
-                } else if (sprite.y > sprite.transitionY) {
-                    sprite.y--;
-                }
-            }
-
-            if (Math.abs(sprite.alpha - sprite.transitionAlpha) > 0.01) {
-                if (sprite.alpha < sprite.transitionAlpha) {
-                    sprite.alpha += 1 / 128;
-                } else if (sprite.alpha > sprite.transitionAlpha) {
-                    sprite.alpha -= 1 / 128;
-                }
-            }
-        }
     }
 
 };
@@ -94,43 +48,46 @@ function runeSelected(rune) {
 
     for (var i = 0 ; i < game.world.children.length ; i++) {
         if (game.world.children[i].runeID !== rune.runeID) {
-            game.world.children[i].transitionAlpha = 0;
+            game.add.tween(game.world.children[i]).to({alpha: 0}, 1000, Phaser.Easing.Linear.None, true);
         }
         game.world.children[i].inputEnabled = false;
     }
 
-    rune.transitionWidth = 200;
-    rune.transitionHeight = 200;
-    rune.transitionX = 100;
-    rune.transitionY = game.world.height / 2;
+    game.add.tween(rune).to({
+        width: 200,
+        height: 200,
+        x: 130,
+        y: game.world.height/2 - 26
+    }, 1000, Phaser.Easing.Linear.None, true);
 
-    rune.associatedText.transitionHeight = rune.associatedText.height / rune.associatedText.width * 150;
-    rune.associatedText.transitionWidth = 150;
-    rune.associatedText.transitionX = 100;
-    rune.associatedText.transitionY = game.world.height / 2 + 150;
+    game.add.tween(rune.associatedText).to({
+        fontSize: 40,
+        x: 130,
+        y: game.world.height / 2 + 124
+    }, 1000, Phaser.Easing.Linear.None, true);
 
     var style = { font: "bold 18px Arial", fill: "white", boundsAlignH: "center", boundsAlignV: "middle" };
 
-    var runeInfo = game.add.text(game.world.width * 3/4 , 20, "Super Long Paragraph Super Long Paragraph Super Long Paragraph Super Long Paragraph Super Long Paragraph Super Long Paragraph Super Long Paragraph Super Long Paragraph Super Long Paragraph Super Long Paragraph all about this rune's stats here.", style);
+    var runeInfo = game.add.text(game.world.width * 3/4 , 50, "Super Long Paragraph Super Long Paragraph Super Long Paragraph Super Long Paragraph Super Long Paragraph Super Long Paragraph Super Long Paragraph Super Long Paragraph Super Long Paragraph Super Long Paragraph all about this rune's stats here.", style);
     runeInfo.anchor.setTo(0.5, 0);
     runeInfo.alpha = 0;
-    runeInfo.transitionAlpha = 1;
+    game.add.tween(runeInfo).to({alpha: 1}, 1000, Phaser.Easing.Linear.None, true);
     runeInfo.wordWrap = true;
     runeInfo.wordWrapWidth = game.world.width / 2;
 
     var buttonStyle = { font: "bold 26px Arial", fill: "white", boundsAlignH: "center", boundsAlignV: "middle" };
 
-    var confirm = game.add.text(game.world.width*3/4,game.world.height/2 + 90,"Confirm", buttonStyle);
+    var confirm = game.add.text(game.world.width*3/4 - 20,game.world.height - 120,"Confirm", buttonStyle);
     confirm.anchor.setTo(0.5, 0);
     confirm.alpha = 0;
-    confirm.transitionAlpha = 1;
+    game.add.tween(confirm).to({alpha: 1}, 1000, Phaser.Easing.Linear.None, true);
     confirm.inputEnabled = true;
     confirm.events.onInputUp.add(() => confirmSelection(rune));
 
-    var cancel = game.add.text(game.world.width*3/4,game.world.height/2 + 120,"Cancel", buttonStyle);
+    var cancel = game.add.text(game.world.width*3/4 - 20,game.world.height - 90,"Cancel", buttonStyle);
     cancel.anchor.setTo(0.5, 0);
     cancel.alpha = 0;
-    cancel.transitionAlpha = 1;
+    game.add.tween(cancel).to({alpha: 1}, 1000, Phaser.Easing.Linear.None, true);
     cancel.inputEnabled = true;
     cancel.events.onInputUp.add(cancelSelection);
 
