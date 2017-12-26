@@ -8,6 +8,8 @@ var selectedSprites = [];
 var numColors = GAME_COLORS.length;
 var level = 1;
 var cpuAttackTimer = 0;
+var wToggle = false;
+var wManaDecrementTime;
 
 //Will be augmented by runes, spells, items, etc. as game progresses.
 var playerStats = Object.assign({}, GAME_DEFAULT_STATS);
@@ -15,8 +17,9 @@ var playerStats = Object.assign({}, GAME_DEFAULT_STATS);
 game_state.game = function() {};
 game_state.game.prototype = {
 
-    init: function(numberOfColors = GAME_COLORS.length) {
-        numColors = numberOfColors;
+    init: function(num) {
+
+        numColors = num;
 
         resetHealthBars();
 
@@ -44,7 +47,7 @@ game_state.game.prototype = {
                 const correctPositionY = GAME_HEIGHT * sprite.row / GAME_NUM_ROWS;
 
                 if (sprite.y < correctPositionY) {
-                    sprite.y+= GAME_FALL_SPEED * playerStats.moveSpeed / GAME_DEFAULT_STATS.moveSpeed;
+                    sprite.y+= GAME_FALL_SPEED * playerStats.attackSpeed / GAME_DEFAULT_STATS.attackSpeed;
                     canMakeMove = false;
                 }
 
@@ -54,6 +57,17 @@ game_state.game.prototype = {
         if (game.time.now > cpuAttackTimer) {
             cpuAttacks();
         }
+        if (wToggle && game.time.now > wManaDecrementTime + 1000) {
+            if (playerStats.mana > 5) {
+                //If enough mana, drain 5 this seconds
+                playerStats.mana -= 5;
+                wManaDecrementTime = game.time.now + 1000;
+                console.log("Mana: " + playerStats.mana);
+            } else {
+                //If not enough mana, turn off toggle automatically.
+                tryCast("W");
+            }
+        }
     }
 
 };
@@ -61,8 +75,18 @@ game_state.game.prototype = {
 function cpuAttacks() {
 
     cpuAttackTimer = game.time.now + GAME_BOSS_STATS(level).attackPeriod;
+
+    //Dodge Chance: Movement Speed / 10000.
+    var rand = Math.random() * 10000;
+    if (playerStats.moveSpeed > rand) {
+        console.log("Enemy attack dodged!!!");
+        return;
+    }
+
+
     var damage = GAME_BOSS_STATS(level).attackDamage * level * 100 / (100 + playerStats.armor);
-    applyDamage(damage, 0);
+    applyDamage(damage, 0, 0);
+
 }
 
 function generateNewOrb(row, col) {
@@ -164,13 +188,17 @@ function beginDrag() {
 
 function attack(length, color) {
     var damage = (Math.pow(length, 2) * 2) + playerStats.attackDamage * 100 / (100 + GAME_BOSS_STATS(level).armor);
-    applyDamage(damage, 1);
+    applyDamage(damage, 1, playerStats.lifeSteal);
 }
 
-function applyDamage(damage, playerNumber) {
+function applyDamage(damage, playerNumber, lifeSteal) {
     var total = HEALTH_BAR[playerNumber].dataset.total;
     var value = HEALTH_BAR[playerNumber].dataset.value;
     var newValue = value - damage;
+
+    if (playerNumber === 0) {
+        playerStats.hp = newValue;
+    }
 
     if (newValue <= 0) {
         newValue = 0;
@@ -179,6 +207,11 @@ function applyDamage(damage, playerNumber) {
         } else {
             game.state.start("levelUp", false, false);
         }
+    }
+
+    //UNLESS they have Overheal Rune (ID: 9101) - All excess healing is converted into a permanent shield.
+    if (newValue >= total) {
+        newValue = total;
     }
 
     // calculate the percentage of the total width
@@ -193,6 +226,11 @@ function applyDamage(damage, playerNumber) {
         HIT[playerNumber].style.width = "0";
         BAR[playerNumber].style.width = barWidth + "%";
     }, 500);
+
+    if (lifeSteal > 0 && damage > 0) {
+        applyDamage(-damage * lifeSteal, 1 - playerNumber, 0);
+    }
+
 }
 
 function resetHealthBars() {
@@ -205,6 +243,8 @@ function resetHealthBars() {
 
     BAR[0].style.width = "100%";
     BAR[1].style.width = "100%";
+
+    playerStats.hp = playerStats.maxHP;
 
 }
 
@@ -228,6 +268,8 @@ function areAdjacent(a, b) {
 
 //params.numColors - Number of Colors
 function resetBoard() {
+
+    game.world.removeAll();
 
     for (var i = -GAME_NUM_ROWS ; i < GAME_NUM_ROWS ; i++) {
         board[i] = [];
@@ -262,28 +304,35 @@ function tryCast(key) {
 
     if (key === "W" && wToggle) {
         wToggle = false;
+        playerStats.attackDamage -= 20 + 0.2 * playerStats.abilityPower;
+        playerStats.lifeSteal -= .2 + .002 * playerStats.abilityPower;
         return;
     }
 
     if (playerStats.abilities[key].cost > playerStats.mana) {
         console.log("Not enough mana!");
+        return;
     } else if (game.time.now < playerStats.abilities[key].cooldown * 1000 + playerStats.abilities[key].lastCastTime) {
         console.log("You may not cast this ability yet!");
+        return;
     }
 
     playerStats.mana -= playerStats.abilities[key].cost;
     playerStats.abilities[key].lastCastTime = game.time.now;
-    playerStats.abilities[key].castEffect(key);
+    castEffect(key);
 }
 
 function castEffect(key) {
     if (key === "Q") {
         var damage = HEALTH_BAR[1].dataset.total * (0.1 + .001 * playerStats.abilityPower);
-        applyDamage(damage, 1);
+        applyDamage(damage, 1, 0);
     } else if (key === "W") {
         wToggle = true;
+        wManaDecrementTime = game.time.now;
+        playerStats.attackDamage += 20 + 0.2 * playerStats.abilityPower;
+        playerStats.lifeSteal += .2 + .002 * playerStats.abilityPower;
     } else if (key === "E") {
-        cpuAttackTimer = game.time.now += 1000 * (2 + .02 * playerstats.abilityPower) + GAME_BOSS_STATS(level).attackPeriod;
+        cpuAttackTimer = game.time.now += 1000 * (2 + .02 * playerStats.abilityPower) + GAME_BOSS_STATS(level).attackPeriod;
     } else if (key === "R") {
         if (numColors > 1)  {
             numColors--;

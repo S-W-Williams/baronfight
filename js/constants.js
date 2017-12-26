@@ -16,7 +16,7 @@ const GAME_COLORS = ["red", "orange", "yellow", "green", "blue", "purple", "blac
 const GAME_NUM_COLORS = (level) => 2 + level;
 const GAME_LEVEL_CAP = GAME_COLORS.length - 2;
 
-const GAME_FALL_SPEED = 1;
+const GAME_FALL_SPEED = 2;
 
 //Must match 3 pieces to count.
 const GAME_AMOUNT_TO_MATCH = 3;
@@ -25,8 +25,8 @@ const GAME_TINT_COLOR = 0x203470;
 const GAME_UNTINT_COLOR = 0xFFFFFF;
 
 const GAME_DEFAULT_STATS = {
-    hp: 1000,
-    mp: 800,
+    health: 1000,
+    mana: 800,
     maxHP: 1000,
     maxMP: 800,
     armor: 20,
@@ -36,6 +36,7 @@ const GAME_DEFAULT_STATS = {
     abilityPower: 0,
     attackSpeed: 1.2,
     tenacity: 0,
+    lifeSteal: 0,
     currentRunes: [],
     abilities: {
         Q: {

@@ -11,6 +11,7 @@ game_state.runeSelect.prototype = {
         } else {
             selectableRunes = runes;
         }
+
     },
 
 
@@ -29,7 +30,7 @@ game_state.runeSelect.prototype = {
             sprite.associatedText = text;
 
             text.wordWrap = true;
-            text.wordWrapWidth = text.width;
+            text.wordWrapWidth = GAME_WIDTH / selectableRunes.length;
 
             sprite.rune = selectableRunes[i];
             text.rune = selectableRunes[i];
@@ -83,7 +84,7 @@ function runeSelected(rune) {
     runeInfo.alpha = 0;
     game.add.tween(runeInfo).to({alpha: 1}, 1000, Phaser.Easing.Linear.None, true);
     runeInfo.wordWrap = true;
-    runeInfo.wordWrapWidth = game.world.width / 2;
+    runeInfo.wordWrapWidth = game.world.width / 2 - 35;
 
     var buttonStyle = { font: "bold 26px Arial", fill: "white", boundsAlignH: "center", boundsAlignV: "middle" };
 
@@ -104,7 +105,6 @@ function runeSelected(rune) {
 }
 
 function confirmSelection(rune) {
-
 
     playerStats.currentRunes = playerStats.currentRunes.concat(rune.rune);
     game.state.start('game', true, false, GAME_NUM_COLORS(level));
