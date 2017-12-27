@@ -308,6 +308,7 @@ function tryCast(key) {
         wToggle = false;
         playerStats.attackDamage -= 20 + 0.2 * playerStats.abilityPower;
         playerStats.lifeSteal -= .2 + .002 * playerStats.abilityPower;
+        setCooldown("W", 0);
         return;
     }
 
@@ -333,6 +334,8 @@ function castEffect(key) {
         wManaDecrementTime = game.time.now;
         playerStats.attackDamage += 20 + 0.2 * playerStats.abilityPower;
         playerStats.lifeSteal += .2 + .002 * playerStats.abilityPower;
+        setCooldown("W", 99999999);
+        return;
     } else if (key === "E") {
         cpuAttackTimer = game.time.now += 1000 * (2 + .02 * playerStats.abilityPower) + GAME_BOSS_STATS(level).attackPeriod;
     } else if (key === "R") {
