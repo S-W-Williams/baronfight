@@ -79,12 +79,12 @@ function runeSelected(rune) {
 
 
     console.log(rune.rune);
-    var runeInfo = game.add.text(game.world.width * 3/4 , 50, rune.rune.shortDesc, style);
+    var runeInfo = game.add.text(game.world.width * 3/4 , 50, runeDescriptions[rune.rune.id] ? runeDescriptions[rune.rune.id] : rune.rune.shortDesc, style);
     runeInfo.anchor.setTo(0.5, 0);
     runeInfo.alpha = 0;
     game.add.tween(runeInfo).to({alpha: 1}, 1000, Phaser.Easing.Linear.None, true);
     runeInfo.wordWrap = true;
-    runeInfo.wordWrapWidth = game.world.width / 2 - 35;
+    runeInfo.wordWrapWidth = game.world.width / 2 - 50;
 
     var buttonStyle = { font: "bold 26px Arial", fill: "white", boundsAlignH: "center", boundsAlignV: "middle" };
 
