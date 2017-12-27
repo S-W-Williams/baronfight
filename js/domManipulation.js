@@ -31,24 +31,40 @@ function resetHealthBars() {
 
 }
 
+var timeOuts = {};
+
 
 function setCooldown(ability, duration) {
+
+    if (timeOuts[ability]) {
+        for (var i = 0 ; i < timeOuts[ability].length; i++) {
+            clearTimeout(timeOuts[ability][i]);
+        }
+    }
+
+    timeOuts[ability] = [];
+
     $("." + ability + " .cooldown-half").css({"opacity":1});
+
     $("." + ability + " .cooldown-half-rotator-right").css({
         "transform":"rotate(180deg)",
         "transition":"transform "+(duration/2000)+"s",
         "transition-timing-function":"linear"
     });
-    setTimeout( function(){
+
+
+    timeOuts[ability][0] = setTimeout( function(){
         $("." + ability + " .cooldown-half-rotator-left").css({
             "transform":"rotate(180deg)",
             "transition":"transform "+(duration/2000)+"s",
             "transition-timing-function":"linear"
         });
-        setTimeout( function(){
-            $("." + ability + " .cooldown-half-rotator-right").css({"transform":"rotate(0deg)","transition":"transform 0s"});
-            $("." + ability + " .cooldown-half-rotator-left").css({"transform":"rotate(0deg)","transition":"transform 0s"});
-            $("." + ability + " .cooldown-half").css({"opacity":0});
-        }, duration/2 );
     }, duration/2 );
+
+    timeOuts[ability][1] = setTimeout( function(){
+        $("." + ability + " .cooldown-half-rotator-right").css({"transform":"rotate(0deg)","transition":"transform 0s"});
+        $("." + ability + " .cooldown-half-rotator-left").css({"transform":"rotate(0deg)","transition":"transform 0s"});
+        $("." + ability + " .cooldown-half").css({"opacity":0});
+    }, duration );
 }
+

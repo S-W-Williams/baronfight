@@ -39,6 +39,14 @@ game_state.game.prototype = {
 
         bossStats = GAME_BOSS_STATS(level);
 
+        var abilities = Object.values(playerStats.abilities);
+
+        for (var i = 0 ; i < abilities.length ; i++) {
+            abilities[i].lastCastTime = -Infinity;
+        }
+
+        wToggle = false;
+
     },
 
     update: function() {
@@ -322,7 +330,7 @@ function castEffect(key) {
         wManaDecrementTime = game.time.now;
         playerStats.attackDamage += 20 + 0.2 * playerStats.abilityPower;
         playerStats.lifeSteal += .2 + .002 * playerStats.abilityPower;
-        setCooldown("W", 99999999);
+        setCooldown("W", 9999999);
         return;
     } else if (key === "E") {
         cpuAttackTimer = game.time.now += 1000 * (2 + .02 * playerStats.abilityPower) + bossStats.attackPeriod;
