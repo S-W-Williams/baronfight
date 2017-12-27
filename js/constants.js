@@ -68,14 +68,6 @@ const GAME_BOSS_STATS = (level) => ({
     tenacity: 0.1 * level
 });
 
-const runeDescriptions = {
-    8000: "Become a Legend - Precision runes are focused on attacks and sustained damage. Primarily for marksmen, select this branch if you want to empower your basic attacks.",
-    8100: "Hunt and Eliminate   Prey - Domination runes are focused on burst damage and target access. Select this branch if you access to fast damage, increased burst, and general utility.",
-    8200: "Unleash Destruction - Sorcery runes are focused around ability damage and resource manipulation. Select this branch if you want to empower your abilities and ease their costs.",
-    8300: "Outwit Mere Mortals - Inspiration runes are focused around creativity and rule bending. Select this branch if you enjoy using unique tools and abilities to outwit your opponent.",
-    8400: "Live Forever - Resolve runes are focused around durability and crowd control. Select this branch if you want to outlive your enemies and solidify your resistances."
-};
-
 var game = new Phaser.Game(GAME_WIDTH, GAME_HEIGHT, Phaser.CANVAS, 'phaser');
 var game_state = {};
 

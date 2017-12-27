@@ -22,6 +22,7 @@ game_state.home.prototype = {
 
     create: function() {
 
+        resetRunePanel();
 
         //TODO - Add Instructions to Home Screen.
         var style = { font: "bold 32px Arial", fill: "white", boundsAlignH: "center", boundsAlignV: "middle" };

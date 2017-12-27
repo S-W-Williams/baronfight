@@ -2,6 +2,7 @@
 var HEALTH_BAR = $('.health-bar');
 var BAR = HEALTH_BAR.find('.bar');
 var HIT = HEALTH_BAR.find('.hit');
+var nextRuneNumber = 1;
 
 
 function updateHealthBar(playerNumber, newValue, total, damage, value) {
@@ -69,4 +70,23 @@ function setCooldown(ability, duration) {
 }
 
 
-$(".spell, .rc").popover();
+function addRuneToPanel(rune) {
+    const identifier = "#rune" + nextRuneNumber++;
+    $(identifier).attr("src", "resources/runes/perk/"+rune.id+".png");
+    $(identifier).attr("data-original-title", rune.name);
+    $(identifier).attr("data-content", runeDescriptions[rune.id].baronfight);
+
+    $(identifier).css({"display": "block"});
+}
+
+function resetRunePanel() {
+    $("#rune1").css({display: "none"});
+    $("#rune2").css({display: "none"});
+    $("#rune3").css({display: "none"});
+    $("#rune4").css({display: "none"});
+    $("#rune5").css({display: "none"});
+    $("#rune6").css({display: "none"});
+}
+
+$(".spell, .rune").popover();
+resetRunePanel();

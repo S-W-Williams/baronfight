@@ -79,7 +79,7 @@ function runeSelected(rune) {
 
 
     console.log(rune.rune);
-    var runeInfo = game.add.text(game.world.width * 3/4 , 50, runeDescriptions[rune.rune.id] ? runeDescriptions[rune.rune.id] : rune.rune.shortDesc, style);
+    var runeInfo = game.add.text(game.world.width * 3/4 , 50, runeDescriptions[rune.rune.id].baronfight, style);
     runeInfo.anchor.setTo(0.5, 0);
     runeInfo.alpha = 0;
     game.add.tween(runeInfo).to({alpha: 1}, 1000, Phaser.Easing.Linear.None, true);
@@ -107,6 +107,12 @@ function runeSelected(rune) {
 function confirmSelection(rune) {
 
     playerStats.currentRunes = playerStats.currentRunes.concat(rune.rune);
+
+    if (!rune.rune.slots) {
+        //This is a rune and not a branch.
+        addRuneToPanel(rune.rune);
+    }
+
     game.state.start('game', true, false, GAME_NUM_COLORS(level));
 
 }
