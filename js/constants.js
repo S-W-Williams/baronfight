@@ -60,16 +60,13 @@ const GAME_DEFAULT_STATS = {
 
 const GAME_BOSS_STATS = (level) => ({
     maxHP: 200 * level,
+    health: 200 * level,
     armor: 5 * level,
     magicResist: 5 * level,
     attackDamage: 5 * level,
     attackPeriod: 1000,
     tenacity: 0.1 * level
 });
-
-var HEALTH_BAR = $('.health-bar');
-var BAR = HEALTH_BAR.find('.bar');
-var HIT = HEALTH_BAR.find('.hit');
 
 var game = new Phaser.Game(GAME_WIDTH, GAME_HEIGHT, Phaser.CANVAS, 'phaser');
 var game_state = {};

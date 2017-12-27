@@ -1,3 +1,37 @@
+
+var HEALTH_BAR = $('.health-bar');
+var BAR = HEALTH_BAR.find('.bar');
+var HIT = HEALTH_BAR.find('.hit');
+
+
+function updateHealthBar(playerNumber, newValue, total, damage, value) {
+    // calculate the percentage of the total width
+    var barWidth = (newValue / total) * 100;
+    var hitWidth = (damage / value) * 100 + "%";
+
+    // show hit bar and set the width
+    HIT[playerNumber].style.width = hitWidth;
+    HEALTH_BAR[playerNumber].dataset.value = newValue;
+
+    setTimeout(function(){
+        HIT[playerNumber].style.width = "0";
+        BAR[playerNumber].style.width = barWidth + "%";
+    }, 500);
+}
+
+function resetHealthBars() {
+    HEALTH_BAR[0].dataset.total = playerStats.maxHP;
+    HEALTH_BAR[1].dataset.total = GAME_BOSS_STATS(level).maxHP;
+
+    HEALTH_BAR[0].dataset.value = HEALTH_BAR[0].dataset.total;
+    HEALTH_BAR[1].dataset.value = HEALTH_BAR[1].dataset.total;
+
+    BAR[0].style.width = "100%";
+    BAR[1].style.width = "100%";
+
+}
+
+
 function setCooldown(ability, duration) {
     $("." + ability + " .cooldown-half").css({"opacity":1});
     $("." + ability + " .cooldown-half-rotator-right").css({

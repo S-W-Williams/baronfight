@@ -14,14 +14,14 @@ var wManaDecrementTime;
 //Will be augmented by runes, spells, items, etc. as game progresses.
 var playerStats = Object.assign({}, GAME_DEFAULT_STATS);
 
+var bossStats = Object.assign({}, GAME_BOSS_STATS(level));
+
 game_state.game = function() {};
 game_state.game.prototype = {
 
     init: function(num) {
 
         numColors = num;
-
-        resetHealthBars();
 
     },
 
@@ -34,6 +34,11 @@ game_state.game.prototype = {
         addAbilityListeners();
 
         resetCooldowns();
+
+        resetHealth();
+
+        bossStats = GAME_BOSS_STATS(level);
+
     },
 
     update: function() {
@@ -76,7 +81,7 @@ game_state.game.prototype = {
 
 function cpuAttacks() {
 
-    cpuAttackTimer = game.time.now + GAME_BOSS_STATS(level).attackPeriod;
+    cpuAttackTimer = game.time.now + bossStats.attackPeriod;
 
     //Dodge Chance: Movement Speed / 10000.
     var rand = Math.random() * 10000;
@@ -86,7 +91,7 @@ function cpuAttacks() {
     }
 
 
-    var damage = GAME_BOSS_STATS(level).attackDamage * level * 100 / (100 + playerStats.armor);
+    var damage = bossStats.attackDamage * level * 100 / (100 + playerStats.armor);
     applyDamage(damage, 0, 0);
 
 }
@@ -189,18 +194,19 @@ function beginDrag() {
 }
 
 function attack(length, color) {
-    var damage = (Math.pow(length, 2) * 2) + playerStats.attackDamage * 100 / (100 + GAME_BOSS_STATS(level).armor);
+    var damage = (Math.pow(length, 2) * 2) + playerStats.attackDamage * 100 / (100 + bossStats.armor);
     applyDamage(damage, 1, playerStats.lifeSteal);
 }
 
 function applyDamage(damage, playerNumber, lifeSteal) {
-    var total = HEALTH_BAR[playerNumber].dataset.total;
-    var value = HEALTH_BAR[playerNumber].dataset.value;
+
+    character = playerNumber == 0 ? playerStats : bossStats;
+
+    var total = character.maxHP;
+    var value = character.health;
     var newValue = value - damage;
 
-    if (playerNumber === 0) {
-        playerStats.hp = newValue;
-    }
+    character.health = newValue;
 
     if (newValue <= 0) {
         newValue = 0;
@@ -216,18 +222,7 @@ function applyDamage(damage, playerNumber, lifeSteal) {
         newValue = total;
     }
 
-    // calculate the percentage of the total width
-    var barWidth = (newValue / total) * 100;
-    var hitWidth = (damage / value) * 100 + "%";
-
-    // show hit bar and set the width
-    HIT[playerNumber].style.width = hitWidth;
-    HEALTH_BAR[playerNumber].dataset.value = newValue;
-
-    setTimeout(function(){
-        HIT[playerNumber].style.width = "0";
-        BAR[playerNumber].style.width = barWidth + "%";
-    }, 500);
+    updateHealthBar(playerNumber, newValue, total, damage, value);
 
     if (lifeSteal > 0 && damage > 0) {
         applyDamage(-damage * lifeSteal, 1 - playerNumber, 0);
@@ -235,18 +230,11 @@ function applyDamage(damage, playerNumber, lifeSteal) {
 
 }
 
-function resetHealthBars() {
-
-    HEALTH_BAR[0].dataset.total = playerStats.maxHP;
-    HEALTH_BAR[1].dataset.total = GAME_BOSS_STATS(level).maxHP;
-
-    HEALTH_BAR[0].dataset.value = HEALTH_BAR[0].dataset.total;
-    HEALTH_BAR[1].dataset.value = HEALTH_BAR[1].dataset.total;
-
-    BAR[0].style.width = "100%";
-    BAR[1].style.width = "100%";
-
+function resetHealth() {
     playerStats.hp = playerStats.maxHP;
+    bossStats.hp = bossStats.maxHP;
+
+    resetHealthBars();
 
 }
 
@@ -327,7 +315,7 @@ function tryCast(key) {
 
 function castEffect(key) {
     if (key === "Q") {
-        var damage = HEALTH_BAR[1].dataset.total * (0.1 + .001 * playerStats.abilityPower);
+        var damage = bossStats.maxHP * (0.1 + .001 * playerStats.abilityPower);
         applyDamage(damage, 1, 0);
     } else if (key === "W") {
         wToggle = true;
@@ -337,7 +325,7 @@ function castEffect(key) {
         setCooldown("W", 99999999);
         return;
     } else if (key === "E") {
-        cpuAttackTimer = game.time.now += 1000 * (2 + .02 * playerStats.abilityPower) + GAME_BOSS_STATS(level).attackPeriod;
+        cpuAttackTimer = game.time.now += 1000 * (2 + .02 * playerStats.abilityPower) + bossStats.attackPeriod;
     } else if (key === "R") {
         if (numColors > 1)  {
             numColors--;
