@@ -32,8 +32,38 @@
     transition: width .5s linear;
 }
 
+div.spell {
+
+    width: 130px;
+    height: 130px;
+    display: inline-block;
+    border-radius: 20px;
+    background-size: cover;
+}
+
+div.cooldown {
+
+}
+
+.Q {
+    background: url('../resources/actives/Q.png') no-repeat ;
+}
+
+.W {
+    background: url('../resources/actives/W.png') no-repeat ;
+}
+
+.E {
+    background: url('../resources/actives/E.png') no-repeat ;
+}
+
+.R {
+    background: url('../resources/actives/R.png') no-repeat ;
+}
+
 img {
     width: 100%;
+    border-radius: 20px;
 }
 
 #phaser {
@@ -41,7 +71,28 @@ img {
     margin: auto;
 }
 
-.spell {
-    width: 130px;
-    padding: 6.25px;
+
+.cooldown-half{
+    width:50%;
+    height:100%;
+    overflow:hidden;
+    position:relative;
+    float:left;
+}
+
+.cooldown-half-rotator{
+    width:200%;
+    height:200%;
+    top:-50%;
+    position:absolute;
+    background-color:rgba(1,1,1,0.7);
+}
+
+.cooldown-half-rotator-right{
+    transform-origin:left center;
+}
+
+.cooldown-half-rotator-left{
+    right:0;
+    transform-origin:right center;
 }

@@ -32,6 +32,8 @@ game_state.game.prototype = {
         resetBoard();
 
         addAbilityListeners();
+
+        resetCooldowns();
     },
 
     update: function() {
@@ -338,6 +340,17 @@ function castEffect(key) {
             numColors--;
         }
         resetBoard();
+    }
+
+    setCooldown(key, playerStats.abilities[key].cooldown * 1000);
+}
+
+function resetCooldowns() {
+
+    const keys = Object.keys(playerStats.abilities);
+
+    for (var i = 0 ; i < keys.length; i++) {
+        setCooldown(keys[i], 0);
     }
 }
 
