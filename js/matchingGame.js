@@ -239,8 +239,8 @@ function applyDamage(damage, playerNumber, lifeSteal) {
 }
 
 function resetHealth() {
-    playerStats.hp = playerStats.maxHP;
-    bossStats.hp = bossStats.maxHP;
+    playerStats.health = playerStats.maxHP;
+    bossStats.health = bossStats.maxHP;
 
     resetHealthBars();
 
