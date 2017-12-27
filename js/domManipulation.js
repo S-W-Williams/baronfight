@@ -68,3 +68,5 @@ function setCooldown(ability, duration) {
     }, duration );
 }
 
+
+$(".spell, .rc").popover();

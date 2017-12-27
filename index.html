@@ -4,6 +4,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+    <script src="js/healthbar.js"></script>
 </head>
 <body>
     <div class="container">
@@ -47,10 +53,10 @@
 
         <div class="row">
             <div class="col-md-3">
-
+                <h3 class="label">Your abilities:</h3>
             </div>
             <div class="col-md-6">
-                <div class="spell Q">
+                <div class="spell Q" data-content="Cost: 40 mana. Cooldown: 15s. <br /> Deal 10% (+ 10% AP) of the enemy’s maximum HP as magic damage." rel="popover" data-placement="top" data-original-title="Annie's Disintegrate" data-trigger="hover" data-html="true">
                     <div class='cooldown-half'>
                         <div class='cooldown-half-rotator cooldown-half-rotator-left'>
                         </div>
@@ -61,7 +67,7 @@
                     </div>
                     <p class="shortKey">Q</p>
                 </div>
-                <div class="spell W">
+                <div class="spell W" data-content="Cost: 5 Mana per second. <br /> Toggle - When On: Gain 20 AD and % Lifesteal (+ 20% AP)." rel="popover" data-placement="top" data-original-title="Aatrox's Blood Thirst" data-trigger="hover" data-html="true">
                     <div class='cooldown-half'>
                         <div class='cooldown-half-rotator cooldown-half-rotator-left'>
                         </div>
@@ -72,7 +78,7 @@
                     </div>
                     <p class="shortKey">W</p>
                 </div>
-                <div class="spell E">
+                <div class="spell E" data-content="Cost: 40 mana. Cooldown: 15s. <br />Stun your enemy for 2 (+ 2% AP) seconds. They cannot attack during this period." rel="popover" data-placement="top" data-original-title="Taric's Dazzle" data-trigger="hover" data-html="true">
                     <div class='cooldown-half'>
                         <div class='cooldown-half-rotator cooldown-half-rotator-left'>
                         </div>
@@ -83,7 +89,7 @@
                     </div>
                     <p class="shortKey">E</p>
                 </div>
-                <div class="spell R">
+                <div class="spell R" data-content="Cost: 100 mana. Cooldown: 60s. <br />Rebuild your board. Reduce the number of colors on board by one." rel="popover" data-placement="top" data-original-title="Kennen's Slicing Maelstrom" data-trigger="hover" data-html="true">
                     <div class='cooldown-half'>
                         <div class='cooldown-half-rotator cooldown-half-rotator-left'>
                         </div>
@@ -99,6 +105,29 @@
 
             </div>
         </div>
+
+
+        <div class="row">
+            <div class="col-md-3">
+                <h3 class="label">Your runes:</h3>
+            </div>
+            <div class="col-md-1 rc" id="rune1" data-content="Hitting an enemy adds a stack for 4 seconds. Landing 3 stacks on the enemy will destroy the stacks to deal 20% of their maximum HP." rel="popover" data-placement="top" data-original-title="Press the Attack" data-trigger="hover">
+                <img class="rune" src="resources/runes/perk/8005.png" />
+            </div>
+            <div class="col-md-1 rc" id="rune2">
+            </div>
+            <div class="col-md-1 rc" id="rune3">
+            </div>
+            <div class="col-md-1 rc" id="rune4">
+            </div>
+            <div class="col-md-1 rc" id="rune5">
+            </div>
+            <div class="col-md-1 rc" id="rune6">
+            </div>
+            <div class="col-md-3">
+            </div>
+        </div>
+
     </div>
 
 
@@ -118,11 +147,5 @@
 
     <script src="js/matchingGame.js"></script>
 
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
-    <script src="js/healthbar.js"></script>
 </body>
 </html>
