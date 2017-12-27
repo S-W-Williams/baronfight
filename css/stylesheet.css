@@ -39,10 +39,7 @@ div.spell {
     display: inline-block;
     border-radius: 20px;
     background-size: cover;
-}
-
-div.cooldown {
-
+    position: relative;
 }
 
 .Q {
@@ -71,6 +68,16 @@ img {
     margin: auto;
 }
 
+.shortKey {
+    position: absolute;
+    font-size: 40px;
+    color: white;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+
+}
 
 .cooldown-half{
     width:50%;
