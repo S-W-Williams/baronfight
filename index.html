@@ -12,196 +12,196 @@
     <script src="js/healthbar.js"></script>
 </head>
 <body>
-<div class="container">
-    <nav class="navbar bg-faded">
-        <a class="navbar-brand" href="#">Baron Fight</a>
-    </nav>
+    <div class="container">
+        <nav class="navbar bg-faded">
+            <a class="navbar-brand" href="#">Baron Fight</a>
+        </nav>
+            <div class="jumbotron">
+                <span class="align-bottom">
+                    <div class="row">
+                        <span class="col-md-3" style="vertical-align: bottom">
+                            <div class="row">
+                                <img class="img-fluid" src="resources/images/veigar0.gif">
+                                <div class="health-bar">
+                                    <div class="bar">
+                                        <div class="hit"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mana-bar">
+                                    <div class="bar">
+                                        <div class="hit"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <table class="potionTable">
+                                    <tr>
+                                        <td id="potion1">
+                                            <img src="http://pm1.narvii.com/6038/9f4b1577a8e9db53e2c067f52322488a5c9f7d23_hq.jpg">
+                                        </td>
+                                        <td id="potion2">
+                                            <img src="http://pm1.narvii.com/6038/9f4b1577a8e9db53e2c067f52322488a5c9f7d23_hq.jpg">
+                                        </td>
+                                        <td id="potion3">
+                                            <img src="http://pm1.narvii.com/6038/9f4b1577a8e9db53e2c067f52322488a5c9f7d23_hq.jpg">
+                                        </td>
+                                        <td id="potion4">
+                                            <img src="http://pm1.narvii.com/6038/9f4b1577a8e9db53e2c067f52322488a5c9f7d23_hq.jpg">
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </span>
+                        <span class="col-md-6">
+                            <div id="phaser">
+                            </div>
+                        </span>
+                        <span class="col-md-3">
+                            <img src="resources/images/baron.gif" />
+                            <div class="health-bar">
+                                <div class="bar">
+                                    <div class="hit"></div>
+                                </div>
+                            </div>
+                        </span>
+                    </div>
+                </span>
 
-    <div class="jumbotron">
-        <span class="align-bottom">
             <div class="row">
-                <span class="col-md-3" style="vertical-align: bottom">
-                    <div class="row">
-                        <img class="img-fluid" src="resources/images/veigar0.gif">
-                        <div class="health-bar">
-                            <div class="bar">
-                                <div class="hit"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="mana-bar">
-                            <div class="bar">
-                                <div class="hit"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <table class="potionTable">
-                            <tr>
-                                <td id="potion1">
-                                    <img src="http://pm1.narvii.com/6038/9f4b1577a8e9db53e2c067f52322488a5c9f7d23_hq.jpg">
-                                </td>
-                                <td id="potion2">
-                                    <img src="http://pm1.narvii.com/6038/9f4b1577a8e9db53e2c067f52322488a5c9f7d23_hq.jpg">
-                                </td>
-                                <td id="potion3">
-                                    <img src="http://pm1.narvii.com/6038/9f4b1577a8e9db53e2c067f52322488a5c9f7d23_hq.jpg">
-                                </td>
-                                <td id="potion4">
-                                    <img src="http://pm1.narvii.com/6038/9f4b1577a8e9db53e2c067f52322488a5c9f7d23_hq.jpg">
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </span>
-                <span class="col-md-6">
-                    <div id="phaser">
-                    </div>
-                </span>
-                <span class="col-md-3">
-                    <img src="resources/images/baron.gif" />
-                    <div class="health-bar">
-                        <div class="bar">
-                            <div class="hit"></div>
-                        </div>
-                    </div>
-                </span>
-            </div>
-        </span>
-        <div class="row">
-            <div class="col-md-3">
+                <div class="col-md-3">
 
-            </div>
-            <div class="col-md-6">
-                <div class="alert alert-info" id="runeInfo">
-                    Indicates a neutral informative change or action.
+                </div>
+                <div class="col-md-6">
+                    <div class="alert alert-info" id="runeInfo">
+                        Indicates a neutral informative change or action.
+                    </div>
+                </div>
+                <div class="col-md-3">
+
                 </div>
             </div>
-            <div class="col-md-3">
 
+            <div class="row">
+                <table class="spells">
+                    <tbody>
+                    <tr>
+                        <td>
+                            <div class="spell Q" data-content="Cost: 40 mana. Cooldown: 15s. <br /> Deal 10% (+ 10% AP) of the enemy’s maximum HP as magic damage." rel="popover" data-placement="top" data-original-title="Annie's Disintegrate" data-trigger="hover" data-html="true">
+                                <div class='cooldown-half'>
+                                    <div class='cooldown-half-rotator cooldown-half-rotator-left'>
+                                    </div>
+                                </div>
+                                <div class='cooldown-half'>
+                                    <div class='cooldown-half-rotator cooldown-half-rotator-right'>
+                                    </div>
+                                </div>
+                                <p class="shortKey">Q</p>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="spell W" data-content="Cost: 5 Mana per second. <br /> Toggle - When On: Gain 20 AD and % Lifesteal (+ 20% AP)." rel="popover" data-placement="top" data-original-title="Aatrox's Blood Thirst" data-trigger="hover" data-html="true">
+                                <div class='cooldown-half'>
+                                    <div class='cooldown-half-rotator cooldown-half-rotator-left'>
+                                    </div>
+                                </div>
+                                <div class='cooldown-half'>
+                                    <div class='cooldown-half-rotator cooldown-half-rotator-right'>
+                                    </div>
+                                </div>
+                                <p class="shortKey">W</p>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="spell E" data-content="Cost: 40 mana. Cooldown: 15s. <br />Stun your enemy for 2 (+ 2% AP) seconds. They cannot attack during this period." rel="popover" data-placement="top" data-original-title="Taric's Dazzle" data-trigger="hover" data-html="true">
+                                <div class='cooldown-half'>
+                                    <div class='cooldown-half-rotator cooldown-half-rotator-left'>
+                                    </div>
+                                </div>
+                                <div class='cooldown-half'>
+                                    <div class='cooldown-half-rotator cooldown-half-rotator-right'>
+                                    </div>
+                                </div>
+                                <p class="shortKey">E</p>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="spell R" data-content="Cost: 100 mana. Cooldown: 60s. <br />Rebuild your board. Reduce the number of colors on board by one." rel="popover" data-placement="top" data-original-title="Kennen's Slicing Maelstrom" data-trigger="hover" data-html="true">
+                                <div class='cooldown-half'>
+                                    <div class='cooldown-half-rotator cooldown-half-rotator-left'>
+                                    </div>
+                                </div>
+                                <div class='cooldown-half'>
+                                    <div class='cooldown-half-rotator cooldown-half-rotator-right'>
+                                    </div>
+                                </div>
+                                <p class="shortKey">R</p>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
-        </div>
 
-        <div class="row">
-            <table class="spells">
-                <tbody>
-                <tr>
-                    <td>
-                        <div class="spell Q" data-content="Cost: 40 mana. Cooldown: 15s. <br /> Deal 10% (+ 10% AP) of the enemy’s maximum HP as magic damage." rel="popover" data-placement="top" data-original-title="Annie's Disintegrate" data-trigger="hover" data-html="true">
-                            <div class='cooldown-half'>
-                                <div class='cooldown-half-rotator cooldown-half-rotator-left'>
-                                </div>
-                            </div>
-                            <div class='cooldown-half'>
-                                <div class='cooldown-half-rotator cooldown-half-rotator-right'>
-                                </div>
-                            </div>
-                            <p class="shortKey">Q</p>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="spell W" data-content="Cost: 5 Mana per second. <br /> Toggle - When On: Gain 20 AD and % Lifesteal (+ 20% AP)." rel="popover" data-placement="top" data-original-title="Aatrox's Blood Thirst" data-trigger="hover" data-html="true">
-                            <div class='cooldown-half'>
-                                <div class='cooldown-half-rotator cooldown-half-rotator-left'>
-                                </div>
-                            </div>
-                            <div class='cooldown-half'>
-                                <div class='cooldown-half-rotator cooldown-half-rotator-right'>
-                                </div>
-                            </div>
-                            <p class="shortKey">W</p>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="spell E" data-content="Cost: 40 mana. Cooldown: 15s. <br />Stun your enemy for 2 (+ 2% AP) seconds. They cannot attack during this period." rel="popover" data-placement="top" data-original-title="Taric's Dazzle" data-trigger="hover" data-html="true">
-                            <div class='cooldown-half'>
-                                <div class='cooldown-half-rotator cooldown-half-rotator-left'>
-                                </div>
-                            </div>
-                            <div class='cooldown-half'>
-                                <div class='cooldown-half-rotator cooldown-half-rotator-right'>
-                                </div>
-                            </div>
-                            <p class="shortKey">E</p>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="spell R" data-content="Cost: 100 mana. Cooldown: 60s. <br />Rebuild your board. Reduce the number of colors on board by one." rel="popover" data-placement="top" data-original-title="Kennen's Slicing Maelstrom" data-trigger="hover" data-html="true">
-                            <div class='cooldown-half'>
-                                <div class='cooldown-half-rotator cooldown-half-rotator-left'>
-                                </div>
-                            </div>
-                            <div class='cooldown-half'>
-                                <div class='cooldown-half-rotator cooldown-half-rotator-right'>
-                                </div>
-                            </div>
-                            <p class="shortKey">R</p>
-                        </div>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="row">
-            <table class="runeTable" id="mainTree">
-                <tbody>
-                <tr>
-                    <td>
-                        <img id="tree1" src="resources/runes/perk/runeplaceholder.png" data-content="Hitting an enemy adds a stack for 4 seconds. Landing 3 stacks on the enemy will destroy the stacks to deal 20% of their maximum HP." rel="popover" data-placement="top" data-original-title="Press the Attack" data-trigger="hover"/>
-                    </td>
-                    <td>
-                        <img id="rune1" class="rune" src="resources/runes/perk/runeplaceholder.png" data-content="Hitting an enemy adds a stack for 4 seconds. Landing 3 stacks on the enemy will destroy the stacks to deal 20% of their maximum HP." rel="popover" data-placement="top" data-original-title="Press the Attack" data-trigger="hover"/>
-                    </td>
-                    <td>
-                        <img id="rune2" class="rune" src="resources/runes/perk/runeplaceholder.png" data-content="Hitting an enemy adds a stack for 4 seconds. Landing 3 stacks on the enemy will destroy the stacks to deal 20% of their maximum HP." rel="popover" data-placement="top" data-original-title="Press the Attack" data-trigger="hover"/>
-                    </td>
-                    <td>
-                        <img id="rune3" class="rune" src="resources/runes/perk/runeplaceholder.png" data-content="Hitting an enemy adds a stack for 4 seconds. Landing 3 stacks on the enemy will destroy the stacks to deal 20% of their maximum HP." rel="popover" data-placement="top" data-original-title="Press the Attack" data-trigger="hover"/>
-                    </td>
-                    <td>
-                        <img id="rune4" class="rune" src="resources/runes/perk/runeplaceholder.png" data-content="Hitting an enemy adds a stack for 4 seconds. Landing 3 stacks on the enemy will destroy the stacks to deal 20% of their maximum HP." rel="popover" data-placement="top" data-original-title="Press the Attack" data-trigger="hover"/>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <table class="runeTable" id="subTree">
-                <tbody>
-                <tr>
-                    <td>
-                        <img id="tree2" src="resources/runes/perk/runeplaceholder.png" data-content="Hitting an enemy adds a stack for 4 seconds. Landing 3 stacks on the enemy will destroy the stacks to deal 20% of their maximum HP." rel="popover" data-placement="top" data-original-title="Press the Attack" data-trigger="hover"/>
-                    </td>
-                    <td>
-                        <img id="rune5" class="rune" src="resources/runes/perk/runeplaceholder.png" data-content="Hitting an enemy adds a stack for 4 seconds. Landing 3 stacks on the enemy will destroy the stacks to deal 20% of their maximum HP." rel="popover" data-placement="top" data-original-title="Press the Attack" data-trigger="hover"/>
-                    </td>
-                    <td>
-                        <img id="rune6" class="rune" src="resources/runes/perk/runeplaceholder.png" data-content="Hitting an enemy adds a stack for 4 seconds. Landing 3 stacks on the enemy will destroy the stacks to deal 20% of their maximum HP." rel="popover" data-placement="top" data-original-title="Press the Attack" data-trigger="hover"/>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+            <div class="row">
+                <table class="runeTable" id="mainTree">
+                    <tbody>
+                    <tr>
+                        <td>
+                            <img id="tree1" src="resources/runes/perk/runeplaceholder.png" data-content="Hitting an enemy adds a stack for 4 seconds. Landing 3 stacks on the enemy will destroy the stacks to deal 20% of their maximum HP." rel="popover" data-placement="top" data-original-title="Press the Attack" data-trigger="hover"/>
+                        </td>
+                        <td>
+                            <img id="rune1" class="rune" src="resources/runes/perk/runeplaceholder.png" data-content="Hitting an enemy adds a stack for 4 seconds. Landing 3 stacks on the enemy will destroy the stacks to deal 20% of their maximum HP." rel="popover" data-placement="top" data-original-title="Press the Attack" data-trigger="hover"/>
+                        </td>
+                        <td>
+                            <img id="rune2" class="rune" src="resources/runes/perk/runeplaceholder.png" data-content="Hitting an enemy adds a stack for 4 seconds. Landing 3 stacks on the enemy will destroy the stacks to deal 20% of their maximum HP." rel="popover" data-placement="top" data-original-title="Press the Attack" data-trigger="hover"/>
+                        </td>
+                        <td>
+                            <img id="rune3" class="rune" src="resources/runes/perk/runeplaceholder.png" data-content="Hitting an enemy adds a stack for 4 seconds. Landing 3 stacks on the enemy will destroy the stacks to deal 20% of their maximum HP." rel="popover" data-placement="top" data-original-title="Press the Attack" data-trigger="hover"/>
+                        </td>
+                        <td>
+                            <img id="rune4" class="rune" src="resources/runes/perk/runeplaceholder.png" data-content="Hitting an enemy adds a stack for 4 seconds. Landing 3 stacks on the enemy will destroy the stacks to deal 20% of their maximum HP." rel="popover" data-placement="top" data-original-title="Press the Attack" data-trigger="hover"/>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table class="runeTable" id="subTree">
+                    <tbody>
+                    <tr>
+                        <td>
+                            <img id="tree2" src="resources/runes/perk/runeplaceholder.png" data-content="Hitting an enemy adds a stack for 4 seconds. Landing 3 stacks on the enemy will destroy the stacks to deal 20% of their maximum HP." rel="popover" data-placement="top" data-original-title="Press the Attack" data-trigger="hover"/>
+                        </td>
+                        <td>
+                            <img id="rune5" class="rune" src="resources/runes/perk/runeplaceholder.png" data-content="Hitting an enemy adds a stack for 4 seconds. Landing 3 stacks on the enemy will destroy the stacks to deal 20% of their maximum HP." rel="popover" data-placement="top" data-original-title="Press the Attack" data-trigger="hover"/>
+                        </td>
+                        <td>
+                            <img id="rune6" class="rune" src="resources/runes/perk/runeplaceholder.png" data-content="Hitting an enemy adds a stack for 4 seconds. Landing 3 stacks on the enemy will destroy the stacks to deal 20% of their maximum HP." rel="popover" data-placement="top" data-original-title="Press the Attack" data-trigger="hover"/>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            </div>
     </div>
-</div>
 
 
 
-<script src="js/phaser.js"></script>
+    <script src="js/phaser.js"></script>
 
-<script src="js/runesReforged.js"></script>
-<script src="js/runeDescriptions.js"></script>
-<script src="js/constants.js"></script>
-<script src="js/domManipulation.js"></script>
+    <script src="js/runesReforged.js"></script>
+    <script src="js/runeDescriptions.js"></script>
+    <script src="js/constants.js"></script>
+    <script src="js/domManipulation.js"></script>
 
-<script src="js/homeScreen.js"></script>
-<script src="js/runeSelectionScreen.js"></script>
+    <script src="js/homeScreen.js"></script>
+    <script src="js/runeSelectionScreen.js"></script>
 
-<script src="js/levelUp.js"></script>
-<script src="js/winScreen.js"></script>
-<script src="js/loseScreen.js"></script>
+    <script src="js/levelUp.js"></script>
+    <script src="js/winScreen.js"></script>
+    <script src="js/loseScreen.js"></script>
 
-<script src="js/matchingGame.js"></script>
+    <script src="js/matchingGame.js"></script>
 
 </body>
 </html>

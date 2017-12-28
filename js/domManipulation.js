@@ -142,6 +142,7 @@ function resetRunePanel() {
     $(".rune ~ .cooldown-half").css({"opacity":0});
 
     nextRuneNumber = 1;
+    treeNumber = 1;
 }
 
 function updateStackCount(count) {

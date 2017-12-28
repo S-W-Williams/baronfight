@@ -274,8 +274,8 @@ function beginDrag() {
     if (playerHasRune(8120)) {
 
         const timeoutID = setTimeout(function() {
-            currentSprite.color = "ANY";
-            currentSprite.loadTexture("poro");
+                currentSprite.color = "ANY";
+                currentSprite.loadTexture("poro");
 
         }, 1000);
 
