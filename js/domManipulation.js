@@ -4,6 +4,9 @@ var BAR = HEALTH_BAR.find('.bar');
 var HIT = HEALTH_BAR.find('.hit');
 var nextRuneNumber = 1;
 
+var MANA_BAR = $('.mana-bar');
+var M_BAR = MANA_BAR.find('.bar');
+var M_PTS = MANA_BAR.find('.hit');
 
 function updateHealthBar(playerNumber, newValue, total, damage, value) {
     // calculate the percentage of the total width
