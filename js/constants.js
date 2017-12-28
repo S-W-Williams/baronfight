@@ -34,9 +34,9 @@ const GAME_STACK_TRIGGER_AMOUNT = 3;
 //PLAYER DEFAULT STATS
 const GAME_DEFAULT_STATS = {
     health: 1000,
-    mana: 800,
+    mana: 300,
     maxHP: 1000,
-    maxMP: 800,
+    maxMP: 300,
     armor: 20,
     magicResist: 20,
     moveSpeed: 300,

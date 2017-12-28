@@ -23,7 +23,22 @@ function updateHealthBar(playerNumber, newValue, total, damage, value) {
     }, 500);
 }
 
-function resetHealthBars() {
+function updateManaBar(playerNumber, newValue, total, damage, value) {
+    // calculate the percentage of the total width
+    var barWidth = (newValue / total) * 100;
+    var hitWidth = (damage / value) * 100 + "%";
+
+    // show hit bar and set the width
+    M_PTS[playerNumber].style.width = hitWidth;
+    MANA_BAR[playerNumber].dataset.value = newValue;
+
+    setTimeout(function(){
+        M_PTS[playerNumber].style.width = "0";
+        M_BAR[playerNumber].style.width = barWidth + "%";
+    }, 500);
+}
+
+function resetResourceBars() {
     HEALTH_BAR[0].dataset.total = playerStats.maxHP;
     HEALTH_BAR[1].dataset.total = GAME_BOSS_STATS(level).maxHP;
 
@@ -32,6 +47,10 @@ function resetHealthBars() {
 
     BAR[0].style.width = "100%";
     BAR[1].style.width = "100%";
+
+    MANA_BAR[0].dataset.total = playerStats.maxMP;
+    MANA_BAR[0].dataset.value = playerStats.maxMP;
+    M_BAR[0].style.width = "100%";
 
 }
 
@@ -90,6 +109,8 @@ function resetRunePanel() {
     $("#rune4").css({display: "none"});
     $("#rune5").css({display: "none"});
     $("#rune6").css({display: "none"});
+
+    nextRuneNumber = 1;
 }
 
 function updateStackCount(count) {

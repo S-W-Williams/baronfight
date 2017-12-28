@@ -40,7 +40,7 @@ game_state.game.prototype = {
 
         resetCooldowns();
 
-        resetHealth();
+        resetResources();
 
         bossStats = GAME_BOSS_STATS(level);
 
@@ -96,8 +96,8 @@ game_state.game.prototype = {
             if (playerStats.mana > 5) {
                 //If enough mana, drain 5 this seconds
                 playerStats.mana -= 5;
+                updateManaBar(0, playerStats.mana, playerStats.maxMP, 5, playerStats.mana + 5)
                 wManaDecrementTime = game.time.now + 1000;
-                console.log("Mana: " + playerStats.mana);
             } else {
                 //If not enough mana, turn off toggle automatically.
                 tryCast("W");
@@ -494,11 +494,13 @@ function applyDamage(damage, playerNumber, lifeSteal) {
 
 }
 
-function resetHealth() {
+function resetResources() {
     playerStats.health = playerStats.maxHP;
     bossStats.health = bossStats.maxHP;
 
-    resetHealthBars();
+    playerStats.mana = playerStats.maxMP;
+
+    resetResourceBars();
 
 }
 
@@ -590,6 +592,7 @@ function tryCast(key) {
     }
 
     playerStats.mana -= cost;
+    updateManaBar(0, playerStats.mana, playerStats.maxMP, cost, playerStats.mana + cost);
     playerStats.abilities[key].lastCastTime = game.time.now;
     castEffect(key);
 
