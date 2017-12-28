@@ -577,7 +577,11 @@ function resetResources() {
 
     playerStats.mana = playerStats.maxMP;
 
+    playerStats.potions = GAME_DEFAULT_STATS.potions;
+
     resetResourceBars();
+
+    updateNumPotions(playerStats.potions);
 
 }
 
@@ -630,14 +634,18 @@ function addAbilityListeners() {
     var w = game.input.keyboard.addKey(Phaser.Keyboard.W);
     var e = game.input.keyboard.addKey(Phaser.Keyboard.E);
     var r = game.input.keyboard.addKey(Phaser.Keyboard.R);
+    var one = game.input.keyboard.addKey(Phaser.Keyboard.ONE);
 
     q.onDown.add(() => tryCast("Q"));
     w.onDown.add(() => tryCast("W"));
     e.onDown.add(() => tryCast("E"));
     r.onDown.add(() => tryCast("R"));
+    one.onDown.add(() => tryCast("1"));
 }
 
 function tryCast(key) {
+
+    console.log("Cast " + key);
 
     var cost = playerStats.abilities[key].cost;
 
@@ -666,6 +674,14 @@ function tryCast(key) {
     } else if (game.time.now < playerStats.abilities[key].cooldown * 1000 + playerStats.abilities[key].lastCastTime) {
         console.log("You may not cast this ability yet!");
         return;
+    } else if (playerStats.abilities[key].potions && playerStats.potions < playerStats.abilities[key].potions) {
+        console.log("You are out of potions!");
+        return;
+    }
+
+    if (playerStats.abilities[key].potions) {
+        playerStats.potions -= playerStats.abilities[key].potions;
+        updateNumPotions(playerStats.potions);
     }
 
     playerStats.mana -= cost;
@@ -700,6 +716,8 @@ function castEffect(key) {
             numColors--;
         }
         resetBoard();
+    } else if (key === "1") {
+        applyDamage(-GAME_POTION_STRENGTH, 0, 0);
     }
 
     setCooldown(key, playerStats.abilities[key].cooldown * 1000);

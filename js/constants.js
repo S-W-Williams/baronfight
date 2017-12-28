@@ -17,13 +17,16 @@ const GAME_COLORS = ["red", "orange", "yellow", "green", "blue", "purple", "blac
 const GAME_NUM_COLORS = (level) => 2 + level;
 const GAME_LEVEL_CAP = GAME_COLORS.length - 2;
 
-const GAME_FALL_SPEED = 2;
+const GAME_FALL_SPEED = 4;
 
 //Must match 3 pieces to count.
 const GAME_AMOUNT_TO_MATCH = 3;
 
 const GAME_TINT_COLOR = 0x203470;
 const GAME_UNTINT_COLOR = 0xFFFFFF;
+
+//Health restored from consuming red potion.
+const GAME_POTION_STRENGTH = 200;
 
 //RUNE-SPECIFIC CONSTANTS
 //Match stacking lasts 4 seconds.
@@ -47,6 +50,7 @@ const GAME_DEFAULT_STATS = {
     tenacity: 0,
     lifeSteal: 0,
     currentRunes: [],
+    potions: 4,
     abilities: {
         Q: {
             cost: 40,
@@ -63,6 +67,11 @@ const GAME_DEFAULT_STATS = {
         R: {
             cost: 100,
             cooldown: 60
+        },
+        1: {
+            cost: 0,
+            cooldown: 1,
+            potions: 1
         }
     }
 };

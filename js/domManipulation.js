@@ -59,6 +59,16 @@ function resetResourceBars() {
 }
 
 
+function updateNumPotions(count) {
+
+    $(".potionTable td").css("display", "none")
+
+    for (var i = 1 ; i <= count ; i++) {
+        $("#potion" + i).css("display", "table-cell");
+    }
+}
+
+
 function setCooldown(ability, duration) {
 
     if (timeOuts[ability]) {
