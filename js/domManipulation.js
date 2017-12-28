@@ -133,12 +133,14 @@ function addRuneToPanel(rune) {
 }
 
 function resetRunePanel() {
+<<<<<<< HEAD
     $("#rune1 img").attr("src", RUNE_PLACEHOLDER);
     $("#rune2 img").attr("src", RUNE_PLACEHOLDER);
     $("#rune3 img").attr("src", RUNE_PLACEHOLDER);
     $("#rune4 img").attr("src", RUNE_PLACEHOLDER);
     $("#rune5 img").attr("src", RUNE_PLACEHOLDER);
     $("#rune6 img").attr("src", RUNE_PLACEHOLDER);
+=======
     $(".rune").css({display: "none"});
     $(".rune ~ .cooldown-half").css({"opacity":0});
 
@@ -194,6 +196,7 @@ function updateRuneCooldown(runeid, duration) {
         $("#rune" + position + " ~ .cooldown-half .cooldown-half-rotator-left").css({"transform":"rotate(0deg)","transition":"transform 0s"});
         $("#rune" + position + " ~ .cooldown-half").css({"opacity":0});
     }, duration );
+>>>>>>> origin/master
 }
 
 $(".spell, .rune").popover();
