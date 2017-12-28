@@ -130,16 +130,14 @@ function addRuneToPanel(rune) {
     $(identifier).attr("data-rune-id", rune.id);
 
     $(identifier).css({"display": "block"});
+    $(identifier).popover("enable");
 }
 
 function resetRunePanel() {
-    $("#rune1 img").attr("src", RUNE_PLACEHOLDER);
-    $("#rune2 img").attr("src", RUNE_PLACEHOLDER);
-    $("#rune3 img").attr("src", RUNE_PLACEHOLDER);
-    $("#rune4 img").attr("src", RUNE_PLACEHOLDER);
-    $("#rune5 img").attr("src", RUNE_PLACEHOLDER);
-    $("#rune6 img").attr("src", RUNE_PLACEHOLDER);
+    $(".runeTable img").attr("src", RUNE_PLACEHOLDER);
+    $(".runeTable img").css("border", "none");
     $(".rune ~ .cooldown-half").css({"opacity":0});
+    $(".rune").popover("disable");
 
     nextRuneNumber = 1;
     treeNumber = 1;
@@ -196,5 +194,5 @@ function updateRuneCooldown(runeid, duration) {
     }, duration );
 }
 
-$(".spell, .rune").popover();
+$(".spell").popover();
 resetRunePanel();

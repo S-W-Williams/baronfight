@@ -175,7 +175,7 @@ const runeDescriptions = {
     },
     8345: {
         league: "Get free biscuit every 3 mins",
-        baronfight: "Gain a free biscuit every 10 seconds that restore 10% HP and MP."
+        baronfight: "Gain a free biscuit every 10 seconds that restores 10% HP and MP."
     },
     8347: {
         league: "Gain 5% CDR and increase cap to 45%",

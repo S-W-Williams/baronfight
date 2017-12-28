@@ -7,8 +7,8 @@ const RUNE_PLACEHOLDER = "resources/runes/perk/runeplaceholder.png";
 
 const GAME_NUM_ROWS = 10;
 const GAME_NUM_COLS = 10;
-const GAME_WIDTH = 540;
-const GAME_HEIGHT = 540;
+const GAME_WIDTH = 508;
+const GAME_HEIGHT = 508;
 
 const GAME_SPRITE_WIDTH = GAME_WIDTH / GAME_NUM_COLS;
 const GAME_SPRITE_HEIGHT = GAME_HEIGHT / GAME_NUM_ROWS;
