@@ -225,7 +225,7 @@ function generateNewOrb(row, col) {
     const color = GAME_COLORS[Math.floor(Math.random() * numColors)];
     var zombie = false;
 
-    if ((color === "red" || color === "yellow" || color === "blue") ){//&& playerHasRune(8136)) {
+    if ((color === "red" || color === "yellow" || color === "blue") && playerHasRune(8136)) {
         var random = Math.random();
         if (random < 0.2) {
             zombie = true;
