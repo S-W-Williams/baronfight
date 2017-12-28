@@ -139,7 +139,6 @@ function resetRunePanel() {
     $("#rune4 img").attr("src", RUNE_PLACEHOLDER);
     $("#rune5 img").attr("src", RUNE_PLACEHOLDER);
     $("#rune6 img").attr("src", RUNE_PLACEHOLDER);
-    $(".rune").css({display: "none"});
     $(".rune ~ .cooldown-half").css({"opacity":0});
 
     nextRuneNumber = 1;
