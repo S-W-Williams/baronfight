@@ -101,6 +101,10 @@ game_state.game.prototype = {
                     canMakeMove = false;
                 }
 
+                if (sprite.y > correctPositionY) {
+                    sprite.y = correctPositionY;
+                }
+
             }
         }
 
@@ -520,7 +524,7 @@ function applyDamage(damage, playerNumber, lifeSteal) {
 
             }
 
-            //Gathering Storm - Every 10 seconds, multiply you AD/AP by 1.1
+            //Gathering Storm - Every 10 seconds, multiply your AD/AP by 1.1
             if (playerHasRune(8236)) {
 
                 clearInterval(runeRelatedData["8236"].intervalID);
