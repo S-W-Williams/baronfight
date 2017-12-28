@@ -1,3 +1,67 @@
+body {
+    background: url("https://i.imgur.com/DBlxCas.jpg?1");
+    background-size: cover;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.navbar {
+    margin-bottom: 20px;
+    background-color: #4d4d4d;
+}
+
+.navbar a {
+    color: white;
+}
+
+.jumbotron {
+    background-color: #4d4d4d;
+}
+
+table {
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+.potionTable {
+    border: 1px solid black;
+    background-color: white;
+    border: 1px solid black;
+}
+
+.potionTable img {
+    height: 40px;
+    width: 40px;
+}
+
+.runeTable {
+    border: 1px solid black;
+    background-color: #202430;
+    border: 1px solid black;
+}
+
+.runeTable tr td{
+    border: 1px solid black;
+}
+
+.spells tr td{
+    padding: 0.3em !important;
+    margin: 0.3em !important;
+}
+
+td img {
+    height: 108px;
+    width: 108px;
+}
+
+#mainTree {
+    margin-right: 0.3em;
+}
+
+#subTree {
+    margin-left: 0.3em;
+}
+
 .health-bar {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -65,10 +129,12 @@ div.spell {
     position: relative;
 }
 
+/*
 .rune {
     width: 100%;
 
 }
+*/
 
 .label {
     position:relative;

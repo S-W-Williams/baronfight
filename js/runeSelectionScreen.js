@@ -111,6 +111,8 @@ function confirmSelection(rune) {
     if (!rune.rune.slots) {
         //This is a rune and not a branch.
         addRuneToPanel(rune.rune);
+    } else {
+        addTreeToPanel(rune.rune);
     }
 
     game.state.start('game', true, false, GAME_NUM_COLORS(level));

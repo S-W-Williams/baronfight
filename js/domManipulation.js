@@ -3,6 +3,7 @@ var HEALTH_BAR = $('.health-bar');
 var BAR = HEALTH_BAR.find('.bar');
 var HIT = HEALTH_BAR.find('.hit');
 var nextRuneNumber = 1;
+var treeNumber = 1;
 
 var MANA_BAR = $('.mana-bar');
 var M_BAR = MANA_BAR.find('.bar');
@@ -72,6 +73,34 @@ function setCooldown(ability, duration) {
     }, duration );
 }
 
+function addTreeToPanel(rune) {
+    const identifier = "#tree" + treeNumber++;
+    $(identifier).attr("src", "resources/runes/perkStyle/"+rune.id+".png");
+    $(identifier).attr("data-original-title", rune.name);
+    $(identifier).css({"display": "block"});
+
+    if (rune.id === 8000) {
+        $(identifier).css("border-style", "solid");
+        $(identifier).css("border-width", "2px");
+        $(identifier).css("border-color", "#bba97c");
+    } else if (rune.id === 8100) {
+        $(identifier).css("border-style", "solid");
+        $(identifier).css("border-width", "2px");
+        $(identifier).css("border-color", "#d94545");
+    } else if (rune.id === 8200) {
+        $(identifier).css("border-style", "solid");
+        $(identifier).css("border-width", "2px");
+        $(identifier).css("border-color", "#8d97f9");
+    } else if (rune.id === 8300) {
+        $(identifier).css("border-style", "solid");
+        $(identifier).css("border-width", "2px");
+        $(identifier).css("border-color", "#49b0bc");
+    } else if (rune.id === 8400) {
+        $(identifier).css("border-style", "solid");
+        $(identifier).css("border-width", "2px");
+        $(identifier).css("border-color", "#a2d489");
+    }
+}
 
 function addRuneToPanel(rune) {
     const identifier = "#rune" + nextRuneNumber++;
@@ -83,12 +112,12 @@ function addRuneToPanel(rune) {
 }
 
 function resetRunePanel() {
-    $("#rune1").css({display: "none"});
-    $("#rune2").css({display: "none"});
-    $("#rune3").css({display: "none"});
-    $("#rune4").css({display: "none"});
-    $("#rune5").css({display: "none"});
-    $("#rune6").css({display: "none"});
+    $("#rune1 img").attr("src", RUNE_PLACEHOLDER);
+    $("#rune2 img").attr("src", RUNE_PLACEHOLDER);
+    $("#rune3 img").attr("src", RUNE_PLACEHOLDER);
+    $("#rune4 img").attr("src", RUNE_PLACEHOLDER);
+    $("#rune5 img").attr("src", RUNE_PLACEHOLDER);
+    $("#rune6 img").attr("src", RUNE_PLACEHOLDER);
 }
 
 $(".spell, .rune").popover();
