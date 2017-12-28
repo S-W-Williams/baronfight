@@ -55,10 +55,11 @@ game_state.game.prototype = {
 
         runeRelatedData = {};
 
-        //Transcendence 0 After 30 seconds, gain 50% CDR on ALL abilities.
+        //Transcendence - After 30 seconds, gain 50% CDR on ALL abilities.
         if (playerHasRune(8210)) {
             runeRelatedData["8210"] = {
                 timeoutID: setTimeout(function() {
+                    runeRelatedData["8210"].activated = true;
                     var abilities = Object.values(playerStats.abilities);
                     for (var i = 0 ; i < abilities.length ; i++) {
                         abilities[i].cooldown /= 2;
@@ -67,6 +68,43 @@ game_state.game.prototype = {
             };
 
             updateRuneCooldown(8210, 30000);
+        }
+
+        //Magical Footwear - After 30 seconds, gain 30% Evasion Rate
+        if (playerHasRune(8304)) {
+            runeRelatedData["8304"] = {
+                timeoutID: setTimeout(function() {
+                    runeRelatedData["8304"].activated = true;
+                    playerStats.moveSpeed += 3000;
+                }, 30000)
+            };
+
+            updateRuneCooldown(8304, 30000);
+        }
+
+        //Celestial Body - Increase HP by 300 but deal 10% less damage for the first 30 seconds.
+        if (playerHasRune(8339)) {
+            runeRelatedData["8339"] = {
+                timeoutID: setTimeout(function() {
+                    runeRelatedData["8339"].activated = false;
+                }, 30000),
+                activated: true
+            };
+
+            updateRuneCooldown(8339, 30000);
+        }
+
+        //Conditioning - After 30 seconds, gain 80 armor and magic resistance
+        if (playerHasRune(8429)) {
+            runeRelatedData["8429"] = {
+                timeoutID: setTimeout(function() {
+                    runeRelatedData["8429"].activated = true;
+                    playerStats.armor += 80;
+                    playerStats.magicResist += 80;
+                }, 30000)
+            };
+
+            updateRuneCooldown(8429, 30000);
         }
 
         //Gathering Storm - Every 10 seconds, multiply your AD/AP by 1.1.
@@ -169,17 +207,38 @@ function cpuAttacks() {
         return;
     }
 
-
     var damage = bossStats.attackDamage * level * 100 / (100 + playerStats.armor);
+
+    //Second Wind - Everytime you take damage you also restore 20 health.
+    if (playerHasRune(8444)) {
+        damage -= 20;
+    }
+
     applyDamage(damage, 0, 0);
+
+
+
 
 }
 
 function generateNewOrb(row, col) {
     const color = GAME_COLORS[Math.floor(Math.random() * numColors)];
-    var sprite = game.add.sprite(GAME_WIDTH * col / GAME_NUM_COLS, GAME_HEIGHT * row / GAME_NUM_ROWS, color);
+    var zombie = false;
+
+    if ((color === "red" || color === "yellow" || color === "blue") ){//&& playerHasRune(8136)) {
+        var random = Math.random();
+        if (random < 0.2) {
+            zombie = true;
+            console.log(color + "Ward");
+        }
+    }
+
+    var sprite = game.add.sprite(GAME_WIDTH * col / GAME_NUM_COLS, GAME_HEIGHT * row / GAME_NUM_ROWS, zombie ? (color + "Ward") : color);
+
+
 
     sprite.color = color;
+    sprite.zombie = zombie;
     sprite.row = row;
     sprite.col = col;
 
@@ -233,6 +292,17 @@ function clearTinted() {
     }
 
     for (var i = 0 ; i < selectedSprites.length ; i++) {
+
+        if (selectedSprites[i].zombie) {
+            selectedSprites[i].loadTexture("zombieWard");
+            selectedSprites[i].width = GAME_SPRITE_WIDTH;
+            selectedSprites[i].height = GAME_SPRITE_HEIGHT;
+            selectedSprites[i].color = "ANY";
+            selectedSprites[i].zombie = false;
+            selectedSprites[i].tint = GAME_UNTINT_COLOR;
+            continue;
+        }
+
         game.world.remove(selectedSprites[i]);
 
         shiftDownPiecesFromPosition(selectedSprites[i].row, selectedSprites[i].col);
@@ -299,6 +369,7 @@ function beginDrag() {
 function attack(length, color) {
 
     var bonusDamage = 0;
+    var bonusLifeSteal = 0;
 
     if (stacks == 0 || lastStackAppliedTime + GAME_STACK_DURATION > game.time.now) {
         stacks++;
@@ -312,6 +383,11 @@ function attack(length, color) {
             if (playerHasRune(8005) || playerHasRune(8112)) {
                 //Deal 20% of the boss's HP as magic damage.
                 applyDamage(bossStats.maxHP / 5 * 100 / (100 + bossStats.magicResist), 1, 0);
+            }
+            //Grasp of the Undying - Landing 3 stacks deals 30% of the player's max hp as magic damage.
+            if (playerHasRune(8437)) {
+                //Deal 30% of the player's HP as magic damage.
+                applyDamage(playerStats.maxHP * 0.3 * 100 / (100 + bossStats.magicResist), 1, 0);
             }
             //Phase Rush - Landing 3 stacks increases evasion rate by 20% for 5 seconds.
             if (playerHasRune(8230)) {
@@ -394,6 +470,28 @@ function attack(length, color) {
         if (playerHasRune(8138)) {
             playerStats.attackDamage += 10;
         }
+
+        //Legend: Bloodline - Clearing 6 or more pieces permanently increases lifesteal by 1%.
+        if (playerHasRune(9103)) {
+            playerStats.lifeSteal += 0.01;
+        }
+
+        //Legend: Alacrity - Clearing 6 or more pieces permanently increases clear speed by 2%.
+        if (playerHasRune(9104)) {
+            playerStats.attackSpeed *= 1.02;
+        }
+
+        //Legend: Tenacity - Clearing 6 or more pieces permanently increases tenacity by 2%.
+        if (playerHasRune(9105)) {
+            playerStats.tenacity += 0.02;
+        }
+
+        //Triumph - Clearing 6 or more pieces restores 10% of your HP.
+        if (playerHasRune(9111)) {
+            applyDamage(-0.1 * playerStats.maxHP, 0, 0);
+        }
+
+
     }
 
     var damage = ((Math.pow(length, 2) * 2) + playerStats.attackDamage) * 100 / (100 + bossStats.armor);
@@ -487,17 +585,106 @@ function attack(length, color) {
         };
     }
 
+    //Absolute Focus - When above 70% HP, deal 40% increased damage.
     if (playerHasRune(8233) && playerStats.health > playerStats.maxHP * 0.7) {
         damage *= 1.4;
     }
 
-    applyDamage(damage, 1, playerStats.lifeSteal);
+
+    //Summon Aery - Orb clears summon Aery to increase your damage by 50% (10 second cooldown).
+    if (playerHasRune(8214)) {
+
+        if (!runeRelatedData["8214"] || runeRelatedData["8214"].lastCastTime + 10000 < game.time.now) {
+
+            runeRelatedData["8214"] = {
+                lastCastTime: game.time.now
+            };
+
+            damage *= 1.5;
+        }
+
+    }
+
+    //Last Stand - Deal 2% more damage for every 1% of HP you're missing.
+    if (playerHasRune(8299)) {
+        const missingHpPercentage = 1 - playerStats.health / playerStats.maxHealth;
+        damage *= 1 + missingHpPercentage;
+    }
+
+    //Celestial Body - Increase HP by 300 but deal 10% less damage for the first 30 seconds.
+    if (playerHasRune(8339)) {
+        if (runeRelatedData["8339"].activated) {
+            damage *= 0.9;
+        }
+    }
+
+    //Glacial Augment - Clearing 5 or more orbs will slow enemy attacks by 50% for 5 seconds.
+    if (playerHasRune(8351)) {
+
+        //If already active, refresh duration.
+        if (runeRelatedData["8351"] && runeRelatedData["8351"].active) {
+            clearTimeout(runeRelatedData["8351"].timeoutID);
+            runeRelatedData["8351"].timeoutID = setTimeout(function() {
+                bossStats.attackPeriod /= 2;
+                runeRelatedData["8351"].active = false;
+            }, 5000);
+            updateRuneCooldown(8351, 5000);
+            return;
+        }
+
+        //Otherwise, slow enemy attacks by 50%.
+        bossStats.attackPeriod *= 2;
+
+        const timeoutID = setTimeout(function() {
+            bossStats.attackPeriod /= 2;
+            runeRelatedData["8351"].active = false;
+        }, 5000);
+
+        updateRuneCooldown(8351, 5000);
+
+        runeRelatedData["8351"] = {
+            active: true,
+            lastApplied: game.time.now,
+            timeoutID: timeoutID
+        };
+    }
+
+    //Font of Life - Gain 40% lifesteal when attacking stunned enemies.
+    if (playerHasRune(8463) && cpuAttackTimer >= game.time.now + bossStats.attackPeriod) {
+        bonusLifeSteal += 0.4;
+    }
+
+    applyDamage(damage, 1, playerStats.lifeSteal + bonusLifeSteal);
 
 }
 
 function applyDamage(damage, playerNumber, lifeSteal) {
 
     character = playerNumber == 0 ? playerStats : bossStats;
+
+    //Revitalize - All potions, shields, and healing is 50% stronger. This is increased to 100% when below 40% HP.
+    if (damage < 0 && playerNumber == 0 && playerHasRune(8453)) {
+        if (playerStats.health / playerStats.maxHP < 0.4) {
+            damage *= 2;
+        } else {
+            damage *= 1.5;
+        }
+    }
+
+    //Guardian - Absorb 50 damage the next time you take damage (cooldown: 10 seconds).
+    if (damage > 0 && playerNumber == 0 && playerHasRune(8465)) {
+        if (!runeRelatedData["8465"] || runeRelatedData["8465"].lastCastTime + 10000 < game.time.now) {
+            runeRelatedData["8465"] = {
+                lastCastTime: game.time.now
+            };
+            damage -= 50;
+
+            if (damage < 0) {
+                damage = 0;
+            }
+
+        }
+    }
 
     var total = character.maxHP;
     var value = character.health;
@@ -524,6 +711,34 @@ function applyDamage(damage, playerNumber, lifeSteal) {
 
             }
 
+            //Magical Footwear - After 30 seconds, gain 30% evasion rate.
+            if (playerHasRune(8304)) {
+
+                clearInterval(runeRelatedData["8304"].timeoutID);
+                if (runeRelatedData["8304"].activated) {
+                    playerStats.moveSpeed -= 3000;
+                }
+
+            }
+
+            //Celestial Body - Increase HP by 300 but deal 10% less damage for the first 30 seconds.
+            if (playerHasRune(8339)) {
+                clearInterval(runeRelatedData["8339"].timeoutID);
+
+            }
+
+            //Conditioning - After 30 seconds, gain 80 armor and magic resistance
+            if (playerHasRune(8429)) {
+
+                clearInterval(runeRelatedData["8429"].timeoutID);
+
+                if (runeRelatedData["8429"].activated) {
+                    playerStats.armor -= 80;
+                    playerStats.magicResist -= 80;
+                }
+
+            }
+
             //Gathering Storm - Every 10 seconds, multiply your AD/AP by 1.1
             if (playerHasRune(8236)) {
 
@@ -537,8 +752,8 @@ function applyDamage(damage, playerNumber, lifeSteal) {
         }
     }
 
-    //UNLESS they have Overheal Rune (ID: 9101) - All excess healing is converted into a permanent shield.
-    if (newValue >= total) {
+    //Overheal - You can heal past 100% HP.
+    if (newValue >= total && !playerHasRune(9101)) {
         newValue = total;
     }
 
@@ -567,6 +782,27 @@ function applyDamage(damage, playerNumber, lifeSteal) {
             updateRuneCooldown(8224, 20000);
         }
 
+    }
+
+    //Demolish - Clearing green orbs grant a stack. Every 5th stack will damage the enemy for 30% of its max HP as magic damage.
+
+    if (color === "green" && playerHasRune(8446)) {
+        if (!runeRelatedData["8446"]) {
+            runeRelatedData["8446"] = 1;
+        } else {
+            runeRelatedData["8446"]++;
+
+            if (runeRelatedData["8446"] >= 5){
+                runeRelatedData["8446"] = 0;
+                applyDamage(0.3 * bossStats.maxHP * 100 / (100 + bossStats.magicResist), 1, 0);
+            }
+        }
+    }
+
+    //Overgrowth - Every set of orbs you clear permanently increases your HP and max HP by 10.
+    if (playerHasRune(8451)) {
+        playerStats.maxHP += 10;
+        playerStats.health += 10;
     }
 
 }
@@ -648,6 +884,7 @@ function tryCast(key) {
     console.log("Cast " + key);
 
     var cost = playerStats.abilities[key].cost;
+    var isHexQ = false;
 
     if (playerHasRune(8226)) {
         if (!runeRelatedData["8226"]) {
@@ -672,8 +909,12 @@ function tryCast(key) {
         console.log("Not enough mana!");
         return;
     } else if (game.time.now < playerStats.abilities[key].cooldown * 1000 + playerStats.abilities[key].lastCastTime) {
-        console.log("You may not cast this ability yet!");
-        return;
+        if (!playerHasRune(8306) || key !== "Q") {
+            console.log("You may not cast this ability yet!");
+            return;
+        } else {
+            isHexQ = true;
+        }
     } else if (playerStats.abilities[key].potions && playerStats.potions < playerStats.abilities[key].potions) {
         console.log("You are out of potions!");
         return;
@@ -687,7 +928,7 @@ function tryCast(key) {
     playerStats.mana -= cost;
     updateManaBar(0, playerStats.mana, playerStats.maxMP, cost, playerStats.mana + cost);
     playerStats.abilities[key].lastCastTime = game.time.now;
-    castEffect(key);
+    castEffect(key, isHexQ);
 
     //Sudden Impact - After using any active ability, your next orb clear will ignore ALL armor.
     if (playerHasRune(8143)) {
@@ -698,9 +939,20 @@ function tryCast(key) {
 
 }
 
-function castEffect(key) {
+function castEffect(key, isHexQ) {
     if (key === "Q") {
         var damage = bossStats.maxHP * (0.1 + .001 * playerStats.abilityPower);
+
+        if (isHexQ) {
+            const percentageCooldownElapsed = (game.time.now - playerStats.abilities["Q"].lastCastTime) / playerStats.abilities["Q"].cooldown / 1000;
+            damage *= percentageCooldownElapsed;
+        }
+
+        //Arcane Comet - Your damaging abilities (Q) hurls a comet at your enemy, doubling the damage.
+        if (playerHasRune(8229)) {
+            damage *= 2;
+        }
+
         applyDamage(damage, 1, 0);
     } else if (key === "W") {
         wToggle = true;
@@ -711,6 +963,71 @@ function castEffect(key) {
         return;
     } else if (key === "E") {
         cpuAttackTimer = game.time.now += 1000 * (2 + .02 * playerStats.abilityPower) + bossStats.attackPeriod;
+
+        //Approach Velocity - Increase evasion rate by 20% for 5 seconds after your enemy is stunned.
+        if (playerHasRune(8410)) {
+
+            //If already active, refresh duration.
+            if (runeRelatedData["8410"] && runeRelatedData["8410"].active) {
+                clearTimeout(runeRelatedData["8410"].timeoutID);
+                runeRelatedData["8410"].timeoutID = setTimeout(function() {
+                    playerStats.moveSpeed -= (2000 + 1000 * (2 + .02 * playerStats.abilityPower));
+                    runeRelatedData["8410"].active = false;
+                }, 5000 + 1000 * (2 + .02 * playerStats.abilityPower));
+                updateRuneCooldown(8410, 5000 + 1000 * (2 + .02 * playerStats.abilityPower));
+                return;
+            }
+
+            //Otherwise, increase evasion rate by 20% for 5 seconds.
+            playerStats.moveSpeed += 2000 + 1000 * (2 + .02 * playerStats.abilityPower);
+
+            const timeoutID = setTimeout(function() {
+                playerStats.moveSpeed -= (2000 + 1000 * (2 + .02 * playerStats.abilityPower));
+                runeRelatedData["8410"].active = false;
+            }, 5000 + 1000 * (2 + .02 * playerStats.abilityPower));
+            updateRuneCooldown(8410, 5000 + 1000 * (2 + .02 * playerStats.abilityPower));
+
+            runeRelatedData["8410"] = {
+                active: true,
+                lastApplied: game.time.now,
+                timeoutID: timeoutID
+            };
+
+        }
+
+        //Aftershock - Increase armor and magic resist by 60 for 5 seconds after your enemy is stunned.
+        if (playerHasRune(8439)) {
+
+            //If already active, refresh duration.
+            if (runeRelatedData["8439"] && runeRelatedData["8439"].active) {
+                clearTimeout(runeRelatedData["8439"].timeoutID);
+                runeRelatedData["8439"].timeoutID = setTimeout(function() {
+                    playerStats.armor -= 60;
+                    playerStats.magicResist -= 60;
+                    runeRelatedData["8439"].active = false;
+                }, 5000 + 1000 * (2 + .02 * playerStats.abilityPower));
+                updateRuneCooldown(8439, 5000 + 1000 * (2 + .02 * playerStats.abilityPower));
+                return;
+            }
+
+            //Otherwise, increase evasion rate by 20% for 5 seconds.
+            playerStats.armor += 60;
+            playerStats.magicResist += 60;
+
+            const timeoutID = setTimeout(function() {
+                playerStats.armor -= 60;
+                playerStats.magicReist -= 60;
+            }, 5000 + 1000 * (2 + .02 * playerStats.abilityPower));
+            updateRuneCooldown(8439, 5000 + 1000 * (2 + .02 * playerStats.abilityPower));
+
+            runeRelatedData["8439"] = {
+                active: true,
+                lastApplied: game.time.now,
+                timeoutID: timeoutID
+            };
+
+        }
+
     } else if (key === "R") {
         if (numColors > 1)  {
             numColors--;
@@ -734,6 +1051,25 @@ function resetCooldowns() {
     for (var i = 0 ; i < playerStats.currentRunes.length; i++) {
         updateRuneCooldown(playerStats.currentRunes[i].id, 0);
     }
+}
+
+
+function stunPlayer(duration) {
+    var tenacity = playerStats.tenacity;
+
+    //Unflinching - For each ability on cooldown, gain 20% tenacity.
+    if (playerHasRune(8242)) {
+        const abilities = Object.values(playerStats.abilities);
+        for (var i = 0 ; i < abilities.length ; i++) {
+            if (game.time.now < playerStats.abilities[key].cooldown * 1000 + playerStats.abilities[key].lastCastTime) {
+                tenacity += 0.2;
+            }
+        }
+    }
+
+    const ccDuration = (1 - tenacity) * duration;
+
+    //STUN PLAYER OR DISABLE INPUT OR SOMETHING.
 }
 
 // Add and start the 'main' state to start the game

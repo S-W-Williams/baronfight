@@ -115,9 +115,9 @@ function confirmSelection(rune) {
         addTreeToPanel(rune.rune);
     }
 
-    //Ingenous Hunter - Reduce cooldowns of ALL abilities by 30%.
+    //Ingenous Hunter and Cosmic Insight - Reduce cooldowns of ALL abilities by 30%.
     //TODO - When a player earns new active effects, those cooldowns must be reduced too.
-    if (rune.rune.id === 8134) {
+    if (rune.rune.id === 8134 || rune.rune.id === 8347) {
         var abilities = Object.values(playerStats.abilities);
         for (var i = 0 ; i < abilities.length ; i++) {
             abilities[i].cooldown *= 0.3;
@@ -132,6 +132,27 @@ function confirmSelection(rune) {
     //The Ultimate Hat - Your ultimate ability's (R Ability) cooldown is reduced by 30%.
     if (rune.rune.id === 8243) {
         abilities["R"].cooldown *= 0.7;
+    }
+
+    //Future's Market - Start each round with 1 additional potion.
+    if (rune.rune.id === 8321) {
+        playerStats.potions++;
+    }
+
+    //Celestial Body - Increase HP by 300 but deal 10% less damage for the first 30 seconds.
+    if (rune.rune.id === 8339) {
+        playerStats.maxHP += 300;
+        playerStats.health += 300;
+    }
+
+    //Iron Skin - Permanently gain 50 armor.
+    if (rune.rune.id === 8430) {
+        playerStats.armor += 50;
+    }
+
+    //Mirror Shell - Permanently gain 50 magic resistance.
+    if (rune.rune.id = 8435) {
+        playerStats.magicResist += 50;
     }
 
     game.state.start('game', true, false, GAME_NUM_COLORS(level));

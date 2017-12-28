@@ -19,6 +19,10 @@ game_state.home.prototype = {
         }
 
         game.load.image("poro", "resources/misc/poro.png");
+        game.load.image("redWard", "resources/misc/redWard.gif");
+        game.load.image("blueWard", "resources/misc/blueWard.gif");
+        game.load.image("yellowWard", "resources/misc/yellowWard.gif");
+        game.load.image("zombieWard", "resources/misc/zombieWard.png");
 
     },
 

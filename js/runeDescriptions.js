@@ -94,7 +94,7 @@ const runeDescriptions = {
     },
     8214: {
         league: "Damaging champions summon Aery to attack them, (She's on cooldown as she returns to you though.)",
-        baronfight: "Damaging enemies summon Aery to attack them (She's on cooldown as she returns to you though.)"
+        baronfight: "Orb clears summon Aery to increase your damage by 50% (10 second cooldown)."
     },
     8224: {
         league: "Dropping below 30% HP grants a shield.",
@@ -106,7 +106,7 @@ const runeDescriptions = {
     },
     8229: {
         league: "Damaging a champion hurls a comet at them for more damage (20-8s cd)",
-        baronfight: "Damaging an enemy hurls a comet at them for more damage."
+        baronfight: "Your damaging abilities (Q) hurls a comet at your enemy, doubling the damage."
     },
     8230: {
         league: "Damaging enemies add stacks, 3 stacks grants move speed and slow resistance",
@@ -147,11 +147,11 @@ const runeDescriptions = {
     },
     8304: {
         league: "Can't buy boots, but get them for free at 10 mins",
-        baronfight: "After 30 seconds, gain 20% Evasion Rate"
+        baronfight: "After 30 seconds, gain 30% Evasion Rate"
     },
     8306: {
         league: "Flash replaced by challened hexflash",
-        baronfight: "When Disintegrate is on cooldown, gain hex-disentegrate which deals damage based on cooldown remaining."
+        baronfight: "When Disintegrate is on cooldown, gain hex-disentegrate which deals a percentage of Disintegrate's damage equal to the % cooldown that has already passed."
     },
     8313: {
         league: "Gain free stopwatch that is worth less at beginning of game",
@@ -163,7 +163,7 @@ const runeDescriptions = {
     },
     8321: {
         league: "You can enter debt to buy items",
-        baronfight: "You can borrow 1 potion (Health or Mana) from the store at any time each round. If you collect that potion later, you can borrow another one."
+        baronfight: "Start each round with 1 additional health potion."
     },
     8326: {
         league: "Reduces summoner spell cooldown by 25%, and allows you to trade spells in store (with summoner shards accumulated over time)",
@@ -171,7 +171,7 @@ const runeDescriptions = {
     },
     8339: {
         league: "Gain 100HP but deal 10% less damage for first 10 mins",
-        baronfight: "Increase HP by 300 by deal 10% less damage for the first 30 seconds."
+        baronfight: "Increase HP by 300 but deal 10% less damage for the first 30 seconds."
     },
     8345: {
         league: "Get free biscuit every 3 mins",
@@ -179,11 +179,11 @@ const runeDescriptions = {
     },
     8347: {
         league: "Gain 5% CDR and increase cap to 45%",
-        baronfight: "Reduce all cooldowns by 25%. "
+        baronfight: "Reduce cooldowns of ALL abilities by 30%."
     },
     8351: {
         league: "Basic attack slow enemies",
-        baronfight: "Damaging enemies will slow their attacks by 20%."
+        baronfight: "Clearing 5 or more orbs will slow enemy attacks by 50% for 5 seconds."
     },
     8359: {
         league: "Basic attacks are empowered to give consumables/gold after using an ability",
@@ -195,7 +195,7 @@ const runeDescriptions = {
     },
     8429: {
         league: "After 10 mins, gain constant armor/mr and % armor/mr",
-        baronfight: "After 30 seconds, increase armor and magic resistance by 10 every 10 seconds."
+        baronfight: "After 30 seconds, increase armor and magic resistance by 80."
     },
     8430: {
         league: "Gain Armor, which increases when healing",
@@ -207,11 +207,12 @@ const runeDescriptions = {
     },
     8437: {
         league: "Gain stacks every 2 seconds in combat. 8 stacks make your next attack deal damage based on your max HP and heal you.",
-        baronfight: "Gain a stack everytime you clear 8 seconds before the next one. At 8 stacks, your next attack deals damage equal to 30% of your health."
+        baronfight: "Hitting an enemy adds a stack for 4 seconds. Landing 3 stacks on the enemy will destroy the stacks to deal 30% of your maximum HP as magic damage.",
+        stacks: true
     },
     8439: {
         league: "Immobilizing enemies grant bonus armor and MR for 2.5 seconds, after which a shockwave will occur dealing damage",
-        baronfight: "Stunning enemies grant you 30 armor/mr for 5 seconds. After, the bonus armor explodes, dealing 50 damage."
+        baronfight: "Increase armor and magic resist by 60 for 5 seconds after your enemy is stunned."
     },
     8444: {
         league: "Taking enemy champ damage causes you to start healing for 10 seconds",
@@ -219,11 +220,11 @@ const runeDescriptions = {
     },
     8446: {
         league: "Attacking structures grants stacks. at 6 stacks, next atk will hella damage the structure",
-        baronfight: "Clearing green orbs grant a stack. Every 5th stack will damage the enemy for 30% of its max HP."
+        baronfight: "Clearing green orbs grant a stack. Every 5th stack will damage the enemy for 30% of its max HP as magic damage."
     },
     8451: {
         league: "Enemy deaths permanently increase max HP",
-        baronfight: "Every orb you clear increases your HP and max HP by 10."
+        baronfight: "Every set of orb you clear permanently increases your HP and max HP by 10."
     },
     8453: {
         league: "Gain 5% Healing/shield power, increased when target is below 40% hp",
@@ -239,22 +240,22 @@ const runeDescriptions = {
     },
     9101: {
         league: "Excess healing is converted to a temporary shield up to 10% MaxHP",
-        baronfight: "All excess healing from potions and lifesteal is converted into a permanent shield."
+        baronfight: "You can heal past 100% HP."
     },
     9103: {
         league: "Killing monsters grant stacks, increasing lifesteal.",
-        baronfight: "Everytime you clear 6 or more pieces, gain 8% permanent lifesteal."
+        baronfight: "Everytime you clear 6 or more pieces, gain 1% permanent lifesteal."
     },
     9104: {
         league: "Killing monsters grant stacks, Increasing attack speed.",
-        baronfight: "Everytime you clear 6 or more pieces, gain 50% permanent clear speed."
+        baronfight: "Everytime you clear 6 or more pieces, gain 2% permanent clear speed."
     },
     9105: {
         league: "Killing monsters grant stacks, increase tenacity",
-        baronfight: "Everytime you clear 6 or more pieces, reduce stun/blind durations by 20%."
+        baronfight: "Everytime you clear 6 or more pieces, reduce stun/blind durations by 2%."
     },
     9111: {
         league: "Killing enemy champions restore 12% missing HP and grant 25 gold",
-        baronfight: "Clearing 6 or more pieces restores 25% of your HP."
+        baronfight: "Clearing 6 or more pieces restores 10% of your HP."
     }
 };
