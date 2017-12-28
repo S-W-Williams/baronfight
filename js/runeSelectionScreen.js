@@ -122,6 +122,16 @@ function confirmSelection(rune) {
         }
     }
 
+    //Celerity - Increase evasion rate by 10%. Gain 10 AD for every 10% Evasion Rate.
+    if (rune.rune.id === 8234) {
+        playerStats.moveSpeed += 1000;
+    }
+
+    //The Ultimate Hat - Your ultimate ability's (R Ability) cooldown is reduced by 30%.
+    if (rune.rune.id === 8243) {
+        abilities["R"].cooldown *= 0.7;
+    }
+
     game.state.start('game', true, false, GAME_NUM_COLORS(level));
 
 }

@@ -69,6 +69,19 @@ game_state.game.prototype = {
             updateRuneCooldown(8210, 30000);
         }
 
+        //Gathering Storm - Every 10 seconds, multiply your AD/AP by 1.1.
+        if (playerHasRune(8236)) {
+            runeRelatedData["8236"] = {
+                intervalID: setInterval(function() {
+                    playerStats.attackDamage *= 1.1;
+                    playerStats.abilityPower *= 1.1;
+                    runeRelatedData["8236"].currentMultiplier *= 1.1;
+                }, 10000),
+                currentMultiplier: 1
+            };
+
+        }
+
     },
 
     update: function() {
@@ -296,6 +309,34 @@ function attack(length, color) {
                 //Deal 20% of the boss's HP as magic damage.
                 applyDamage(bossStats.maxHP / 5 * 100 / (100 + bossStats.magicResist), 1, 0);
             }
+            //Phase Rush - Landing 3 stacks increases evasion rate by 20% for 5 seconds.
+            if (playerHasRune(8230)) {
+                //If already active, refresh duration.
+                if (runeRelatedData["8230"] && runeRelatedData["8230"].active) {
+                    clearTimeout(runeRelatedData["8230"].timeoutID);
+                    runeRelatedData["8230"].timeoutID = setTimeout(function() {
+                        playerStats.moveSpeed -= 2000;
+                        runeRelatedData["8230"].active = false;
+                    }, 5000);
+                    updateRuneCooldown(8230, 5000);
+                    return;
+                }
+
+                //Otherwise, increase evasion rate by 20% for 5 seconds.
+                playerStats.moveSpeed += 2000;
+
+                const timeoutID = setTimeout(function() {
+                    playerStats.moveSpeed -= 2000;
+                    runeRelatedData["8021"].active = false;
+                }, 5000);
+                updateRuneCooldown(8230, 5000);
+
+                runeRelatedData["8230"] = {
+                    active: true,
+                    lastApplied: game.time.now,
+                    timeoutID: timeoutID
+                };
+            }
         }
     } else {
         stacks = 1;
@@ -353,6 +394,11 @@ function attack(length, color) {
 
     var damage = ((Math.pow(length, 2) * 2) + playerStats.attackDamage) * 100 / (100 + bossStats.armor);
 
+    //Celerity - Increase evasion rate by 10%. Gain 10 AD for every 10% evasion rate.
+    if (playerHasRune(8234)) {
+        damage += playerStats.moveSpeed / (100 + bossStats.armor);
+    }
+
     //Coup de Grace - Orb clears deal double damage to enemies below 40% HP.
     if (playerHasRune(8014) && bossStats.health < bossStats.maxHP) {
         damage *= 2;
@@ -376,6 +422,11 @@ function attack(length, color) {
     //Dark Harvest - Damage dealt from clearing 6 or more orbs will be doubled.
     if (playerHasRune(8128) && length >= 6) {
         damage *= 2;
+    }
+
+    //Scorch - All orb clears burn enemies for an additional 30% damage.
+    if (playerHasRune(8237)) {
+        damage *= 1.3;
     }
 
     //Taste of Blood - Heal 15% of your max HP everytime you damage an enemy (20 second cooldown).
@@ -456,7 +507,7 @@ function applyDamage(damage, playerNumber, lifeSteal) {
             game.state.start("lose", true, false);
         } else {
 
-            //Transcendence 0 After 30 seconds, gain 50% CDR on ALL abilities.
+            //Transcendence - After 30 seconds, gain 50% CDR on ALL abilities.
             if (playerHasRune(8210)) {
 
                 clearInterval(runeRelatedData["8210"].timeoutID);
@@ -466,6 +517,15 @@ function applyDamage(damage, playerNumber, lifeSteal) {
                         abilities[i].cooldown *= 2;
                     }
                 }
+
+            }
+
+            //Gathering Storm - Every 10 seconds, multiply you AD/AP by 1.1
+            if (playerHasRune(8236)) {
+
+                clearInterval(runeRelatedData["8236"].intervalID);
+                playerStats.attackDamage /= runeRelatedData["8236"].currentMultiplier;
+                playerStats.abilityPower /= runeRelatedData["8236"].currentMultiplier;
 
             }
 

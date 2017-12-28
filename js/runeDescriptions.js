@@ -50,11 +50,11 @@ const runeDescriptions = {
     },
     8120: {
         league: "Entering brush will begin a channel that will summon a ghost poro ward",
-        baronfight: "Clicking and holding your mouse over a piece for 1 second will transform it into a ghost poro that can be ANY color (8 second cooldown)."
+        baronfight: "Clicking and holding your mouse over a piece for 1 second will transform it into a ghost poro that can be used as ANY color."
     },
     8124: {
         league: "Give your boots an active ability: Channel for 3 seconds then gain 45% Movespeed until you enter combat",
-        baronfight: "Gain an Active: Dash - Channel for 3 seconds then triple clearing speed for 20 seconds."
+        baronfight: "Gain an Active: Dash - Channel for 3 seconds (You cannot take any actions while channeling) then triple clearing speed for 20 seconds."
     },
     8126: {
         league: "You deal bonus damage to impaired enemies.",
@@ -74,7 +74,7 @@ const runeDescriptions = {
     },
     8136: {
         league: "Killing enemy wards replace it with an allied zombie ward.",
-        baronfight: "Enemy wards can now appear as pieces. When cleared, they reappear as zombie wards that can be cleared as if they were ANY color."
+        baronfight: "Yellow, Blue, and Red Trinkets can now appear as pieces. When cleared, they reappear as zombie wards that can be cleared as if they were ANY color."
     },
     8138: {
         league: "Enemy kills grant permanent AD or AP up to a cap.",
@@ -110,7 +110,8 @@ const runeDescriptions = {
     },
     8230: {
         league: "Damaging enemies add stacks, 3 stacks grants move speed and slow resistance",
-        baronfight: "Damaging enemies add stacks that last 4 seconds. Landing 3 stacks will increase evasion rate by 20% for 5 seconds."
+        baronfight: "Damaging enemies add stacks that last 4 seconds. Landing 3 stacks will increase evasion rate by 20% for 5 seconds.",
+        stacks: true
     },
     8232: {
         league: "Gain movespeed, AD, AP while in the river.",
@@ -130,7 +131,7 @@ const runeDescriptions = {
     },
     8237: {
         league: "Damaging enemies burn them for more damage for 1 sec (20s cooldown)",
-        baronfight: "All attacks burn enemies for an additional 30 damage."
+        baronfight: "All orb clears burn enemies for an additional 30% damage."
     },
     8242: {
         league: "Gain 10% Tenacity for each summoner spell on cooldown, 15% Slow resistance when casting a summoner spell",
@@ -138,7 +139,7 @@ const runeDescriptions = {
     },
     8243: {
         league: "5% CDR on your ult, increased by 2% everytime you ult, up to 15%",
-        baronfight: "Your ult's cooldown is reduced by 30%. "
+        baronfight: "Your ultimate ability's (R Ability) cooldown is reduced by 30%. "
     },
     8299: {
         league: "Deal more damage the lower HP you have",
