@@ -18,6 +18,8 @@ game_state.home.prototype = {
             game.load.image(GAME_COLORS[i], 'resources/balls/'+GAME_COLORS[i]+'.png');
         }
 
+        game.load.image("poro", "resources/misc/poro.png");
+
     },
 
     create: function() {

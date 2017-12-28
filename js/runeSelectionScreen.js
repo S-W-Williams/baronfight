@@ -18,9 +18,9 @@ game_state.runeSelect.prototype = {
     create: function() {
 
         var style = { font: "bold 32px Arial", fill: "white", boundsAlignH: "center", boundsAlignV: "middle" };
-        game.add.text(GAME_WIDTH/2, GAME_HEIGHT/2 - 70, "Select your Rune Tree!", style).anchor.setTo(.5,.5);
+        game.add.text(GAME_WIDTH/2, GAME_HEIGHT/2 - 70, selectableRunes[0].slots ? "Select your Rune Tree!" : "Select a rune for your tree!", style).anchor.setTo(.5,.5);
 
-        var subtitleStyle = {font: "bold 16px Arial", fill: "white", boundsAlignH: "center", boundsAlignV: "middle"  }
+        var subtitleStyle = {font: "bold 16px Arial", fill: "white", boundsAlignH: "center", boundsAlignV: "middle"  };
 
 
         for (var i = 0 ; i < selectableRunes.length ; i++) {
@@ -111,6 +111,15 @@ function confirmSelection(rune) {
     if (!rune.rune.slots) {
         //This is a rune and not a branch.
         addRuneToPanel(rune.rune);
+    }
+
+    //Ingenous Hunter - Reduce cooldowns of ALL abilities by 30%.
+    //TODO - When a player earns new active effects, those cooldowns must be reduced too.
+    if (rune.rune.id === 8134) {
+        var abilities = Object.values(playerStats.abilities);
+        for (var i = 0 ; i < abilities.length ; i++) {
+            abilities[i].cooldown *= 0.3;
+        }
     }
 
     game.state.start('game', true, false, GAME_NUM_COLORS(level));

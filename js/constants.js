@@ -6,8 +6,8 @@ const GAME_RUNE_HEIGHT = 100;
 
 const GAME_NUM_ROWS = 10;
 const GAME_NUM_COLS = 10;
-const GAME_WIDTH = 500;
-const GAME_HEIGHT = 500;
+const GAME_WIDTH = 540;
+const GAME_HEIGHT = 540;
 
 const GAME_SPRITE_WIDTH = GAME_WIDTH / GAME_NUM_COLS;
 const GAME_SPRITE_HEIGHT = GAME_HEIGHT / GAME_NUM_ROWS;
@@ -24,6 +24,14 @@ const GAME_AMOUNT_TO_MATCH = 3;
 const GAME_TINT_COLOR = 0x203470;
 const GAME_UNTINT_COLOR = 0xFFFFFF;
 
+//RUNE-SPECIFIC CONSTANTS
+//Match stacking lasts 4 seconds.
+const GAME_STACK_DURATION = 4000;
+//Triggering stack effects require 3 stacks.
+const GAME_STACK_TRIGGER_AMOUNT = 3;
+
+
+//PLAYER DEFAULT STATS
 const GAME_DEFAULT_STATS = {
     health: 1000,
     mana: 800,
@@ -75,4 +83,13 @@ const getNextRuneOffer = function(runeTree, level) {
 
     return runeTree.slots[level-2].runes;
 
+};
+
+const playerHasRune = function(id) {
+    for (var i = 0 ; i < playerStats.currentRunes.length ; i++) {
+        if (playerStats.currentRunes[i].id === id) {
+            return true;
+        }
+    }
+    return false;
 };

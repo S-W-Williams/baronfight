@@ -78,6 +78,7 @@ function addRuneToPanel(rune) {
     $(identifier).attr("src", "resources/runes/perk/"+rune.id+".png");
     $(identifier).attr("data-original-title", rune.name);
     $(identifier).attr("data-content", runeDescriptions[rune.id].baronfight);
+    $(identifier).attr("data-rune-id", rune.id);
 
     $(identifier).css({"display": "block"});
 }
@@ -89,6 +90,16 @@ function resetRunePanel() {
     $("#rune4").css({display: "none"});
     $("#rune5").css({display: "none"});
     $("#rune6").css({display: "none"});
+}
+
+function updateStackCount(count) {
+
+    for (var i = 0 ; i < playerStats.currentRunes.length ; i++) {
+        if (runeDescriptions[playerStats.currentRunes[i].id].stacks) {
+            //Reset stack count.
+        }
+    }
+
 }
 
 $(".spell, .rune").popover();
