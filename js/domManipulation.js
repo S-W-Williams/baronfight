@@ -9,6 +9,9 @@ var MANA_BAR = $('.mana-bar');
 var M_BAR = MANA_BAR.find('.bar');
 var M_PTS = MANA_BAR.find('.hit');
 
+
+var timeOuts = {};
+
 function updateHealthBar(playerNumber, newValue, total, damage, value) {
     // calculate the percentage of the total width
     var barWidth = (newValue / total) * 100;
@@ -24,7 +27,22 @@ function updateHealthBar(playerNumber, newValue, total, damage, value) {
     }, 500);
 }
 
-function resetHealthBars() {
+function updateManaBar(playerNumber, newValue, total, damage, value) {
+    // calculate the percentage of the total width
+    var barWidth = (newValue / total) * 100;
+    var hitWidth = (damage / value) * 100 + "%";
+
+    // show hit bar and set the width
+    M_PTS[playerNumber].style.width = hitWidth;
+    MANA_BAR[playerNumber].dataset.value = newValue;
+
+    setTimeout(function(){
+        M_PTS[playerNumber].style.width = "0";
+        M_BAR[playerNumber].style.width = barWidth + "%";
+    }, 500);
+}
+
+function resetResourceBars() {
     HEALTH_BAR[0].dataset.total = playerStats.maxHP;
     HEALTH_BAR[1].dataset.total = GAME_BOSS_STATS(level).maxHP;
 
@@ -34,9 +52,11 @@ function resetHealthBars() {
     BAR[0].style.width = "100%";
     BAR[1].style.width = "100%";
 
-}
+    MANA_BAR[0].dataset.total = playerStats.maxMP;
+    MANA_BAR[0].dataset.value = playerStats.maxMP;
+    M_BAR[0].style.width = "100%";
 
-var timeOuts = {};
+}
 
 
 function setCooldown(ability, duration) {
@@ -107,17 +127,76 @@ function addRuneToPanel(rune) {
     $(identifier).attr("src", "resources/runes/perk/"+rune.id+".png");
     $(identifier).attr("data-original-title", rune.name);
     $(identifier).attr("data-content", runeDescriptions[rune.id].baronfight);
+    $(identifier).attr("data-rune-id", rune.id);
 
     $(identifier).css({"display": "block"});
 }
 
 function resetRunePanel() {
+<<<<<<< HEAD
     $("#rune1 img").attr("src", RUNE_PLACEHOLDER);
     $("#rune2 img").attr("src", RUNE_PLACEHOLDER);
     $("#rune3 img").attr("src", RUNE_PLACEHOLDER);
     $("#rune4 img").attr("src", RUNE_PLACEHOLDER);
     $("#rune5 img").attr("src", RUNE_PLACEHOLDER);
     $("#rune6 img").attr("src", RUNE_PLACEHOLDER);
+=======
+    $(".rune").css({display: "none"});
+    $(".rune ~ .cooldown-half").css({"opacity":0});
+
+    nextRuneNumber = 1;
+}
+
+function updateStackCount(count) {
+
+    for (var i = 0 ; i < playerStats.currentRunes.length ; i++) {
+        if (runeDescriptions[playerStats.currentRunes[i].id].stacks) {
+            updateRuneCooldown(playerStats.currentRunes[i].id, GAME_STACK_DURATION);
+        }
+    }
+
+}
+
+function updateRuneCooldown(runeid, duration) {
+    if (timeOuts[runeid]) {
+        for (var i = 0 ; i < timeOuts[runeid].length; i++) {
+            clearTimeout(timeOuts[runeid][i]);
+        }
+    }
+
+    var position;
+
+    for (position = 1; position <= 6; position++) {
+        if ($("#rune" + position).attr("data-rune-id") == runeid) {
+            break;
+        }
+    }
+
+    timeOuts[runeid] = [];
+
+    $("#rune" + position + " ~ .cooldown-half").css({"opacity":1});
+
+    $("#rune" + position + " ~ .cooldown-half .cooldown-half-rotator-right").css({
+        "transform":"rotate(180deg)",
+        "transition":"transform "+(duration/2000)+"s",
+        "transition-timing-function":"linear"
+    });
+
+
+    timeOuts[runeid][0] = setTimeout( function(){
+        $("#rune" + position + " ~ .cooldown-half .cooldown-half-rotator-left").css({
+            "transform":"rotate(180deg)",
+            "transition":"transform "+(duration/2000)+"s",
+            "transition-timing-function":"linear"
+        });
+    }, duration/2 );
+
+    timeOuts[runeid][1] = setTimeout( function(){
+        $("#rune" + position + " ~ .cooldown-half .cooldown-half-rotator-right").css({"transform":"rotate(0deg)","transition":"transform 0s"});
+        $("#rune" + position + " ~ .cooldown-half .cooldown-half-rotator-left").css({"transform":"rotate(0deg)","transition":"transform 0s"});
+        $("#rune" + position + " ~ .cooldown-half").css({"opacity":0});
+    }, duration );
+>>>>>>> origin/master
 }
 
 $(".spell, .rune").popover();

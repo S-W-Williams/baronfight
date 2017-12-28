@@ -16,11 +16,12 @@ const runeDescriptions = {
     },
     8005: {
         league: "Basic attacks apply stacks for 4 seconds. 3 Stacks deal bonus damage",
-        baronfight: "Hitting an enemy adds a stack for 4 seconds. Landing 3 stacks on the enemy will destroy the stacks to deal 20% of their maximum HP."
+        baronfight: "Hitting an enemy adds a stack for 4 seconds. Landing 3 stacks on the enemy will destroy the stacks to deal 20% of their maximum HP as magic damage.",
+        stacks: true
     },
     8008: {
         league: "1.5 seconds after attacking a champion, increase attack speed.",
-        baronfight: "After clearing 6 or more pieces increase attack speed (clear speed) by 50% for 10 seconds."
+        baronfight: "After clearing 5 or more pieces, double clear speed for 5 seconds."
     },
     8009: {
         league: "Restore all mana spent when killing an enemy champion in past 7 sec",
@@ -28,43 +29,44 @@ const runeDescriptions = {
     },
     8014: {
         league: "Deal Increased damage to champions below 40% HP.",
-        baronfight: "Deal 50% more damage to enemies below 40% HP."
+        baronfight: "Your orb clears deal double damage to enemies below 40% HP."
     },
     8017: {
         leauge: "Deal increased damage to champions with more HP than you.",
-        baronfight: "Deal 50% more damage when enemies have more HP than you."
+        baronfight: "Your orb clears deal 50% more damage when enemies have more percentage HP than you do."
     },
     8021: {
         league: "Energized Attacks (From movement), deal additional damage and grant movement speed",
-        baronfight: "When dodging an attack, your next attack will deal 20% of their maximum HP as additional damage and double your evasion rate for 10 seconds."
+        baronfight: "When dodging an attack, deal 20% of your enemy's Max HP as magic damage and increase your evasion rate by 10% for 10 seconds."
     },
     8105: {
         league: "Gain out of combat move speed",
-        baronfight: "Clearing yellow orbs permanently increase clear speed by 30%."
+        baronfight: "Everytime you clear a set of yellow orbs, permanently increase clear speed by 10%."
     },
     8112: {
-        league: "Hitting a champion adds a stack. 3 Stacks will electrocute the target for bonus dmg",
-        baronfight: "Hitting an enemy adds a stack for 4 seconds. Landing 3 stacks on the enemy will destroy the stacks to deal 20% of their maximum HP."
+        league: "Hitting a champion 3 times within 3 seconds will electrocute the target for bonus damage.",
+        baronfight: "Hitting an enemy adds a stack for 4 seconds. Landing 3 stacks on the enemy will destroy the stacks to deal 20% of their maximum HP as magic damage.",
+        stacks: true
     },
     8120: {
         league: "Entering brush will begin a channel that will summon a ghost poro ward",
-        baronfight: "Holding your mouse over a piece for 1 second will transform it into a ghost poro that can be ANY color (8 second cooldown)."
+        baronfight: "Clicking and holding your mouse over a piece for 1 second will transform it into a ghost poro that can be used as ANY color."
     },
     8124: {
         league: "Give your boots an active ability: Channel for 3 seconds then gain 45% Movespeed until you enter combat",
-        baronfight: "Gain an Active: Dash - Channel for 3 seconds then triple clearing speed for 20 seconds."
+        baronfight: "Gain an Active: Dash - Channel for 3 seconds (You cannot take any actions while channeling) then triple clearing speed for 20 seconds."
     },
     8126: {
         league: "You deal bonus damage to impaired enemies.",
-        baronfight: "When your enemy  is impaired, you deal double damage"
+        baronfight: "When your enemy  is impaired, your orb clears deal double damage."
     },
     8128: {
         league: "Killing enemies drop soul essence, which empower your next attack depending on amount collected",
-        baronfight: "Clearing 6 or more pieces will empower your next attack to deal additional damage."
+        baronfight: "Damage dealt from clearing 6 or more orbs will be doubled."
     },
     8134: {
         league: "Reduce active cooldowns from items by 10%",
-        baronfight: "Reduce cooldowns of ALL abilities by 50%."
+        baronfight: "Reduce cooldowns of ALL abilities by 30%."
     },
     8135: {
         league: "Heal for 2.5% of damage dealt by your abilities.",
@@ -72,7 +74,7 @@ const runeDescriptions = {
     },
     8136: {
         league: "Killing enemy wards replace it with an allied zombie ward.",
-        baronfight: "Enemy wards can now appear as pieces. When cleared, they reappear as zombie wards that can be cleared as if they were ANY color."
+        baronfight: "Yellow, Blue, and Red Trinkets can now appear as pieces. When cleared, they reappear as zombie wards that can be cleared as if they were ANY color."
     },
     8138: {
         league: "Enemy kills grant permanent AD or AP up to a cap.",
@@ -84,11 +86,11 @@ const runeDescriptions = {
     },
     8143: {
         league: "Damaging enemies after flash/blink/tele/stealth increases penetration",
-        baronfight: "After using any active ability, your next attack ignores all armor and magic resistance."
+        baronfight: "After using any active ability, your next orb clear will ignore ALL armor."
     },
     8210: {
         league: "Gain 10% CDR at level 10",
-        baronfight: "After 30 seconds, gain 50% CDR on ALL abilities"
+        baronfight: "After 30 seconds, gain 50% CDR on ALL abilities until the end of the round."
     },
     8214: {
         league: "Damaging champions summon Aery to attack them, (She's on cooldown as she returns to you though.)",
@@ -96,7 +98,7 @@ const runeDescriptions = {
     },
     8224: {
         league: "Dropping below 30% HP grants a shield.",
-        baronfight: "Dropping below 30% HP grants you a shield for 20% of your Max HP."
+        baronfight: "Restore 20% of your Max HP after falling below 30% Health (20 second cooldown)."
     },
     8226: {
         league: "Every 75s your next ability costs 0 mana and restore 8% mana",
@@ -108,7 +110,8 @@ const runeDescriptions = {
     },
     8230: {
         league: "Damaging enemies add stacks, 3 stacks grants move speed and slow resistance",
-        baronfight: "Damaging enemies add stacks that last 4 seconds. Landing 3 stacks will increase evasion rate by 20% for 5 seconds."
+        baronfight: "Damaging enemies add stacks that last 4 seconds. Landing 3 stacks will increase evasion rate by 20% for 5 seconds.",
+        stacks: true
     },
     8232: {
         league: "Gain movespeed, AD, AP while in the river.",
@@ -116,7 +119,7 @@ const runeDescriptions = {
     },
     8233: {
         league: "Gain AD/AP when above 70% HP",
-        baronfight: "When above 70% HP, deal 40% increased damage."
+        baronfight: "When above 70% HP, your orb clears deal 40% increased damage."
     },
     8234: {
         league: "Gain 3% Move speed, gain ad/ap based on current movespeed",
@@ -128,7 +131,7 @@ const runeDescriptions = {
     },
     8237: {
         league: "Damaging enemies burn them for more damage for 1 sec (20s cooldown)",
-        baronfight: "All attacks burn enemies for an additional 30 damage."
+        baronfight: "All orb clears burn enemies for an additional 30% damage."
     },
     8242: {
         league: "Gain 10% Tenacity for each summoner spell on cooldown, 15% Slow resistance when casting a summoner spell",
@@ -136,7 +139,7 @@ const runeDescriptions = {
     },
     8243: {
         league: "5% CDR on your ult, increased by 2% everytime you ult, up to 15%",
-        baronfight: "Your ult's cooldown is reduced by 30%. "
+        baronfight: "Your ultimate ability's (R Ability) cooldown is reduced by 30%. "
     },
     8299: {
         league: "Deal more damage the lower HP you have",

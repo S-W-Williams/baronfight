@@ -132,7 +132,12 @@ div.spell {
 /*
 .rune {
     width: 100%;
+    position: absolute;
+    width: 65%;
+}
 
+.rune ~ .cooldown-half {
+    height: 62.5px;
 }
 */
 
@@ -166,7 +171,7 @@ img {
 
 #phaser {
     width: 500px;
-    margin: auto;
+    margin: 0;
 }
 
 .shortKey {
