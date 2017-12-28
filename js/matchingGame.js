@@ -65,6 +65,8 @@ game_state.game.prototype = {
                     }
                 }, 30000)
             };
+
+            updateRuneCooldown(8210, 30000);
         }
 
     },
@@ -127,6 +129,7 @@ function cpuAttacks() {
                     playerStats.moveSpeed -= 1000;
                     runeRelatedData["8021"].active = false;
                 }, 10000);
+                updateRuneCooldown(8021, 10000);
                 return;
             }
 
@@ -137,6 +140,7 @@ function cpuAttacks() {
                 playerStats.moveSpeed -= 1000;
                 runeRelatedData["8021"].active = false;
             }, 10000);
+            updateRuneCooldown(8021, 10000);
 
             runeRelatedData["8021"] = {
                 active: true,
@@ -310,6 +314,7 @@ function attack(length, color) {
                     playerStats.attackSpeed /= 2;
                     runeRelatedData["8008"].active = false;
                 }, 5000);
+                updateRuneCooldown(8008, 5000);
                 return;
             }
 
@@ -320,6 +325,8 @@ function attack(length, color) {
                 playerStats.attackSpeed /= 2;
                 runeRelatedData["8008"].active = false;
             }, 5000);
+
+            updateRuneCooldown(8008, 5000);
 
             runeRelatedData["8008"] = {
                 active: true,
@@ -381,6 +388,8 @@ function attack(length, color) {
             };
 
             applyDamage(playerStats.maxHP * -0.15, 0, 0);
+
+            updateRuneCooldown(8139, 20000);
         }
 
     }
@@ -403,6 +412,7 @@ function attack(length, color) {
                 playerStats.moveSpeed -= 3000;
                 runeRelatedData["8232"].active = false;
             }, 5000);
+            updateRuneCooldown(8232, 5000);
             return;
         }
 
@@ -413,6 +423,7 @@ function attack(length, color) {
             playerStats.attackSpeed -= 3000;
             runeRelatedData["8232"].active = false;
         }, 5000);
+        updateRuneCooldown(8232, 5000);
 
         runeRelatedData["8232"] = {
             active: true,
@@ -488,6 +499,8 @@ function applyDamage(damage, playerNumber, lifeSteal) {
             };
 
             applyDamage(-0.2 * playerStats.maxHP, 0, 0);
+
+            updateRuneCooldown(8224, 20000);
         }
 
     }
@@ -634,6 +647,10 @@ function resetCooldowns() {
 
     for (var i = 0 ; i < keys.length; i++) {
         setCooldown(keys[i], 0);
+    }
+
+    for (var i = 0 ; i < playerStats.currentRunes.length; i++) {
+        updateRuneCooldown(playerStats.currentRunes[i].id, 0);
     }
 }
 

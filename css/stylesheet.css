@@ -67,7 +67,12 @@ div.spell {
 
 .rune {
     width: 100%;
+    position: absolute;
+    width: 65%;
+}
 
+.rune ~ .cooldown-half {
+    height: 62.5px;
 }
 
 .label {

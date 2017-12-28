@@ -45,7 +45,8 @@ const runeDescriptions = {
     },
     8112: {
         league: "Hitting a champion 3 times within 3 seconds will electrocute the target for bonus damage.",
-        baronfight: "Hitting an enemy adds a stack for 4 seconds. Landing 3 stacks on the enemy will destroy the stacks to deal 20% of their maximum HP as magic damage."
+        baronfight: "Hitting an enemy adds a stack for 4 seconds. Landing 3 stacks on the enemy will destroy the stacks to deal 20% of their maximum HP as magic damage.",
+        stacks: true
     },
     8120: {
         league: "Entering brush will begin a channel that will summon a ghost poro ward",

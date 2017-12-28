@@ -8,6 +8,9 @@ var MANA_BAR = $('.mana-bar');
 var M_BAR = MANA_BAR.find('.bar');
 var M_PTS = MANA_BAR.find('.hit');
 
+
+var timeOuts = {};
+
 function updateHealthBar(playerNumber, newValue, total, damage, value) {
     // calculate the percentage of the total width
     var barWidth = (newValue / total) * 100;
@@ -53,8 +56,6 @@ function resetResourceBars() {
     M_BAR[0].style.width = "100%";
 
 }
-
-var timeOuts = {};
 
 
 function setCooldown(ability, duration) {
@@ -103,12 +104,8 @@ function addRuneToPanel(rune) {
 }
 
 function resetRunePanel() {
-    $("#rune1").css({display: "none"});
-    $("#rune2").css({display: "none"});
-    $("#rune3").css({display: "none"});
-    $("#rune4").css({display: "none"});
-    $("#rune5").css({display: "none"});
-    $("#rune6").css({display: "none"});
+    $(".rune").css({display: "none"});
+    $(".rune ~ .cooldown-half").css({"opacity":0});
 
     nextRuneNumber = 1;
 }
@@ -117,10 +114,51 @@ function updateStackCount(count) {
 
     for (var i = 0 ; i < playerStats.currentRunes.length ; i++) {
         if (runeDescriptions[playerStats.currentRunes[i].id].stacks) {
-            //Reset stack count.
+            updateRuneCooldown(playerStats.currentRunes[i].id, GAME_STACK_DURATION);
         }
     }
 
+}
+
+function updateRuneCooldown(runeid, duration) {
+    if (timeOuts[runeid]) {
+        for (var i = 0 ; i < timeOuts[runeid].length; i++) {
+            clearTimeout(timeOuts[runeid][i]);
+        }
+    }
+
+    var position;
+
+    for (position = 1; position <= 6; position++) {
+        if ($("#rune" + position).attr("data-rune-id") == runeid) {
+            break;
+        }
+    }
+
+    timeOuts[runeid] = [];
+
+    $("#rune" + position + " ~ .cooldown-half").css({"opacity":1});
+
+    $("#rune" + position + " ~ .cooldown-half .cooldown-half-rotator-right").css({
+        "transform":"rotate(180deg)",
+        "transition":"transform "+(duration/2000)+"s",
+        "transition-timing-function":"linear"
+    });
+
+
+    timeOuts[runeid][0] = setTimeout( function(){
+        $("#rune" + position + " ~ .cooldown-half .cooldown-half-rotator-left").css({
+            "transform":"rotate(180deg)",
+            "transition":"transform "+(duration/2000)+"s",
+            "transition-timing-function":"linear"
+        });
+    }, duration/2 );
+
+    timeOuts[runeid][1] = setTimeout( function(){
+        $("#rune" + position + " ~ .cooldown-half .cooldown-half-rotator-right").css({"transform":"rotate(0deg)","transition":"transform 0s"});
+        $("#rune" + position + " ~ .cooldown-half .cooldown-half-rotator-left").css({"transform":"rotate(0deg)","transition":"transform 0s"});
+        $("#rune" + position + " ~ .cooldown-half").css({"opacity":0});
+    }, duration );
 }
 
 $(".spell, .rune").popover();
