@@ -26,6 +26,7 @@ const GAME_TINT_COLOR = 0x203470;
 const GAME_UNTINT_COLOR = 0xFFFFFF;
 
 //Health restored from consuming red potion.
+//and Mana restored from consuming blue potion.
 const GAME_POTION_STRENGTH = 200;
 
 //RUNE-SPECIFIC CONSTANTS
@@ -50,7 +51,8 @@ const GAME_DEFAULT_STATS = {
     tenacity: 0,
     lifeSteal: 0,
     currentRunes: [],
-    potions: 3,
+    redPotions: 3,
+    bluePotions: 3,
     maxPotions: 3,
     abilities: {
         Q: {
@@ -72,7 +74,12 @@ const GAME_DEFAULT_STATS = {
         1: {
             cost: 0,
             cooldown: 1,
-            potions: 1
+            redPotions: 1
+        },
+        2: {
+            cost: -GAME_POTION_STRENGTH,
+            cooldown: 1,
+            bluePotions: 1
         }
     }
 };

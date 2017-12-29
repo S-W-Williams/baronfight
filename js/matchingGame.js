@@ -870,11 +870,12 @@ function resetResources() {
 
     playerStats.mana = playerStats.maxMP;
 
-    playerStats.potions = playerStats.maxPotions;
+    playerStats.redPotions = playerStats.maxPotions;
+    playerStats.bluePotions = playerStats.maxPotions;
 
     resetResourceBars();
 
-    updateNumPotions(playerStats.potions);
+    updateNumPotions(playerStats.redPotions, playerStats.bluePotions);
 
 }
 
@@ -987,17 +988,30 @@ function tryCast(key) {
         } else {
             isHexQ = true;
         }
-    } else if (playerStats.abilities[key].potions && playerStats.potions < playerStats.abilities[key].potions) {
-        console.log("You are out of potions!");
+    } else if (playerStats.abilities[key].redPotions && playerStats.redPotions < playerStats.abilities[key].redPotions) {
+        console.log("You are out of red potions!");
+        return;
+    } else if (playerStats.abilities[key].bluePotions && playerStats.bluePotions < playerStats.abilities[key].bluePotions) {
+        console.log("You are out of blue potions!");
         return;
     }
 
-    if (playerStats.abilities[key].potions) {
-        playerStats.potions -= playerStats.abilities[key].potions;
-        updateNumPotions(playerStats.potions);
+    if (playerStats.abilities[key].redPotions) {
+        playerStats.redPotions -= playerStats.abilities[key].redPotions;
+        updateNumPotions(playerStats.redPotions, playerStats.bluePotions);
+    }
+
+    if (playerStats.abilities[key].bluePotions) {
+        playerStats.bluePotions -= playerStats.abilities[key].bluePotions;
+        updateNumPotions(playerStats.redPotions, playerStats.bluePotions);
     }
 
     playerStats.mana -= cost;
+
+    if (playerStats.mana > playerStats.maxMP) {
+        playerStats.mana = playerStats.maxMP;
+    }
+
     updateManaBar(0, playerStats.mana, playerStats.maxMP, cost, playerStats.mana + cost);
     playerStats.abilities[key].lastCastTime = game.time.now;
     castEffect(key, isHexQ);
@@ -1112,7 +1126,7 @@ function castEffect(key, isHexQ) {
         resetBoard();
     } else if (key === "1") {
         applyDamage(-GAME_POTION_STRENGTH, 0, 0);
-    } else if (key === "2") {
+    } else if (key === "3") {
 
         isStunned = true;
 
@@ -1124,7 +1138,7 @@ function castEffect(key, isHexQ) {
             }, 20000);
         }, 3000);
 
-    } else if (key === "3") {
+    } else if (key === "4") {
 
         isStunned = true;
         isDamagable = false;
@@ -1135,7 +1149,7 @@ function castEffect(key, isHexQ) {
         }, 10000);
 
 
-    } else if (key === "4") {
+    } else if (key === "5") {
 
         if (runeRelatedData["8316"] && runeRelatedData["8316"] <= 0) {
             console.log("You don't have any more dematerializers!");

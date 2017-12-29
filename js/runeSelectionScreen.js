@@ -167,25 +167,25 @@ function confirmSelection(rune) {
         }
     }
 
-    //Predator - Gain an active (2): Dash - Channel for 3 seconds then triple clearing speed for 20 seconds.
+    //Predator - Gain an active (3): Dash - Channel for 3 seconds then triple clearing speed for 20 seconds.
     if (rune.rune.id === 8124) {
-        playerStats.abilities["2"] = {
+        playerStats.abilities["3"] = {
             cost: 0,
             cooldown: 20
         };
     }
 
-    //Perfect Timing - Gain an active (3): Stasis - You cannot make any actions but you cannot be damaged for 10 seconds. Cooldown: 45 seconds.
+    //Perfect Timing - Gain an active (4): Stasis - You cannot make any actions but you cannot be damaged for 10 seconds. Cooldown: 45 seconds.
     if (rune.rune.id === 8313) {
-        playerStats.abilities["3"] = {
+        playerStats.abilities["4"] = {
             cost: 0,
             cooldown: 55
         };
     }
 
-    //Minion Dematerializer - Start each round witih 10 dematerializers. Activate them (4) to destroy any orb on your field.
+    //Minion Dematerializer - Start each round witih 10 dematerializers. Activate them (5) to destroy any orb on your field.
     if (rune.rune.id === 8316) {
-        playerStats.abilities["4"] = {
+        playerStats.abilities["5"] = {
             cost: 0,
             cooldown: 0
         };

@@ -59,13 +59,10 @@ function resetResourceBars() {
 }
 
 
-function updateNumPotions(count) {
+function updateNumPotions(red, blue) {
 
-    $(".potionTable td").css("display", "none")
-
-    for (var i = 1 ; i <= count ; i++) {
-        $("#potion" + i).css("display", "table-cell");
-    }
+    $("#healthPotCounter .potionCounter").html(red);
+    $("#manaPotCounter .potionCounter").html(blue);
 }
 
 
