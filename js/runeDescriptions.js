@@ -159,7 +159,7 @@ const runeDescriptions = {
     },
     8316: {
         league: "Start game with 6 minion dematerializers, killing an enemy minion for free",
-        baronfight: "Start each round with 10 dematerializers. Activate them to destroy any orb on your field."
+        baronfight: "Start each round with 10 dematerializers. Activate (4) them to destroy any orb on your field."
     },
     8321: {
         league: "You can enter debt to buy items",

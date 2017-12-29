@@ -714,7 +714,7 @@ function attack(length, color) {
         }
     }
 
-    console.log("Apply Damage : " + damage);
+    //console.log("Apply Damage : " + damage);
     applyDamage(damage, 1, playerStats.lifeSteal + bonusLifeSteal);
 
 }
@@ -870,7 +870,7 @@ function resetResources() {
 
     playerStats.mana = playerStats.maxMP;
 
-    playerStats.potions = GAME_DEFAULT_STATS.potions;
+    playerStats.potions = playerStats.maxPotions;
 
     resetResourceBars();
 

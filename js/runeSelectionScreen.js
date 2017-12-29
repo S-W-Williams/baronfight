@@ -51,7 +51,7 @@ game_state.runeSelect.prototype = {
 
 function runeSelected(rune) {
 
-    console.log("Selected Rune: " + rune.rune.id);
+    //console.log("Selected Rune: " + rune.rune.id);
 
     ///TODO: DISPLAY INFORMATION ABOUT RUNE AS WELL.
 
@@ -78,7 +78,7 @@ function runeSelected(rune) {
     var style = { font: "bold 18px Arial", fill: "white", boundsAlignH: "center", boundsAlignV: "middle" };
 
 
-    console.log(rune.rune);
+    //console.log(rune.rune);
     var runeInfo = game.add.text(game.world.width * 3/4 , 50, runeDescriptions[rune.rune.id].baronfight, style);
     runeInfo.anchor.setTo(0.5, 0);
     runeInfo.alpha = 0;
@@ -108,6 +108,10 @@ function confirmSelection(rune) {
 
     playerStats.currentRunes = playerStats.currentRunes.concat(rune.rune);
 
+
+    //console.log("Selection: " + rune.rune.id);
+
+
     if (!rune.rune.slots) {
         //This is a rune and not a branch.
         addRuneToPanel(rune.rune);
@@ -136,7 +140,9 @@ function confirmSelection(rune) {
 
     //Future's Market - Start each round with 1 additional potion.
     if (rune.rune.id === 8321) {
-        playerStats.potions++;
+
+        playerStats.maxPotions = playerStats.maxPotions + 1;
+
     }
 
     //Celestial Body - Increase HP by 300 but deal 10% less damage for the first 30 seconds.
