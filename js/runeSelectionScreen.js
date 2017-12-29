@@ -136,7 +136,7 @@ function confirmSelection(rune) {
         abilities["R"].cooldown *= 0.7;
     }
 
-    //Future's Market - Start each round with 1 additional potion.
+    //Future's Market - Start each round with 1 additional red and blue potion.
     if (rune.rune.id === 8321) {
 
         playerStats.maxPotions = playerStats.maxPotions + 1;

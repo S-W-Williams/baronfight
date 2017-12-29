@@ -163,7 +163,7 @@ const runeDescriptions = {
     },
     8321: {
         league: "You can enter debt to buy items",
-        baronfight: "Start each round with 1 additional health potion."
+        baronfight: "Start each round with 1 additional health and mana potion."
     },
     8326: {
         league: "Reduces summoner spell cooldown by 25%, and allows you to trade spells in store (with summoner shards accumulated over time)",
