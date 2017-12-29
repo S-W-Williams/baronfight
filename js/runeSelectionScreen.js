@@ -120,7 +120,7 @@ function confirmSelection(rune) {
     if (rune.rune.id === 8134 || rune.rune.id === 8347) {
         var abilities = Object.values(playerStats.abilities);
         for (var i = 0 ; i < abilities.length ; i++) {
-            abilities[i].cooldown *= 0.3;
+            abilities[i].cooldown *= 0.7;
         }
     }
 
@@ -151,8 +151,40 @@ function confirmSelection(rune) {
     }
 
     //Mirror Shell - Permanently gain 50 magic resistance.
-    if (rune.rune.id = 8435) {
+    if (rune.rune.id === 8435) {
         playerStats.magicResist += 50;
+    }
+
+    //Unsealed Spellbook - Reduce all cooldowns by 15%. Clearing 6 or more pieces will permanently increase ability damage by 10%.
+    if (rune.rune.id === 8326) {
+        var abilities = Object.values(playerStats.abilities);
+        for (var i = 0 ; i < abilities.length ; i++) {
+            abilities[i].cooldown *= 0.85;
+        }
+    }
+
+    //Predator - Gain an active (2): Dash - Channel for 3 seconds then triple clearing speed for 20 seconds.
+    if (rune.rune.id === 8124) {
+        playerStats.abilities["2"] = {
+            cost: 0,
+            cooldown: 20
+        };
+    }
+
+    //Perfect Timing - Gain an active (3): Stasis - You cannot make any actions but you cannot be damaged for 10 seconds. Cooldown: 45 seconds.
+    if (rune.rune.id === 8313) {
+        playerStats.abilities["3"] = {
+            cost: 0,
+            cooldown: 55
+        };
+    }
+
+    //Minion Dematerializer - Start each round witih 10 dematerializers. Activate them (4) to destroy any orb on your field.
+    if (rune.rune.id === 8316) {
+        playerStats.abilities["4"] = {
+            cost: 0,
+            cooldown: 0
+        };
     }
 
     game.state.start('game', true, false, GAME_NUM_COLORS(level));

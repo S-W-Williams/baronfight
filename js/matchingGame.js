@@ -2,6 +2,9 @@ var board = [];
 
 var isDragging = false;
 var canMakeMove = true;
+var isStunned = false;
+var isDamagable = true;
+var dematerialize = false;
 var currentSprite = null;
 var currentDragColor = null;
 var selectedSprites = [];
@@ -114,6 +117,24 @@ game_state.game.prototype = {
                     playerStats.attackDamage *= 1.1;
                     playerStats.abilityPower *= 1.1;
                     runeRelatedData["8236"].currentMultiplier *= 1.1;
+                }, 10000),
+                currentMultiplier: 1
+            };
+
+        }
+
+        //Biscuit Delivery - Every 10 seconds, eat a biscuit that restores 10% HP and MP.
+        if (playerHasRune(8345)) {
+            runeRelatedData["8345"] = {
+                intervalID: setInterval(function() {
+                    applyDamage(-playerStats.maxHP / 10, 0, 0);
+                    playerStats.mana += playerStats.maxMP / 10;
+
+                    if (playerStats.mana > playerStats.maxMP) {
+                        playerStats.mana = playerStats.maxMP;
+                    }
+
+                    updateManaBar(0, playerStats.mana, playerStats.maxMP, -playerStats.maxMP / 10, playerStats.mana - playerStats.maxMP / 10);
                 }, 10000),
                 currentMultiplier: 1
             };
@@ -341,8 +362,22 @@ function shiftDownPiecesFromPosition(row, col) {
 
 function beginDrag() {
 
-    if (!canMakeMove) {
+    if (!canMakeMove || isStunned) {
         return;
+    }
+
+    if (dematerialize) {
+
+        dematerialize = false;
+        if (!runeRelatedData["8316"]) {
+            runeRelatedData["8316"] = 9;
+        } else {
+            runeRelatedData["8316"]--;
+        }
+
+        selectedSprites = [currentSprite];
+        clearTinted();
+
     }
 
     if (playerHasRune(8120)) {
@@ -399,23 +434,24 @@ function attack(length, color) {
                         runeRelatedData["8230"].active = false;
                     }, 5000);
                     updateRuneCooldown(8230, 5000);
-                    return;
+                } else {
+                    //Otherwise, increase evasion rate by 20% for 5 seconds.
+                    playerStats.moveSpeed += 2000;
+
+                    const timeoutID = setTimeout(function() {
+                        playerStats.moveSpeed -= 2000;
+                        runeRelatedData["8021"].active = false;
+                    }, 5000);
+                    updateRuneCooldown(8230, 5000);
+
+                    runeRelatedData["8230"] = {
+                        active: true,
+                        lastApplied: game.time.now,
+                        timeoutID: timeoutID
+                    };
                 }
 
-                //Otherwise, increase evasion rate by 20% for 5 seconds.
-                playerStats.moveSpeed += 2000;
 
-                const timeoutID = setTimeout(function() {
-                    playerStats.moveSpeed -= 2000;
-                    runeRelatedData["8021"].active = false;
-                }, 5000);
-                updateRuneCooldown(8230, 5000);
-
-                runeRelatedData["8230"] = {
-                    active: true,
-                    lastApplied: game.time.now,
-                    timeoutID: timeoutID
-                };
             }
         }
     } else {
@@ -436,24 +472,25 @@ function attack(length, color) {
                     runeRelatedData["8008"].active = false;
                 }, 5000);
                 updateRuneCooldown(8008, 5000);
-                return;
+            } else {
+                //Otherwise, multiply attack speed by 2 and add timer to return.
+                playerStats.attackSpeed *= 2;
+
+                const timeoutID = setTimeout(function() {
+                    playerStats.attackSpeed /= 2;
+                    runeRelatedData["8008"].active = false;
+                }, 5000);
+
+                updateRuneCooldown(8008, 5000);
+
+                runeRelatedData["8008"] = {
+                    active: true,
+                    lastApplied: game.time.now,
+                    timeoutID: timeoutID
+                };
             }
 
-            //Otherwise, multiply attack speed by 2 and add timer to return.
-            playerStats.attackSpeed *= 2;
 
-            const timeoutID = setTimeout(function() {
-                playerStats.attackSpeed /= 2;
-                runeRelatedData["8008"].active = false;
-            }, 5000);
-
-            updateRuneCooldown(8008, 5000);
-
-            runeRelatedData["8008"] = {
-                active: true,
-                lastApplied: game.time.now,
-                timeoutID: timeoutID
-            };
         }
     }
 
@@ -490,6 +527,15 @@ function attack(length, color) {
         if (playerHasRune(9111)) {
             applyDamage(-0.1 * playerStats.maxHP, 0, 0);
         }
+
+        if (playerHasRune(8326)) {
+            if (!runeRelatedData["8326"]) {
+                runeRelatedData["8326"] = 1.1;
+            } else {
+                runeRelatedData["8326"] *= 1.1;
+            }
+        }
+
 
 
     }
@@ -566,23 +612,23 @@ function attack(length, color) {
                 runeRelatedData["8232"].active = false;
             }, 5000);
             updateRuneCooldown(8232, 5000);
-            return;
+        } else {
+            //Otherwise, increase evasion rate by 30%.
+            playerStats.attackSpeed += 3000;
+
+            const timeoutID = setTimeout(function() {
+                playerStats.attackSpeed -= 3000;
+                runeRelatedData["8232"].active = false;
+            }, 5000);
+            updateRuneCooldown(8232, 5000);
+
+            runeRelatedData["8232"] = {
+                active: true,
+                lastApplied: game.time.now,
+                timeoutID: timeoutID
+            };
         }
 
-        //Otherwise, increase evasion rate by 30%.
-        playerStats.attackSpeed += 3000;
-
-        const timeoutID = setTimeout(function() {
-            playerStats.attackSpeed -= 3000;
-            runeRelatedData["8232"].active = false;
-        }, 5000);
-        updateRuneCooldown(8232, 5000);
-
-        runeRelatedData["8232"] = {
-            active: true,
-            lastApplied: game.time.now,
-            timeoutID: timeoutID
-        };
     }
 
     //Absolute Focus - When above 70% HP, deal 40% increased damage.
@@ -629,24 +675,23 @@ function attack(length, color) {
                 runeRelatedData["8351"].active = false;
             }, 5000);
             updateRuneCooldown(8351, 5000);
-            return;
+        } else {
+            //Otherwise, slow enemy attacks by 50%.
+            bossStats.attackPeriod *= 2;
+
+            const timeoutID = setTimeout(function() {
+                bossStats.attackPeriod /= 2;
+                runeRelatedData["8351"].active = false;
+            }, 5000);
+
+            updateRuneCooldown(8351, 5000);
+
+            runeRelatedData["8351"] = {
+                active: true,
+                lastApplied: game.time.now,
+                timeoutID: timeoutID
+            };
         }
-
-        //Otherwise, slow enemy attacks by 50%.
-        bossStats.attackPeriod *= 2;
-
-        const timeoutID = setTimeout(function() {
-            bossStats.attackPeriod /= 2;
-            runeRelatedData["8351"].active = false;
-        }, 5000);
-
-        updateRuneCooldown(8351, 5000);
-
-        runeRelatedData["8351"] = {
-            active: true,
-            lastApplied: game.time.now,
-            timeoutID: timeoutID
-        };
     }
 
     //Font of Life - Gain 40% lifesteal when attacking stunned enemies.
@@ -669,6 +714,7 @@ function attack(length, color) {
         }
     }
 
+    console.log("Apply Damage : " + damage);
     applyDamage(damage, 1, playerStats.lifeSteal + bonusLifeSteal);
 
 }
@@ -678,7 +724,7 @@ function applyDamage(damage, playerNumber, lifeSteal) {
     character = playerNumber == 0 ? playerStats : bossStats;
 
     //Revitalize - All potions, shields, and healing is 50% stronger. This is increased to 100% when below 40% HP.
-    if (damage < 0 && playerNumber == 0 && playerHasRune(8453)) {
+    if (damage < 0 && playerNumber === 0 && playerHasRune(8453)) {
         if (playerStats.health / playerStats.maxHP < 0.4) {
             damage *= 2;
         } else {
@@ -699,6 +745,10 @@ function applyDamage(damage, playerNumber, lifeSteal) {
             }
 
         }
+    }
+
+    if (playerNumber == 0 && !isDamagable) {
+        return;
     }
 
     var total = character.maxHP;
@@ -760,6 +810,13 @@ function applyDamage(damage, playerNumber, lifeSteal) {
                 clearInterval(runeRelatedData["8236"].intervalID);
                 playerStats.attackDamage /= runeRelatedData["8236"].currentMultiplier;
                 playerStats.abilityPower /= runeRelatedData["8236"].currentMultiplier;
+
+            }
+
+            //Biscuit Delivery - Every 10 seconds, eat a biscuit that restores 10% HP and MP.
+            if (playerHasRune(8345)) {
+
+                clearInterval(runeRelatedData["8345"].intervalID);
 
             }
 
@@ -871,17 +928,32 @@ function addAbilityListeners() {
     var e = game.input.keyboard.addKey(Phaser.Keyboard.E);
     var r = game.input.keyboard.addKey(Phaser.Keyboard.R);
     var one = game.input.keyboard.addKey(Phaser.Keyboard.ONE);
+    var two = game.input.keyboard.addKey(Phaser.Keyboard.TWO);
+    var three = game.input.keyboard.addKey(Phaser.Keyboard.THREE);
+    var four = game.input.keyboard.addKey(Phaser.Keyboard.FOUR);
+    var five = game.input.keyboard.addKey(Phaser.Keyboard.FIVE);
+    var six = game.input.keyboard.addKey(Phaser.Keyboard.SIX);
 
     q.onDown.add(() => tryCast("Q"));
     w.onDown.add(() => tryCast("W"));
     e.onDown.add(() => tryCast("E"));
     r.onDown.add(() => tryCast("R"));
     one.onDown.add(() => tryCast("1"));
+    two.onDown.add(() => tryCast("2"));
+    three.onDown.add(() => tryCast("3"));
+    four.onDown.add(() => tryCast("4"));
+    five.onDown.add(() => tryCast("5"));
+    six.onDown.add(() => tryCast("6"));
 }
 
 function tryCast(key) {
 
-    console.log("Cast " + key);
+    //console.log("Cast " + key);
+
+    if (!playerStats.abilities[key]) {
+        console.log("You do not have this ability!");
+        return;
+    }
 
     var cost = playerStats.abilities[key].cost;
     var isHexQ = false;
@@ -946,6 +1018,11 @@ function castEffect(key, isHexQ) {
         if (isHexQ) {
             const percentageCooldownElapsed = (game.time.now - playerStats.abilities["Q"].lastCastTime) / playerStats.abilities["Q"].cooldown / 1000;
             damage *= percentageCooldownElapsed;
+        }
+
+        //Unsealed Spellbook - Reduce all cooldowns by 15%. Clearing 6 or more pieces will permanently increase ability damage by 10%.
+        if (runeRelatedData["8326"]) {
+            damage *= runeRelatedData["8326"];
         }
 
         //Arcane Comet - Your damaging abilities (Q) hurls a comet at your enemy, doubling the damage.
@@ -1035,6 +1112,38 @@ function castEffect(key, isHexQ) {
         resetBoard();
     } else if (key === "1") {
         applyDamage(-GAME_POTION_STRENGTH, 0, 0);
+    } else if (key === "2") {
+
+        isStunned = true;
+
+        setTimeout(function() {
+            isStunned = false;
+            playerStats.attackSpeed *= 3;
+            setTimeout(function() {
+                playerStats.attackSpeed /= 3;
+            }, 20000);
+        }, 3000);
+
+    } else if (key === "3") {
+
+        isStunned = true;
+        isDamagable = false;
+
+        setTimeout(function() {
+            isStunned = false;
+            isDamagable = true;
+        }, 10000);
+
+
+    } else if (key === "4") {
+
+        if (runeRelatedData["8316"] && runeRelatedData["8316"] <= 0) {
+            console.log("You don't have any more dematerializers!");
+            return;
+        }
+
+        dematerialize = !dematerialize;
+
     }
 
     setCooldown(key, playerStats.abilities[key].cooldown * 1000);
@@ -1069,7 +1178,9 @@ function stunPlayer(duration) {
 
     const ccDuration = (1 - tenacity) * duration;
 
-    //STUN PLAYER OR DISABLE INPUT OR SOMETHING.
+    isStunned = true;
+
+    setTimeout(() => isStunned = false, ccDuration);
 }
 
 // Add and start the 'main' state to start the game

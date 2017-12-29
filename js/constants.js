@@ -50,7 +50,7 @@ const GAME_DEFAULT_STATS = {
     tenacity: 0,
     lifeSteal: 0,
     currentRunes: [],
-    potions: 3,
+    potions: 4,
     abilities: {
         Q: {
             cost: 40,

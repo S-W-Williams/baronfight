@@ -54,7 +54,7 @@ const runeDescriptions = {
     },
     8124: {
         league: "Give your boots an active ability: Channel for 3 seconds then gain 45% Movespeed until you enter combat",
-        baronfight: "Gain an Active: Dash - Channel for 3 seconds (You cannot take any actions while channeling) then triple clearing speed for 20 seconds."
+        baronfight: "Gain an Active (2): Dash - Channel for 3 seconds (You cannot take any actions while channeling) then triple clearing speed for 20 seconds. This cannot be cast while already in effect."
     },
     8126: {
         league: "You deal bonus damage to impaired enemies.",
@@ -155,7 +155,7 @@ const runeDescriptions = {
     },
     8313: {
         league: "Gain free stopwatch that is worth less at beginning of game",
-        baronfight: "Gain free stopwatch active for one-time use each game. When using it, enter stasis for 10 seconds."
+        baronfight: "Gain an active (3): Stasis - You cannot make any actions but you cannot be damaged for 10 seconds. Cooldown: 45 seconds."
     },
     8316: {
         league: "Start game with 6 minion dematerializers, killing an enemy minion for free",
@@ -167,7 +167,7 @@ const runeDescriptions = {
     },
     8326: {
         league: "Reduces summoner spell cooldown by 25%, and allows you to trade spells in store (with summoner shards accumulated over time)",
-        baronfight: "Reduce all cooldowns by 15%. Accumulate summoner shards in game to upgrade your abilities"
+        baronfight: "Reduce all cooldowns by 15%. Clearing 6 or more pieces will permanently increase ability damage by 10%."
     },
     8339: {
         league: "Gain 100HP but deal 10% less damage for first 10 mins",
@@ -175,7 +175,7 @@ const runeDescriptions = {
     },
     8345: {
         league: "Get free biscuit every 3 mins",
-        baronfight: "Gain a free biscuit every 10 seconds that restores 10% HP and MP."
+        baronfight: "Eat a biscuit every 10 seconds that restores 10% HP and MP."
     },
     8347: {
         league: "Gain 5% CDR and increase cap to 45%",
