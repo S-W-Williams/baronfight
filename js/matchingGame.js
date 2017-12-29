@@ -228,7 +228,7 @@ function cpuAttacks() {
         return;
     }
 
-    var damage = bossStats.attackDamage * level * 100 / (100 + playerStats.armor);
+    var damage = bossStats.attackDamage * 100 / (100 + playerStats.armor);
 
     //Second Wind - Everytime you take damage you also restore 20 health.
     if (playerHasRune(8444)) {

@@ -15,7 +15,7 @@ const GAME_SPRITE_HEIGHT = GAME_HEIGHT / GAME_NUM_ROWS;
 
 const GAME_COLORS = ["red", "orange", "yellow", "green", "blue", "purple", "black"];
 const GAME_NUM_COLORS = (level) => 2 + level;
-const GAME_LEVEL_CAP = GAME_COLORS.length - 2;
+const GAME_LEVEL_CAP = 8;
 
 const GAME_FALL_SPEED = 4;
 
@@ -91,6 +91,12 @@ var game = new Phaser.Game(GAME_WIDTH, GAME_HEIGHT, Phaser.CANVAS, 'phaser');
 var game_state = {};
 
 const getNextRuneOffer = function(runeTree, level) {
+
+    if (level == 6) {
+        return runesReforged;
+    } else if (level > 6) {
+        return runeTree.slots[level - 7].runes;
+    }
 
     return runeTree.slots[level-2].runes;
 

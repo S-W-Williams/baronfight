@@ -53,8 +53,6 @@ function runeSelected(rune) {
 
     //console.log("Selected Rune: " + rune.rune.id);
 
-    ///TODO: DISPLAY INFORMATION ABOUT RUNE AS WELL.
-
     for (var i = 0 ; i < game.world.children.length ; i++) {
         if (!game.world.children[i].rune || game.world.children[i].rune.id !== rune.rune.id) {
             game.add.tween(game.world.children[i]).to({alpha: 0}, 1000, Phaser.Easing.Linear.None, true);

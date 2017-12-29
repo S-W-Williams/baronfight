@@ -224,7 +224,7 @@ const runeDescriptions = {
     },
     8451: {
         league: "Enemy deaths permanently increase max HP",
-        baronfight: "Every set of orb you clear permanently increases your HP and max HP by 10."
+        baronfight: "Every set of orbs you clear permanently increases your HP and max HP by 10."
     },
     8453: {
         league: "Gain 5% Healing/shield power, increased when target is below 40% hp",
