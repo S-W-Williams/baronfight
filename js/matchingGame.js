@@ -228,7 +228,19 @@ function cpuAttacks() {
         return;
     }
 
-    var damage = bossStats.attackDamage * 100 / (100 + playerStats.armor);
+    var damage = 0;
+    rand = Math.random();
+
+    if (rand < 0.04 && !isStunned) { //Baron will stun the player.
+        stunPlayer(10000);
+        return;
+    } else if (rand < 0.52) { //Baron will deal physical damage to the player.
+        damage = bossStats.attackDamage * 100 / (100 + playerStats.armor);
+    } else { //Baron will deal magic damage to the player.
+        damage = bossStats.attackDamage * 100 / (100 + playerStats.magicResist);
+    }
+
+
 
     //Second Wind - Everytime you take damage you also restore 20 health.
     if (playerHasRune(8444)) {
