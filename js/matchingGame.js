@@ -654,6 +654,21 @@ function attack(length, color) {
         bonusLifeSteal += 0.4;
     }
 
+    //Demolish - Clearing green orbs grant a stack. Every 5th stack will damage the enemy for 30% of its max HP as magic damage.
+
+    if (color === "green" && playerHasRune(8446)) {
+        if (!runeRelatedData["8446"]) {
+            runeRelatedData["8446"] = 1;
+        } else {
+            runeRelatedData["8446"]++;
+
+            if (runeRelatedData["8446"] >= 5){
+                runeRelatedData["8446"] = 0;
+                applyDamage(0.3 * bossStats.maxHP * 100 / (100 + bossStats.magicResist), 1, 0);
+            }
+        }
+    }
+
     applyDamage(damage, 1, playerStats.lifeSteal + bonusLifeSteal);
 
 }
@@ -782,21 +797,6 @@ function applyDamage(damage, playerNumber, lifeSteal) {
             updateRuneCooldown(8224, 20000);
         }
 
-    }
-
-    //Demolish - Clearing green orbs grant a stack. Every 5th stack will damage the enemy for 30% of its max HP as magic damage.
-
-    if (color === "green" && playerHasRune(8446)) {
-        if (!runeRelatedData["8446"]) {
-            runeRelatedData["8446"] = 1;
-        } else {
-            runeRelatedData["8446"]++;
-
-            if (runeRelatedData["8446"] >= 5){
-                runeRelatedData["8446"] = 0;
-                applyDamage(0.3 * bossStats.maxHP * 100 / (100 + bossStats.magicResist), 1, 0);
-            }
-        }
     }
 
     //Overgrowth - Every set of orbs you clear permanently increases your HP and max HP by 10.
