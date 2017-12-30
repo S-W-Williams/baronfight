@@ -113,7 +113,6 @@ function confirmSelection(rune) {
     if (!rune.rune.slots) {
         //This is a rune and not a branch.
         addRuneToPanel(rune.rune);
-        showRuneInfoModal(rune.rune);
     } else {
         addTreeToPanel(rune.rune);
     }
@@ -190,6 +189,13 @@ function confirmSelection(rune) {
             cost: 0,
             cooldown: 0
         };
+    }
+
+    if (!rune.rune.slots) {
+        //This is a rune and not a branch.
+        showRuneInfoModal(rune.rune);
+    } else {
+        postRuneInfoModal();
     }
 
 }
