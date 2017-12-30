@@ -226,9 +226,17 @@ function showRuneInfoModal(rune) {
 
 function setStunned(on) {
     if (on) {
-        $(".stunned").css("display", "block");
+        $(".playerSide").css("display", "block");
     } else {
-        $(".stunned").css("display", "none");
+        $(".playerSide").css("display", "none");
+    }
+}
+
+function setBaronStunned(on) {
+    if (on) {
+        $(".baronSide").css("display", "block");
+    } else {
+        $(".baronSide").css("display", "none");
     }
 }
 

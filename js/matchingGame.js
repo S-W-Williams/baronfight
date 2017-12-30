@@ -1085,6 +1085,11 @@ function castEffect(key, isHexQ) {
     } else if (key === "E") {
         cpuAttackTimer = game.time.now += 1000 * (2 + .02 * playerStats.abilityPower) + bossStats.attackPeriod;
 
+        setBaronStunned(true);
+        setTimeout(function() {
+            setBaronStunned(false);
+        }, 1000 * (2 + .02 * playerStats.abilityPower));
+
         //Approach Velocity - Increase evasion rate by 20% for 5 seconds after your enemy is stunned.
         if (playerHasRune(8410)) {
 

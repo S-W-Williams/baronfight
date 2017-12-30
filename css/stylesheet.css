@@ -266,4 +266,5 @@ img {
     animation: rotation 4s infinite linear;
     opacity: .5;
     display: none;
+    top:0;
 }
