@@ -32,6 +32,9 @@ function nextRuneSelect() {
     if (level > GAME_LEVEL_CAP) {
         game.state.start("win", true, false);
     } else {
+
+        currentBaronStats = GAME_BOSS_STATS(level);
+
         game.state.start('runeSelect', true, false, getNextRuneOffer(level >= 6 ? playerStats.currentRunes[5] : playerStats.currentRunes[0], level));
     }
 }

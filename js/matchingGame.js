@@ -22,7 +22,7 @@ var runeRelatedData = {};
 //Will be augmented by runes, spells, items, etc. as game progresses.
 var playerStats = Object.assign({}, GAME_DEFAULT_STATS);
 
-var bossStats = Object.assign({}, GAME_BOSS_STATS(level));
+var bossStats = Object.assign({}, currentBaronStats);
 
 game_state.game = function() {};
 game_state.game.prototype = {
@@ -45,7 +45,7 @@ game_state.game.prototype = {
 
         resetResources();
 
-        bossStats = GAME_BOSS_STATS(level);
+        bossStats = currentBaronStats;
 
         var abilities = Object.values(playerStats.abilities);
 
@@ -232,7 +232,7 @@ function cpuAttacks() {
     rand = Math.random();
 
     if (rand < 0.04 && !isStunned) { //Baron will stun the player.
-        stunPlayer(10000);
+        stunPlayer(3000);
         return;
     } else if (rand < 0.52) { //Baron will deal physical damage to the player.
         damage = bossStats.attackDamage * 100 / (100 + playerStats.armor);
