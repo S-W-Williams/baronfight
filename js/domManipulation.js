@@ -203,7 +203,7 @@ function updateRuneCooldown(runeid, duration) {
 
 function showRuneInfoModal(rune) {
     $('#runeInfoModalTitle').text("You selected the rune: " + rune.name);
-    $('#runeInfoModalText').html(rune.shortDesc);
+    $('#runeInfoModalText').html(rune.text);
     $('#runeInfoModal').modal();
 }
 
