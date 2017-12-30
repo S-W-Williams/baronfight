@@ -204,6 +204,23 @@ function updateRuneCooldown(runeid, duration) {
 function showRuneInfoModal(rune) {
     $('#runeInfoModalTitle').text("You selected the rune: " + rune.name);
     $('#runeInfoModalText').html(rune.text);
+
+    //championIcons
+
+    var html = "<div class=\"card-group\">";
+    var key = rune.name.toLowerCase().replace(/[^\w\s]/gi, '');
+    for (i = 0; i < runeChampions[key].length; i++) {
+        var champId = champNameToIds[runeChampions[key][i][0]];
+        html += "<div class=\"card text-center\" style='width: 120px'>\n" +
+            "  <img class=\"card-img-top\" src='" + DATA_DRAGON_URL + championIcons[champId]['image'] + "' >\n" +
+            "  <div class=\"card-block\">\n" +
+            "    <h4 class=\"card-title\">" + runeChampions[key][i][0] + "</h4>\n" +
+            "    <p class=\"card-text\">" + runeChampions[key][i][1] + "</p>\n" +
+            "  </div>\n" +
+            "</div>"
+    }
+    html += "</div>";
+    $('#runeInfoModalChampions').html(html);
     $('#runeInfoModal').modal();
 }
 
