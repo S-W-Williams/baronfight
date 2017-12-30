@@ -322,6 +322,11 @@ function untintAll() {
 function clearTinted() {
 
     for (var i = 0 ; i < selectedSprites.length; i++) {
+
+        if (selectedSprites[i].zombie) {
+            continue;
+        }
+
         addPieceToCol(selectedSprites[i].col);
     }
 
