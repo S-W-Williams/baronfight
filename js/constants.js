@@ -14,7 +14,7 @@ const GAME_SPRITE_WIDTH = GAME_WIDTH / GAME_NUM_COLS;
 const GAME_SPRITE_HEIGHT = GAME_HEIGHT / GAME_NUM_ROWS;
 
 const GAME_COLORS = ["red", "orange", "yellow", "green", "blue", "purple", "black"];
-const GAME_NUM_COLORS = (level) => 2 + level;
+const GAME_NUM_COLORS = (level) => level >= 5 ? 7 : 2 + level;
 const GAME_LEVEL_CAP = 8;
 
 const GAME_PLAYER_STUN_DURATION = 3000;
@@ -88,18 +88,22 @@ const GAME_DEFAULT_STATS = {
 
 const GAME_BOSS_STATS = function(level) {
 
-    return {
-        maxHP: 200 * level,
-        health: 200 * level,
-        armor: 5 * level,
-        magicResist: 5 * level,
-        attackDamage: 5 * level,
-        attackPeriod: 1000,
-        tenacity: 0.1 * level
-    };
+    if (level === 1) {
+        return barons[0][0];
+    } else if (level <= 4) {
+        return randomBaronFrom(barons[1]);
+    } else if (level <= 6) {
+        return randomBaronFrom(barons[2]);
+    } else {
+        return randomBaronFrom(barons[3]);
+    }
 
 };
 
+const randomBaronFrom = function(barons) {
+    const rand = Math.floor(Math.random() * barons.length);
+    return barons[rand];
+};
 
 //Current baron stats
 var currentBaronStats = GAME_BOSS_STATS(1);
@@ -110,7 +114,12 @@ var game_state = {};
 
 const getNextRuneOffer = function(runeTree, level) {
 
-    if (level == 6) {
+    if (level === 6) {
+        var copy = runesReforged.slice();
+        copy.splice(copy.indexOf(playerStats.currentRunes[0]), 1);
+        return copy;
+
+    } else if (level === 1) {
         return runesReforged;
     } else if (level > 6) {
         return runeTree.slots[level - 7].runes;
@@ -128,3 +137,6 @@ const playerHasRune = function(id) {
     }
     return false;
 };
+
+
+

@@ -42,7 +42,7 @@ game_state.home.prototype = {
 };
 
 function advanceFromHome() {
-    game.state.start('runeSelect', true, false);
+    game.state.start('nextBaron', true, false);
 }
 
 game.state.add('home', game_state.home);

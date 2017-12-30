@@ -35,7 +35,8 @@ function nextRuneSelect() {
 
         currentBaronStats = GAME_BOSS_STATS(level);
 
-        game.state.start('runeSelect', true, false, getNextRuneOffer(level >= 6 ? playerStats.currentRunes[5] : playerStats.currentRunes[0], level));
+        game.state.start("nextBaron", true, false);
+
     }
 }
 

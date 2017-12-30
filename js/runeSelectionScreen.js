@@ -133,7 +133,7 @@ function confirmSelection(rune) {
 
     //The Ultimate Hat - Your ultimate ability's (R Ability) cooldown is reduced by 30%.
     if (rune.rune.id === 8243) {
-        abilities["R"].cooldown *= 0.7;
+        playerStats.abilities["R"].cooldown *= 0.7;
     }
 
     //Future's Market - Start each round with 1 additional red and blue potion.
@@ -202,6 +202,7 @@ function confirmSelection(rune) {
 
 function postRuneInfoModal() {
     game.state.start('game', true, false, GAME_NUM_COLORS(level));
+
 }
 
 function cancelSelection() {
