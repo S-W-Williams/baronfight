@@ -31,8 +31,9 @@ game_state.home.prototype = {
         resetRunePanel();
 
         //TODO - Add Instructions to Home Screen.
+        var bigStyle = { font: "bold 64px Arial", fill: "white", boundsAlignH: "center", boundsAlignV: "middle" };
         var style = { font: "bold 32px Arial", fill: "white", boundsAlignH: "center", boundsAlignV: "middle" };
-        game.add.text(GAME_WIDTH/2, GAME_HEIGHT/2 - 70, "BaronFight", style).anchor.setTo(.5,.5);
+        game.add.text(GAME_WIDTH/2, GAME_HEIGHT/2 - 70, "Bust-A-Baron", bigStyle).anchor.setTo(.5,.5);
         game.add.text(GAME_WIDTH/2, GAME_HEIGHT/2 + 70, "Click anywhere to continue!", style).anchor.setTo(.5,.5);
 
         game.input.onDown.add(advanceFromHome);
