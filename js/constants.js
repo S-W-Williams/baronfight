@@ -17,6 +17,8 @@ const GAME_COLORS = ["red", "orange", "yellow", "green", "blue", "purple", "blac
 const GAME_NUM_COLORS = (level) => 2 + level;
 const GAME_LEVEL_CAP = 8;
 
+const GAME_PLAYER_STUN_DURATION = 3000;
+
 const GAME_FALL_SPEED = 4;
 
 //Must match 3 pieces to count.

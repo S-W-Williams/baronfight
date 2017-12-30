@@ -250,3 +250,20 @@ img {
     right:0;
     transform-origin:right center;
 }
+
+@-webkit-keyframes rotation {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(359deg);
+    }
+}
+
+.stunned {
+    width: 100%;
+    position: absolute;
+    animation: rotation 4s infinite linear;
+    opacity: .5;
+    display: none;
+}

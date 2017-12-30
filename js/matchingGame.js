@@ -232,7 +232,7 @@ function cpuAttacks() {
     rand = Math.random();
 
     if (rand < 0.04 && !isStunned) { //Baron will stun the player.
-        stunPlayer(3000);
+        stunPlayer(GAME_PLAYER_STUN_DURATION);
         return;
     } else if (rand < 0.52) { //Baron will deal physical damage to the player.
         damage = bossStats.attackDamage * 100 / (100 + playerStats.armor);
@@ -1205,8 +1205,18 @@ function stunPlayer(duration) {
     const ccDuration = (1 - tenacity) * duration;
 
     isStunned = true;
+    setStunned(true);
 
-    setTimeout(() => isStunned = false, ccDuration);
+    const style = { font: "bold 100px Arial", fill: "red", boundsAlignH: "center", boundsAlignV: "middle" };
+    const stunText = game.add.text(game.world.width / 2, game.world.height / 2,"STUNNED", style);
+    stunText.anchor.setTo(0.5, 0.5);
+    stunText.rotation = 1;
+
+    setTimeout(() => {
+        isStunned = false;
+        setStunned(false);
+        game.world.remove(stunText);
+    }, ccDuration);
 }
 
 // Add and start the 'main' state to start the game

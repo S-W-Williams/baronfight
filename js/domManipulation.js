@@ -207,6 +207,14 @@ function showRuneInfoModal(rune) {
     $('#runeInfoModal').modal();
 }
 
+function setStunned(on) {
+    if (on) {
+        $(".stunned").css("display", "block");
+    } else {
+        $(".stunned").css("display", "none");
+    }
+}
+
 $('#closeRuneInfoModal').click(function() {
     postRuneInfoModal();
 });
