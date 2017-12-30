@@ -55,7 +55,7 @@ const runeDescriptions = {
     },
     8124: {
         league: "Give your boots an active ability: Channel for 3 seconds then gain 45% Movespeed until you enter combat",
-        baronfight: "Gain an Active (2): Dash - Channel for 3 seconds (You cannot take any actions while channeling) then triple clearing speed for 20 seconds. This cannot be cast while already in effect."
+        baronfight: "Gain an Active (3): Dash - Channel for 3 seconds (You cannot take any actions while channeling) then triple clearing speed for 20 seconds. This cannot be cast while already in effect."
     },
     8126: {
         league: "You deal bonus damage to impaired enemies.",
@@ -156,11 +156,11 @@ const runeDescriptions = {
     },
     8313: {
         league: "Gain free stopwatch that is worth less at beginning of game",
-        baronfight: "Gain an active (3): Stasis - You cannot make any actions but you cannot be damaged for 10 seconds. Cooldown: 45 seconds."
+        baronfight: "Gain an active (4): Stasis - You cannot make any actions but you cannot be damaged for 10 seconds. Cooldown: 45 seconds."
     },
     8316: {
         league: "Start game with 6 minion dematerializers, killing an enemy minion for free",
-        baronfight: "Start each round with 10 dematerializers. Activate (4) them to destroy any orb on your field."
+        baronfight: "Start each round with 10 dematerializers. Activate (5) them to destroy any orb on your field."
     },
     8321: {
         league: "You can enter debt to buy items",

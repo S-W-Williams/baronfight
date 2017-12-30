@@ -22,7 +22,7 @@ var runeRelatedData = {};
 //Will be augmented by runes, spells, items, etc. as game progresses.
 var playerStats = Object.assign({}, GAME_DEFAULT_STATS);
 
-var bossStats = Object.assign({}, currentBaronStats);
+var bossStats = currentBaronStats;
 
 game_state.game = function() {};
 game_state.game.prototype = {
@@ -46,6 +46,7 @@ game_state.game.prototype = {
         resetResources();
 
         bossStats = currentBaronStats;
+        bossStats.attackPeriod = bossStats.attackDelay;
 
         var abilities = Object.values(playerStats.abilities);
 
