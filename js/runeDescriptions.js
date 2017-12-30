@@ -188,7 +188,7 @@ const runeDescriptions = {
     },
     8359: {
         league: "Basic attacks are empowered to give consumables/gold after using an ability",
-        baronfight: "Certain orbs will drop potions."
+        baronfight: "Each orb clear you make has a 5% chance to drop either a red potion or a blue potion."
     },
     8410: {
         league: "Gain move speed when approaching move impaired enemies",

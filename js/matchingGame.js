@@ -727,6 +727,18 @@ function attack(length, color) {
         }
     }
 
+    //Kleptomancy - Each orb clear you make has a 5% chance to drop either a red potion or a blue potion.
+    if (playerHasRune(8359)) {
+        const random = Math.random();
+        if (random < 0.025) {
+            playerStats.redPotions++;
+            updateNumPotions(playerStats.redPotions, playerStats.bluePotions);
+        } else if (random < 0.05) {
+            playerStats.bluePotions++;
+            updateNumPotions(playerStats.redPotions, playerStats.bluePotions);
+        }
+    }
+
     //console.log("Apply Damage : " + damage);
     applyDamage(damage, 1, playerStats.lifeSteal + bonusLifeSteal);
 
