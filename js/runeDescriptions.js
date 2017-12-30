@@ -17,6 +17,7 @@ const runeDescriptions = {
     8005: {
         league: "Basic attacks apply stacks for 4 seconds. 3 Stacks deal bonus damage",
         baronfight: "Hitting an enemy adds a stack for 4 seconds. Landing 3 stacks on the enemy will destroy the stacks to deal 20% of their maximum HP as magic damage.",
+        champions: [102, 81, 24, 429, 114, 110],
         stacks: true
     },
     8008: {

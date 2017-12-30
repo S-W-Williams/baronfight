@@ -201,5 +201,15 @@ function updateRuneCooldown(runeid, duration) {
     }, duration );
 }
 
+function showRuneInfoModal(rune) {
+    $('#runeInfoModalTitle').text("You selected the rune: " + rune.name);
+    $('#runeInfoModalText').html(rune.shortDesc);
+    $('#runeInfoModal').modal();
+}
+
+$('#closeRuneInfoModal').click(function() {
+    postRuneInfoModal();
+});
+
 $(".spell").popover();
 resetRunePanel();
