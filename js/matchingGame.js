@@ -912,7 +912,7 @@ function endDrag() {
         clearTimeout(runeRelatedData["8120"].timeoutID);
     }
 
-    if (selectedSprites.length >= GAME_AMOUNT_TO_MATCH) {
+    if (selectedSprites.length >= GAME_AMOUNT_TO_MATCH && !isStunned) {
         color = selectedSprites[0].color;
         attack(selectedSprites.length, color);
         clearTinted();
@@ -980,7 +980,10 @@ function addAbilityListeners() {
 
 function tryCast(key) {
 
-    //console.log("Cast " + key);
+    if (isStunned) {
+        console.log("You are currently stunned and cannot take any actions!");
+        return;
+    }
 
     if (!playerStats.abilities[key]) {
         console.log("You do not have this ability!");
@@ -1231,7 +1234,7 @@ function stunPlayer(duration) {
     isStunned = true;
     setStunned(true);
 
-    const style = { font: "bold 100px Arial", fill: "red", boundsAlignH: "center", boundsAlignV: "middle" };
+    const style = { font: "bold 100px Arial", fill: "red", boundsAlignH: "center", boundsAlignV: "middle", stroke: "#000000", strokeThickness: 6 };
     const stunText = game.add.text(game.world.width / 2, game.world.height / 2,"STUNNED", style);
     stunText.anchor.setTo(0.5, 0.5);
     stunText.rotation = 1;
