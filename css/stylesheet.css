@@ -268,3 +268,14 @@ img {
     display: none;
     top:0;
 }
+
+canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+@media (max-width: 900px) {
+    div.health-bar {
+        width: 100%;
+    }
+}
