@@ -242,9 +242,9 @@ function setBaronStunned(on) {
 
 function setZhonyas(bool) {
     if (bool) {
-        $("#playerImage").attr("src", "resources/images/veigarZhonyas.png");
+        $("#playerImage").attr("src", "resources/images/veigarZhonyaT.png");
     } else {
-        $("#playerImage").attr("src", "resources/images/veigar0.gif");
+        $("#playerImage").attr("src", "resources/images/veigar0T.gif");
     }
 }
 
