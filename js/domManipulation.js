@@ -224,6 +224,8 @@ function showRuneInfoModal(rune) {
     if (rune.video) {
         var videoHtml = "<p>Check out this video from Riot Games of it in action:</p>"
         videoHtml += "<iframe width=\"560\" height=\"315\" src=\"" + rune.video + "\" frameborder=\"0\" gesture=\"media\" allow=\"encrypted-media\" allowfullscreen></iframe>";
+    } else {
+        $('#runeInfoModalVideo').html("");
     }
 
     $('#runeInfoModalVideo').html(videoHtml);
