@@ -240,6 +240,14 @@ function setBaronStunned(on) {
     }
 }
 
+function setZhonyas(bool) {
+    if (bool) {
+        $("#playerImage").attr("src", "resources/images/veigarZhonyas.png");
+    } else {
+        $("#playerImage").attr("src", "resources/images/veigar0.gif");
+    }
+}
+
 $('#closeRuneInfoModal').click(function() {
     postRuneInfoModal();
 });

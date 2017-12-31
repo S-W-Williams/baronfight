@@ -1181,10 +1181,12 @@ function castEffect(key, isHexQ) {
 
         isStunned = true;
         isDamagable = false;
+        setZhonyas(true);
 
         setTimeout(function() {
             isStunned = false;
             isDamagable = true;
+            setZhonyas(false);
         }, 10000);
 
 
