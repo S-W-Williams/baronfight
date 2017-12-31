@@ -34,6 +34,7 @@ game_state.game.prototype = {
     },
 
     create: function() {
+
         //Untint all when mouse leaves game board.
         document.body.onmouseover = this.untintAll;
 
@@ -111,13 +112,13 @@ game_state.game.prototype = {
             updateRuneCooldown(8429, 30000);
         }
 
-        //Gathering Storm - Every 10 seconds, multiply your AD/AP by 1.1.
+        //Gathering Storm - Every 10 seconds, multiply your AD/AP by 1.3.
         if (playerHasRune(8236)) {
             runeRelatedData["8236"] = {
                 intervalID: setInterval(function() {
                     playerStats.attackDamage *= 1.1;
                     playerStats.abilityPower *= 1.1;
-                    runeRelatedData["8236"].currentMultiplier *= 1.1;
+                    runeRelatedData["8236"].currentMultiplier *= 1.3;
                 }, 10000),
                 currentMultiplier: 1
             };
@@ -322,6 +323,11 @@ function untintAll() {
 function clearTinted() {
 
     for (var i = 0 ; i < selectedSprites.length; i++) {
+
+        if (selectedSprites[i].zombie) {
+            continue;
+        }
+
         addPieceToCol(selectedSprites[i].col);
     }
 
@@ -432,10 +438,10 @@ function attack(length, color) {
                 //Deal 20% of the boss's HP as magic damage.
                 applyDamage(bossStats.maxHP / 5 * 100 / (100 + bossStats.magicResist), 1, 0);
             }
-            //Grasp of the Undying - Landing 3 stacks deals 30% of the player's max hp as magic damage.
+            //Grasp of the Undying - Landing 3 stacks deals 20% of the player's max hp as magic damage.
             if (playerHasRune(8437)) {
                 //Deal 30% of the player's HP as magic damage.
-                applyDamage(playerStats.maxHP * 0.3 * 100 / (100 + bossStats.magicResist), 1, 0);
+                applyDamage(playerStats.maxHP * 0.2 * 100 / (100 + bossStats.magicResist), 1, 0);
             }
             //Phase Rush - Landing 3 stacks increases evasion rate by 20% for 5 seconds.
             if (playerHasRune(8230)) {
@@ -518,7 +524,7 @@ function attack(length, color) {
 
         //Eyeball Collection - Clearing 6 or more pieces permanently increases your attack damage by 10.
         if (playerHasRune(8138)) {
-            playerStats.attackDamage += 10;
+            playerStats.attackDamage += 2;
         }
 
         //Legend: Bloodline - Clearing 6 or more pieces permanently increases lifesteal by 1%.
@@ -594,14 +600,14 @@ function attack(length, color) {
     if (playerHasRune(8139)) {
 
         //If already active, refresh duration.
-        if (!runeRelatedData["8139"] || runeRelatedData["8139"].lastCastTime + 20000 < game.time.now) {
+        if (!runeRelatedData["8139"] || runeRelatedData["8139"].lastCastTime + 10000 < game.time.now) {
             runeRelatedData["8139"] = {
                 lastCastTime: game.time.now
             };
 
             applyDamage(playerStats.maxHP * -0.15, 0, 0);
 
-            updateRuneCooldown(8139, 20000);
+            updateRuneCooldown(8139, 10000);
         }
 
     }
@@ -707,9 +713,9 @@ function attack(length, color) {
         }
     }
 
-    //Font of Life - Gain 40% lifesteal when attacking stunned enemies.
+    //Font of Life - Gain 100% lifesteal when attacking stunned enemies.
     if (playerHasRune(8463) && cpuAttackTimer >= game.time.now + bossStats.attackPeriod) {
-        bonusLifeSteal += 0.4;
+        bonusLifeSteal += 1;
     }
 
     //Demolish - Clearing green orbs grant a stack. Every 5th stack will damage the enemy for 30% of its max HP as magic damage.
@@ -724,6 +730,18 @@ function attack(length, color) {
                 runeRelatedData["8446"] = 0;
                 applyDamage(0.3 * bossStats.maxHP * 100 / (100 + bossStats.magicResist), 1, 0);
             }
+        }
+    }
+
+    //Kleptomancy - Each orb clear you make has a 5% chance to drop either a red potion or a blue potion.
+    if (playerHasRune(8359)) {
+        const random = Math.random();
+        if (random < 0.025) {
+            playerStats.redPotions++;
+            updateNumPotions(playerStats.redPotions, playerStats.bluePotions);
+        } else if (random < 0.05) {
+            playerStats.bluePotions++;
+            updateNumPotions(playerStats.redPotions, playerStats.bluePotions);
         }
     }
 
@@ -745,18 +763,13 @@ function applyDamage(damage, playerNumber, lifeSteal) {
         }
     }
 
-    //Guardian - Absorb 50 damage the next time you take damage (cooldown: 10 seconds).
+    //Guardian - Heal for all damage received the next time you take damage (cooldown: 8 seconds).
     if (damage > 0 && playerNumber == 0 && playerHasRune(8465)) {
         if (!runeRelatedData["8465"] || runeRelatedData["8465"].lastCastTime + 10000 < game.time.now) {
             runeRelatedData["8465"] = {
                 lastCastTime: game.time.now
             };
-            damage -= 50;
-
-            if (damage < 0) {
-                damage = 0;
-            }
-
+            damage *= -1;
         }
     }
 
@@ -767,8 +780,6 @@ function applyDamage(damage, playerNumber, lifeSteal) {
     var total = character.maxHP;
     var value = character.health;
     var newValue = value - damage;
-
-    character.health = newValue;
 
     if (newValue <= 0) {
         newValue = 0;
@@ -817,7 +828,7 @@ function applyDamage(damage, playerNumber, lifeSteal) {
 
             }
 
-            //Gathering Storm - Every 10 seconds, multiply your AD/AP by 1.1
+            //Gathering Storm - Every 10 seconds, multiply your AD/AP by 1.3
             if (playerHasRune(8236)) {
 
                 clearInterval(runeRelatedData["8236"].intervalID);
@@ -841,6 +852,8 @@ function applyDamage(damage, playerNumber, lifeSteal) {
     if (newValue >= total && !playerHasRune(9101)) {
         newValue = total;
     }
+
+    character.health = newValue;
 
     updateHealthBar(playerNumber, newValue, total, damage, value);
 
@@ -899,7 +912,7 @@ function endDrag() {
         clearTimeout(runeRelatedData["8120"].timeoutID);
     }
 
-    if (selectedSprites.length >= GAME_AMOUNT_TO_MATCH) {
+    if (selectedSprites.length >= GAME_AMOUNT_TO_MATCH && !isStunned) {
         color = selectedSprites[0].color;
         attack(selectedSprites.length, color);
         clearTinted();
@@ -918,6 +931,11 @@ function areAdjacent(a, b) {
 function resetBoard() {
 
     game.world.removeAll();
+
+
+    var bg = game.add.sprite(0, 0, 'sr');
+    bg.width = GAME_WIDTH;
+    bg.height = GAME_HEIGHT;
 
     for (var i = -GAME_NUM_ROWS ; i < GAME_NUM_ROWS ; i++) {
         board[i] = [];
@@ -962,7 +980,10 @@ function addAbilityListeners() {
 
 function tryCast(key) {
 
-    //console.log("Cast " + key);
+    if (isStunned) {
+        console.log("You are currently stunned and cannot take any actions!");
+        return;
+    }
 
     if (!playerStats.abilities[key]) {
         console.log("You do not have this ability!");
@@ -1040,7 +1061,7 @@ function tryCast(key) {
 
 function castEffect(key, isHexQ) {
     if (key === "Q") {
-        var damage = bossStats.maxHP * (0.1 + .001 * playerStats.abilityPower);
+        var damage = 200 + playerStats.abilityPower;
 
         if (isHexQ) {
             const percentageCooldownElapsed = (game.time.now - playerStats.abilities["Q"].lastCastTime) / playerStats.abilities["Q"].cooldown / 1000;
@@ -1066,7 +1087,12 @@ function castEffect(key, isHexQ) {
         setCooldown("W", 9999999);
         return;
     } else if (key === "E") {
-        cpuAttackTimer = game.time.now += 1000 * (2 + .02 * playerStats.abilityPower) + bossStats.attackPeriod;
+        cpuAttackTimer = game.time.now += 3500 * (1 - bossStats.tenacity) + bossStats.attackPeriod;
+
+        setBaronStunned(true);
+        setTimeout(function() {
+            setBaronStunned(false);
+        }, 3500);
 
         //Approach Velocity - Increase evasion rate by 20% for 5 seconds after your enemy is stunned.
         if (playerHasRune(8410)) {
@@ -1099,28 +1125,28 @@ function castEffect(key, isHexQ) {
 
         }
 
-        //Aftershock - Increase armor and magic resist by 60 for 5 seconds after your enemy is stunned.
+        //Aftershock - Increase armor and magic resist by 150 for 5 seconds after your enemy is stunned.
         if (playerHasRune(8439)) {
 
             //If already active, refresh duration.
             if (runeRelatedData["8439"] && runeRelatedData["8439"].active) {
                 clearTimeout(runeRelatedData["8439"].timeoutID);
                 runeRelatedData["8439"].timeoutID = setTimeout(function() {
-                    playerStats.armor -= 60;
-                    playerStats.magicResist -= 60;
+                    playerStats.armor -= 150;
+                    playerStats.magicResist -= 150;
                     runeRelatedData["8439"].active = false;
                 }, 5000 + 1000 * (2 + .02 * playerStats.abilityPower));
                 updateRuneCooldown(8439, 5000 + 1000 * (2 + .02 * playerStats.abilityPower));
                 return;
             }
 
-            //Otherwise, increase evasion rate by 20% for 5 seconds.
-            playerStats.armor += 60;
-            playerStats.magicResist += 60;
+            //Otherwise, increase armor/mr by 150 for 5 seconds.
+            playerStats.armor += 150;
+            playerStats.magicResist += 150;
 
             const timeoutID = setTimeout(function() {
-                playerStats.armor -= 60;
-                playerStats.magicReist -= 60;
+                playerStats.armor -= 150;
+                playerStats.magicReist -= 150;
             }, 5000 + 1000 * (2 + .02 * playerStats.abilityPower));
             updateRuneCooldown(8439, 5000 + 1000 * (2 + .02 * playerStats.abilityPower));
 
@@ -1155,10 +1181,12 @@ function castEffect(key, isHexQ) {
 
         isStunned = true;
         isDamagable = false;
+        setZhonyas(true);
 
         setTimeout(function() {
             isStunned = false;
             isDamagable = true;
+            setZhonyas(false);
         }, 10000);
 
 
@@ -1197,8 +1225,8 @@ function stunPlayer(duration) {
     if (playerHasRune(8242)) {
         const abilities = Object.values(playerStats.abilities);
         for (var i = 0 ; i < abilities.length ; i++) {
-            if (game.time.now < playerStats.abilities[key].cooldown * 1000 + playerStats.abilities[key].lastCastTime) {
-                tenacity += 0.2;
+            if (game.time.now < abilities[i].cooldown * 1000 + abilities[i].lastCastTime) {
+                tenacity += 0.3;
             }
         }
     }
@@ -1208,7 +1236,7 @@ function stunPlayer(duration) {
     isStunned = true;
     setStunned(true);
 
-    const style = { font: "bold 100px Arial", fill: "red", boundsAlignH: "center", boundsAlignV: "middle" };
+    const style = { font: "bold 100px Arial", fill: "red", boundsAlignH: "center", boundsAlignV: "middle", stroke: "#000000", strokeThickness: 6 };
     const stunText = game.add.text(game.world.width / 2, game.world.height / 2,"STUNNED", style);
     stunText.anchor.setTo(0.5, 0.5);
     stunText.rotation = 1;

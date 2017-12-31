@@ -79,11 +79,11 @@ const runeDescriptions = {
     },
     8138: {
         league: "Enemy kills grant permanent AD or AP up to a cap.",
-        baronfight: "Clearing 6 or more pieces permanently increases your attack damage by 10."
+        baronfight: "Clearing 6 or more pieces permanently increases your attack damage by 2."
     },
     8139: {
         league: "Heal 18-35 HP every time you damage an enemy (20 sec cooldown)",
-        baronfight: "Heal 15% of your max HP everytime you damage an enemy (20 second cooldown)"
+        baronfight: "Heal 15% of your max HP everytime you damage an enemy (10 second cooldown)"
     },
     8143: {
         league: "Damaging enemies after flash/blink/tele/stealth increases penetration",
@@ -128,7 +128,7 @@ const runeDescriptions = {
     },
     8236: {
         league: "Every 10 minutes, gain exponentially more AD/AP",
-        baronfight: "Every 10 seconds, multiply your AD/AP by 1.1."
+        baronfight: "Every 10 seconds, multiply your AD/AP by 1.3."
     },
     8237: {
         league: "Damaging enemies burn them for more damage for 1 sec (20s cooldown)",
@@ -136,7 +136,7 @@ const runeDescriptions = {
     },
     8242: {
         league: "Gain 10% Tenacity for each summoner spell on cooldown, 15% Slow resistance when casting a summoner spell",
-        baronfight: "For each ability on cooldown, gain 20% Tenacity. "
+        baronfight: "For each ability on cooldown, gain 30% Tenacity. "
     },
     8243: {
         league: "5% CDR on your ult, increased by 2% everytime you ult, up to 15%",
@@ -188,7 +188,7 @@ const runeDescriptions = {
     },
     8359: {
         league: "Basic attacks are empowered to give consumables/gold after using an ability",
-        baronfight: "Certain orbs will drop potions."
+        baronfight: "Each orb clear you make has a 5% chance to drop either a red potion or a blue potion."
     },
     8410: {
         league: "Gain move speed when approaching move impaired enemies",
@@ -208,12 +208,12 @@ const runeDescriptions = {
     },
     8437: {
         league: "Gain stacks every 2 seconds in combat. 8 stacks make your next attack deal damage based on your max HP and heal you.",
-        baronfight: "Hitting an enemy adds a stack for 4 seconds. Landing 3 stacks on the enemy will destroy the stacks to deal 30% of your maximum HP as magic damage.",
+        baronfight: "Hitting an enemy adds a stack for 4 seconds. Landing 3 stacks on the enemy will destroy the stacks to deal 20% of your maximum HP as magic damage.",
         stacks: true
     },
     8439: {
         league: "Immobilizing enemies grant bonus armor and MR for 2.5 seconds, after which a shockwave will occur dealing damage",
-        baronfight: "Increase armor and magic resist by 60 for 5 seconds after your enemy is stunned."
+        baronfight: "Increase armor and magic resist by 150 for 5 seconds after your enemy is stunned."
     },
     8444: {
         league: "Taking enemy champ damage causes you to start healing for 10 seconds",
@@ -233,11 +233,11 @@ const runeDescriptions = {
     },
     8463: {
         league: "Impairing movement of enemies mark them. Allies heal when attacking them.",
-        baronfight: "Gain 40% lifesteal when attacking stunned enemies."
+        baronfight: "Gain 100% lifesteal when attacking stunned enemies."
     },
     8465: {
         league: "Gain a shield before taking damage. Also applies to allies you shield.",
-        baronfight: "Absorb 50 damage the next time you take damage (cooldown: 10 seconds)."
+        baronfight: "Heal for all damage received the next time you take damage (cooldown: 8 seconds)."
     },
     9101: {
         league: "Excess healing is converted to a temporary shield up to 10% MaxHP",

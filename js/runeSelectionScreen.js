@@ -17,10 +17,15 @@ game_state.runeSelect.prototype = {
 
     create: function() {
 
-        var style = { font: "bold 32px Arial", fill: "white", boundsAlignH: "center", boundsAlignV: "middle" };
+        var bg = game.add.sprite(0, 0, 'runes');
+        bg.width = GAME_WIDTH;
+        bg.height = GAME_HEIGHT;
+
+
+        var style = { font: "bold 32px Arial", fill: "white", boundsAlignH: "center", boundsAlignV: "middle", stroke: "#000000", strokeThickness: 6 };
         game.add.text(GAME_WIDTH/2, GAME_HEIGHT/2 - 70, selectableRunes[0].slots ? "Select your Rune Tree!" : "Select a rune for your tree!", style).anchor.setTo(.5,.5);
 
-        var subtitleStyle = {font: "bold 16px Arial", fill: "white", boundsAlignH: "center", boundsAlignV: "middle"  };
+        var subtitleStyle = {font: "bold 16px Arial", fill: "white", boundsAlignH: "center", boundsAlignV: "middle", stroke: "#000000", strokeThickness: 6  };
 
 
         for (var i = 0 ; i < selectableRunes.length ; i++) {
@@ -73,7 +78,7 @@ function runeSelected(rune) {
         y: game.world.height / 2 + 124
     }, 1000, Phaser.Easing.Linear.None, true);
 
-    var style = { font: "bold 18px Arial", fill: "white", boundsAlignH: "center", boundsAlignV: "middle" };
+    var style = { font: "bold 18px Arial", fill: "white", boundsAlignH: "center", boundsAlignV: "middle", stroke: "#000000", strokeThickness: 6 };
 
 
     //console.log(rune.rune);
@@ -84,7 +89,7 @@ function runeSelected(rune) {
     runeInfo.wordWrap = true;
     runeInfo.wordWrapWidth = game.world.width / 2 - 50;
 
-    var buttonStyle = { font: "bold 26px Arial", fill: "white", boundsAlignH: "center", boundsAlignV: "middle" };
+    var buttonStyle = { font: "bold 26px Arial", fill: "white", boundsAlignH: "center", boundsAlignV: "middle", stroke: "#000000", strokeThickness: 6 };
 
     var confirm = game.add.text(game.world.width*3/4 - 20,game.world.height - 120,"Confirm", buttonStyle);
     confirm.anchor.setTo(0.5, 0);
