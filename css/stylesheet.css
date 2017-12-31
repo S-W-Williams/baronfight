@@ -266,7 +266,6 @@ img {
     animation: rotation 4s infinite linear;
     opacity: .5;
     display: none;
-<<<<<<< HEAD
 }
 
 html {
@@ -287,7 +286,6 @@ body {
 
 #copyright {
     color: white;
-=======
     top:0;
 }
 
@@ -300,5 +298,4 @@ canvas {
     div.health-bar {
         width: 100%;
     }
->>>>>>> 7cf9d654a8479e185d189fc47ec6697caf522b6b
 }
