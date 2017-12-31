@@ -18,7 +18,8 @@ var runesReforged = [
                         "\n" +
                         "Damage: 50 - 220 (+0.500000 bonus AD, +0.3 AP) damage.\n" +
                         "\n" +
-                        "Cooldown: 50 - 25s"
+                        "Cooldown: 50 - 25s",
+                        "video": "https://www.youtube.com/embed/eAYgLNxEXL4"
                     },
                     {
                         "id": 8124,
@@ -31,7 +32,8 @@ var runesReforged = [
                         "\n" +
                         "Channel for 1.5s out of combat to gain 45% movement speed for 15s. Damaging attacks or abilities end this effect, dealing 60 - 140 (+0.4 bonus AD)(+0.25 AP) bonus adaptive damage.\n" +
                         "\n" +
-                        "Cooldown: 180s - 120s. Starts the game on cooldown and goes on cooldown if interrupted while channeling."
+                        "Cooldown: 180s - 120s. Starts the game on cooldown and goes on cooldown if interrupted while channeling.",
+                        "video": "https://www.youtube.com/embed/8-5htdt-ohg"
                     },
                     {
                         "id": 8128,
@@ -48,7 +50,8 @@ var runesReforged = [
                         "\n" +
                         "Champions - 6 soul essence.\n" +
                         "Monsters - 2 soul essence.\n" +
-                        "Minions - 4 soul essence."
+                        "Minions - 4 soul essence.",
+                        "video": "https://www.youtube.com/embed/fKKTvyoaMu4"
                     }
                 ]
             },
@@ -197,7 +200,8 @@ var runesReforged = [
                         "Additionally, your Summoner Spell Cooldowns are reduced by 25%.\n" +
                         "\n" +
                         "Smite: Buying Smite won't grant access to Smite items\n" +
-                        "You cannot have two of the same Summoner Spell"
+                        "You cannot have two of the same Summoner Spell",
+                        "video": "https://www.youtube.com/embed/FkYLrlYVxDg"
                     },
                     {
                         "id": 8351,
@@ -212,7 +216,8 @@ var runesReforged = [
                         "\n" +
                         "Slowing a champion with active items shoots a freeze ray through them, freezing the nearby ground for 5s, slowing all units inside by 50%.\n" +
                         "\n" +
-                        "Cooldown: 7-4s per unit"
+                        "Cooldown: 7-4s per unit",
+                        "video": "https://www.youtube.com/embed/KSaOUuW-t6Q"
                     },
                     {
                         "id": 8359,
@@ -221,7 +226,8 @@ var runesReforged = [
                         "shortDesc": "After using an ability, your next attack will grant bonus gold if used on a champion. There's a chance you'll also gain a consumable.",
                         "longDesc": "After using an ability, your next attack will grant bonus gold if used on a champion. There's a chance you'll also gain a consumable.",
                         "icon": "ASSETS/Perks/Styles/Inspiration/KSLooter/KSLooter.dds",
-                        "text": "After using an ability, your next attack on a champion grants bonus gold. There's a chance you'll also gain a consumable."
+                        "text": "After using an ability, your next attack on a champion grants bonus gold. There's a chance you'll also gain a consumable.",
+                        "video": "https://www.youtube.com/embed/cgrATV-Qa08"
                     }
                 ]
             },
@@ -360,7 +366,8 @@ var runesReforged = [
                         "shortDesc": "Hitting an enemy champion @HitsRequired@ consecutive times makes them vulnerable, dealing bonus damage and causing them to take more damage from all sources for @AmpDuration@s.",
                         "longDesc": "Hitting an enemy champion with @HitsRequired@ consecutive basic attacks deals @MinDamage@ - @MaxDamage@ bonus <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_AdaptiveDmg'><font color='#48C4B7'>adaptive damage</font></lol-uikit-tooltipped-keyword> (based on level) and makes them vulnerable, increasing the damage they take by @AmpPotencySelf.0*100@% from all sources for @AmpDuration@s.",
                         "icon": "ASSETS/Perks/Styles/Precision/PressThreeAttacks/PressThreeAttacks.dds",
-                        "text": "Hitting an enemy champion with 3 consecutive basic attacks deals 30 - 120 bonus adaptive damage (based on level) and makes them vulnerable, increasing the damage they take by 12% from all sources for 6s."
+                        "text": "Hitting an enemy champion with 3 consecutive basic attacks deals 30 - 120 bonus adaptive damage (based on level) and makes them vulnerable, increasing the damage they take by 12% from all sources for 6s.",
+                        "video": "https://www.youtube.com/embed/PTQLTMSZr-k"
                     },
                     {
                         "id": 8008,
@@ -373,7 +380,8 @@ var runesReforged = [
                         "\n" +
                         "Cooldown: 10s\n" +
                         "\n" +
-                        "Lethal Tempo allows you to temporarily exceed the attack speed limit."
+                        "Lethal Tempo allows you to temporarily exceed the attack speed limit.",
+                        "video": "https://www.youtube.com/embed/iA8OK5evk6w"
                     },
                     {
                         "id": 8021,
@@ -385,7 +393,8 @@ var runesReforged = [
                         "text": "Attacking and moving builds Energy stacks. At 100 stacks, your next attack is Energized.\n" +
                         "\n" +
                         "Energized attacks heal you for 5 - 50 (+0.100000 Bonus AD, +0.200000 AP) and grant +30% Movement Speed for 1s.\n" +
-                        "Healing is 60% as effective when used on a minion."
+                        "Healing is 60% as effective when used on a minion.",
+                        "text": "https://www.youtube.com/embed/nbD_xmQIYRM"
                     }
                 ]
             },
@@ -515,7 +524,8 @@ var runesReforged = [
                         "Heal you for 2% of your max health\n" +
                         "Permanently increase your health by 5\n" +
                         "\n" +
-                        "Ranged Champions: Damage and healing are halved and gain 2 permanent health instead."
+                        "Ranged Champions: Damage and healing are halved and gain 2 permanent health instead.",
+                        "video": "https://www.youtube.com/embed/7HfWqtiLgug"
                     },
                     {
                         "id": 8439,
@@ -527,7 +537,8 @@ var runesReforged = [
                         "text": "After immobilizing an enemy champion, increase your Armor and Magic Resist by 20 + 30% for 2.5s. Then explode, dealing magic damage to nearby enemies.\n" +
                         "\n" +
                         "Damage: 40 - 140 (+3.5% of your maximum health)\n" +
-                        "Cooldown: 20s"
+                        "Cooldown: 20s",
+                        "video": "https://www.youtube.com/embed/k04J5F7BSG0"
                     },
                     {
                         "id": 8465,
@@ -540,7 +551,8 @@ var runesReforged = [
                         "\n" +
                         "Cooldown: 45s\n" +
                         "Shield: 60 - 150 +(0.200000 AP) + (+10% bonus health).\n" +
-                        "Haste: +20% Movement Speed."
+                        "Haste: +20% Movement Speed.",
+                        "video": "https://www.youtube.com/embed/fXHbN6e0biQ"
                     }
                 ]
             },
@@ -667,7 +679,8 @@ var runesReforged = [
                         "Damage: 20 - 60 based on level (+0.100000 AP and +0.150000 bonus AD)\n" +
                         "Shield: 30 - 80 based on level (+0.250000 AP and +0.400000 bonus AD) \n" +
                         "\n" +
-                        "Aery cannot be sent out again until she returns to you."
+                        "Aery cannot be sent out again until she returns to you.",
+                        "video": "https://www.youtube.com/embed/spn_dmGAEs0"
                     },
                     {
                         "id": 8229,
@@ -684,7 +697,8 @@ var runesReforged = [
                         "Cooldown Reduction:\n" +
                         "Single Target: 20%.\n" +
                         "Area of Effect: 10%.\n" +
-                        "Damage over Time: 5%."
+                        "Damage over Time: 5%.",
+                        "video": "https://www.youtube.com/embed/GpNN2Q4a1qY"
                     },
                     {
                         "id": 8230,
@@ -697,7 +711,8 @@ var runesReforged = [
                         "\n" +
                         "Duration: 3s\n" +
                         "Cooldown: 15s\n" +
-                        "Melee: Additionally, gain 75% Slow Resistance for the duration."
+                        "Melee: Additionally, gain 75% Slow Resistance for the duration.",
+                        "video": "https://www.youtube.com/embed/uJ5DQhy-axc"
                     }
                 ]
             },
