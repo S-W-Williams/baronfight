@@ -786,8 +786,6 @@ function applyDamage(damage, playerNumber, lifeSteal) {
     var value = character.health;
     var newValue = value - damage;
 
-    character.health = newValue;
-
     if (newValue <= 0) {
         newValue = 0;
         if (playerNumber == 0) {
@@ -856,9 +854,11 @@ function applyDamage(damage, playerNumber, lifeSteal) {
     }
 
     //Overheal - You can heal past 100% HP.
-    if (newValue >= total && playerHasRune(9101)) {
+    if (newValue >= total && !playerHasRune(9101)) {
         newValue = total;
     }
+
+    character.health = newValue;
 
     updateHealthBar(playerNumber, newValue, total, damage, value);
 
