@@ -22,6 +22,9 @@ game_state.levelUp.prototype = {
 
         //MAKE MODIFICATIONS TO PLAYER STATS, BOSS STATS, ETC. HERE.
         level++;
+        playerStats.health += 200;
+        playerStats.abilityPower += 20;
+        playerStats.attackDamage += 10;
 
     }
 
