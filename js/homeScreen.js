@@ -23,6 +23,10 @@ game_state.home.prototype = {
         game.load.image("blueWard", "resources/misc/blueWard.gif");
         game.load.image("yellowWard", "resources/misc/yellowWard.gif");
         game.load.image("zombieWard", "resources/misc/zombieWard.png");
+        game.load.image("baron", "resources/misc/baron.png");
+        game.load.image("runes", "resources/misc/rune.png");
+        game.load.image("fighting", "resources/misc/bg.png");
+        game.load.image("sr", "resources/misc/sr.png");
 
     },
 
@@ -30,9 +34,13 @@ game_state.home.prototype = {
 
         resetRunePanel();
 
+        var bg = game.add.sprite(0, 0, 'baron');
+        bg.width = GAME_WIDTH;
+        bg.height = GAME_HEIGHT;
+
         //TODO - Add Instructions to Home Screen.
-        var bigStyle = { font: "bold 64px Arial", fill: "white", boundsAlignH: "center", boundsAlignV: "middle" };
-        var style = { font: "bold 32px Arial", fill: "white", boundsAlignH: "center", boundsAlignV: "middle" };
+        var bigStyle = { font: "bold 64px Arial", fill: "white", boundsAlignH: "center", boundsAlignV: "middle", stroke: "#000000", strokeThickness: 6 };
+        var style = { font: "bold 32px Arial", fill: "white", boundsAlignH: "center", boundsAlignV: "middle", stroke: "#000000", strokeThickness: 6  };
         game.add.text(GAME_WIDTH/2, GAME_HEIGHT/2 - 70, "Bust-A-Baron", bigStyle).anchor.setTo(.5,.5);
         game.add.text(GAME_WIDTH/2, GAME_HEIGHT/2 + 70, "Click anywhere to continue!", style).anchor.setTo(.5,.5);
 

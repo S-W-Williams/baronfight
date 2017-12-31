@@ -34,6 +34,7 @@ game_state.game.prototype = {
     },
 
     create: function() {
+
         //Untint all when mouse leaves game board.
         document.body.onmouseover = this.untintAll;
 
@@ -855,7 +856,7 @@ function applyDamage(damage, playerNumber, lifeSteal) {
     }
 
     //Overheal - You can heal past 100% HP.
-    if (newValue >= total && !playerHasRune(9101)) {
+    if (newValue >= total && playerHasRune(9101)) {
         newValue = total;
     }
 
@@ -935,6 +936,11 @@ function areAdjacent(a, b) {
 function resetBoard() {
 
     game.world.removeAll();
+
+
+    var bg = game.add.sprite(0, 0, 'sr');
+    bg.width = GAME_WIDTH;
+    bg.height = GAME_HEIGHT;
 
     for (var i = -GAME_NUM_ROWS ; i < GAME_NUM_ROWS ; i++) {
         board[i] = [];
