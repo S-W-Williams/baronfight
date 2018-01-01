@@ -235,6 +235,7 @@ function showRuneInfoModal(rune) {
 function setStunned(on) {
     if (on) {
         $(".playerSide").css("display", "block");
+        setMessageBoxText("You have been stunned!");
     } else {
         $(".playerSide").css("display", "none");
     }
