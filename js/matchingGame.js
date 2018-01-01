@@ -518,8 +518,9 @@ function attack(length, color) {
 
         //Presence of Mind - Clearing 6 or more pieces restores mana to 100%.
         if (playerHasRune(8009)) {
+            const oldMana = playerStats.mana;
             playerStats.mana = playerStats.maxMP;
-            //UPDATE MANA BARS
+            updateManaBar(0, playerStats.maxMP, playerStats.maxMP, playerStats.maxMP - oldMana, oldMana);
         }
 
         //Eyeball Collection - Clearing 6 or more pieces permanently increases your attack damage by 10.
