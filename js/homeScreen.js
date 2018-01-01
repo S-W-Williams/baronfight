@@ -34,6 +34,8 @@ game_state.home.prototype = {
 
         resetRunePanel();
 
+        currentBaronStats = GAME_BOSS_STATS(level);
+
         var bg = game.add.sprite(0, 0, 'baron');
         bg.width = GAME_WIDTH;
         bg.height = GAME_HEIGHT;
