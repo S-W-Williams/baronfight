@@ -741,9 +741,11 @@ function attack(length, color) {
         if (random < 0.025) {
             playerStats.redPotions++;
             updateNumPotions(playerStats.redPotions, playerStats.bluePotions);
+            setMessageBoxText("You gained a health potion!");
         } else if (random < 0.05) {
             playerStats.bluePotions++;
             updateNumPotions(playerStats.redPotions, playerStats.bluePotions);
+            setMessageBoxText("You gained a mana potion!");
         }
     }
 
