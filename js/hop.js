@@ -35,7 +35,7 @@ var HopPlugin;
                 height: options.radius,
                 marginTop: -options.radius / 2,
                 marginLeft: -options.radius / 2,
-                position: 'fixed',
+                position: 'absolute',
                 zIndex: 999,
                 borderRadius: '50%',
                 borderWidth: options.borderWidth,
