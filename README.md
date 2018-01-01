@@ -57,6 +57,19 @@ It was also very difficult to balance the game. One of the most important aspect
 
 [This Google Sheets Spreadsheet](https://docs.google.com/spreadsheets/d/16zrgSBui5sOE8invP48clxXKRjFAF0Clb-q3C25Uzvk/edit) details the consistencies we tried to maintain when translating, the effects of every single rune in both League of Legends and in Bust-A-Baron, as well as the different versions of Baron Nashor the player can face as they progress through the game.
 
+## The Future
+If there was more time there are several changes we probably would have made and several features we would have liked to implement.
+
+1) <b>Different Abilities: </b>We would have liked to implement different abilities each time the player plays the game. This would introduce even more diversity and increase the amount of thinking and planning the player would have to go through.
+
+2) <b>Different Bosses: </b> While the name of the game is Bust-A-Baron, we definitely would have liked for there to be different opponents for the player to face. Facing different jungle champs, bosses such as the dragon, or even enemy champions could pose a multitude of different challenges for the player that Baron may not be able to. It would have also been pretty awesome to have some more attacks that Baron could perform, perhaps some that would mess with the player's board.
+
+3) <b>Epic Sound Effects: </b> One thing that we never got the opportunity to look for were soudn effects. Finding artwork was a challenge in itself due to our low-tier artistic abilities, but this definitely would've ramped up the hype as the players were fighting for their lives against Baron.
+
+4) <b>A leaderboard: </b> If there's anything that makes a game fun, it's competition and collaboration! Having a leaderboard would challenge people to fight for a spot at the top. Scoring players by time would have been an awesome way to keep the game interesting and allow players to compete against their friends and their foes. 
+
+5) <b>Responsiveness: </b> One of the biggest issues with Bust-A-Baron is responsiveness. The game was really only optimized to look nice on screens with a width of over 900 pixels. It would be amazing to have a mobile version of this application so players could take this with them on-the-go, and would probably be one of our first priorities if there was additional time.
+
 
 ## Credits
 - Health Bar: [Dominik Widomski](https://codepen.io/dwidomski)
