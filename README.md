@@ -77,7 +77,7 @@ If there was more time there are several changes we probably would have made and
 
 3) <b>Epic Sound Effects: </b> One thing that we never got the opportunity to look for were soudn effects. Finding artwork was a challenge in itself due to our low-tier artistic abilities, but this definitely would've ramped up the hype as the players were fighting for their lives against Baron.
 
-4) <b>A leaderboard: </b> If there's anything that makes a game fun, it's competition and collaboration! Having a leaderboard would challenge people to fight for a spot at the top. Scoring players by time would have been an awesome way to keep the game interesting and allow players to compete against their friends and their foes. 
+4) <b>A leaderboard: </b> If there's anything that makes a game fun, it's competition and collaboration! Having a leaderboard would challenge people to fight for a spot at the top. Scoring players by time would have been an awesome way to keep the game interesting and allow players to compete against their friends and their foes. This was definitely something we didn't have time to implement though, as we would have had to host a backend server and database to keep track of all the submissions people were making to the leaderboard.
 
 5) <b>Responsiveness: </b> One of the biggest issues with Bust-A-Baron is responsiveness. The game was really only optimized to look nice on screens with a width of over 900 pixels. It would be amazing to have a mobile version of this application so players could take this with them on-the-go, and would probably be one of our first priorities if there was additional time.
 
