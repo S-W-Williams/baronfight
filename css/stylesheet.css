@@ -300,3 +300,72 @@ canvas {
         width: 100%;
     }
 }
+
+.hop-outer {
+    transition: .2s all ease-out;
+    -webkit-transition: .2s all ease-out;
+    -mz-transition: .2s all ease-out;
+    -ms-transition: .2s all ease-out;
+    -o-transition: .2s all ease-out;
+}
+
+.hop-content {
+    color: #fff;
+    font-size: 22px;
+    width: 300px;
+    top: 100%;
+    left: 100%;
+    position: absolute;
+}
+
+.hop-content h2 {
+    margin: 5px 0;
+}
+
+.btn {
+    display: inline-block;
+    margin-bottom: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 0.3rem;
+    transition: color 0.2s, background-color 0.2s, border-color 0.2s; }
+.btn + .btn {
+    margin-left: 1rem; }
+
+.btn:hover {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3); }
+
+@media screen and (min-width: 64em) {
+    .btn {
+        padding: 0.75rem 1rem; } }
+
+@media screen and (min-width: 42em) and (max-width: 64em) {
+    .btn {
+        padding: 0.6rem 0.9rem;
+        font-size: 0.9rem; } }
+
+@media screen and (max-width: 42em) {
+    .btn {
+        display: block;
+        width: 100%;
+        padding: 0.75rem;
+        font-size: 0.9rem; }
+    .btn + .btn {
+        margin-top: 1rem;
+        margin-left: 0; } }
+
+#baronImage {
+    width: 269px;
+    height: 300px;
+}
+
+#playerImage {
+    width: 179px;
+    height: 200px;
+}
