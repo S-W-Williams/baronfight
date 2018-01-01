@@ -234,10 +234,10 @@ function cpuAttacks() {
     var damage = 0;
     rand = Math.random();
 
-    if (rand < 0.04 && !isStunned) { //Baron will stun the player.
+    if (rand < bossStats.stun && !isStunned) { //Baron will stun the player.
         stunPlayer(GAME_PLAYER_STUN_DURATION);
         return;
-    } else if (rand < 0.52) { //Baron will deal physical damage to the player.
+    } else if (rand < bossStats.physical) { //Baron will deal physical damage to the player.
         damage = bossStats.attackDamage * 100 / (100 + playerStats.armor);
     } else { //Baron will deal magic damage to the player.
         damage = bossStats.attackDamage * 100 / (100 + playerStats.magicResist);

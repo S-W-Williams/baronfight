@@ -42,7 +42,7 @@ function intro5() {
 function intro6() {
     $('html,body').animate({scrollTop: $("#mainTree").offset().top - 300}, 500);
     $('#mainTree').hop({color: '#2E4053', radius: 250, borderWidth: 10, borderColor: 'white', opacity: .9})
-    $('.hop-content').css({top:0, right: '100%', left: 'auto', width: 450}).html('<h2>Your Runes!</h2><p>Here you find the Runes that you pick. At the start you have the option to select a playstyle path. Each time you level up you will have the option to select a Rune from that tree. Each Rune has their own unique effect to help you out.' +
+    $('.hop-content').css({top:0, right: '100%', left: 'auto', width: 450}).html('<h2>Your Runes!</h2><p>Here you find the Runes that you pick. At the start you have the option to select a playstyle path. Each time you level up you will have the option to select a Rune from that tree. Each Rune has their own unique effect to help you out. ' +
         'Every time you select a Rune you will be prompted with helpful information about that Rune to help you remember them when on the Fields of Justice. </p>' +
         '<a style="cursor:pointer" class="btn hopBtn" onclick="intro7()">Continue</a>');
 }
