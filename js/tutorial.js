@@ -61,9 +61,9 @@ function closeHop() {
 }
 
 $(function(){
-    if (getCookie("tutorial") !== "done") {
-        intro1();
-    }
+    //if (getCookie("tutorial") !== "done") {
+     intro1();
+    //}
 
 });
 
