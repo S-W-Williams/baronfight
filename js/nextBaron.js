@@ -14,7 +14,7 @@ game_state.nextBaron.prototype = {
         var style = { font: "bold 32px Arial", fill: "white", boundsAlignH: "center", boundsAlignV: "middle", stroke: "#000000", strokeThickness: 6  };
         var smallStyle = { font: "bold 20px Arial", fill: "white", boundsAlignH: "center", boundsAlignV: "middle", stroke: "#000000", strokeThickness: 6  };
         game.add.text(GAME_WIDTH/2, GAME_HEIGHT/2 - 160, "The next baron you face is:", style).anchor.setTo(.5,.5);
-        game.add.text(GAME_WIDTH/2, GAME_HEIGHT/2 - 100, currentBaronStats.name + "!", bigStyle).anchor.setTo(.5,.5);
+        game.add.text(GAME_WIDTH/2, GAME_HEIGHT/2 - 100, currentBaronStats.name, bigStyle).anchor.setTo(.5,.5);
 
         game.add.text(GAME_WIDTH/2, GAME_HEIGHT/2 - 40 , "Traits:", style).anchor.setTo(.5,.5);
 
