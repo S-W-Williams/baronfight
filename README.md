@@ -19,7 +19,7 @@ The game has also extracted spells from a variety of different League of Legends
 
 <b>R - Kennen's Slicing Maelstrom</b> Cost: 100 mana. Cooldown: 60s. Rebuild your board. Reduce the number of colors on board by one.
 
-Players are also provided with 2 Health Potions and 2 Mana Potions that they can use every round using the (1) and (2) keys.
+Players are also provided with 2 Health Potions and 2 Mana Potions that they can use every round using the <b>(1)</b> and <b>(2)</b> keys.
 
 ## Runes
 
@@ -27,15 +27,17 @@ With Baron Nashor getting stronger and stronger every level, how will you be abl
  
  ![You can view what traits your next foe possesses.](https://image.ibb.co/jctnCG/Screen_Shot_2017_12_31_at_8_03_09_PM.png)
  
- The player is then presented with a selection of runes or rune branches to empower your character. And while these runes very closely mimic the effects of their in-game counterparts, <b>their effects have been amplified significantly, </b>making it much more important for the player to look through their effects and determine what would be most helpful for the next boss.
+ The player is then presented with a selection of runes or rune branches to empower Veigar. And while these runes very closely mimic the effects of their in-game counterparts, <b>they have been amplified significantly, </b>making it much more important for the player to look through their effects and determine what would be most helpful for each boss.
 
 ![You can select a new rune or a new tree to go down everytime you defeat a boss.](https://media.giphy.com/media/3oFzmj5kdpRbOr8ucM/giphy.gif)
 
-<b>Every rune from the new Runes Reforged System has an in-game counterpart in Bust-A-Baron.</b> While the impact of these runes have been scaled up to make their effects much more impactful in game, at heart, they are still the same runes at heart. Knowing what runes to pick in Bust-A-Baron will not only familiarize players with the new runes in League of Legends, but it will also make it easier for players to decide what runes are appropriate against every opponent. Whenever the player selects a rune, they are also informed about the Rune's effect in League of Legends. This will help them get an understanding of the rune's real effect as they progress through Bust-A-Baron.
+<b>Each of the 60 runes from the new Runes Reforged System has an in-game counterpart in Bust-A-Baron.</b> While the impact of these runes have been scaled up to make their effects much more impactful in game, they are still the same runes at heart. Knowing what runes to pick in Bust-A-Baron will not only familiarize players with the new system in League of Legends, but it will also make it easier for players to decide what runes are appropriate against every opponent. Whenever the player selects a rune, they are also informed about the Rune's effect in League of Legends. This will help them get an understanding of the rune's real effect as they progress through Bust-A-Baron.
 
 ![You are also shown the Rune's League of Legends effect when selecting your rune.](https://media.giphy.com/media/3oFzm3aBUU7wAHlTl6/giphy.gif)
 
 Take advantage of your runes' crazy effects to defeat all 8 Baron Nashors and progress your way to victory!
+
+![Use the Perfect Timing rune to put your player into stasis for several seconds!](https://media.giphy.com/media/l49JIjbN8eokl6igU/giphy.gif)
 
 
 ## Challenges
