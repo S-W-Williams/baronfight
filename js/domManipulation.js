@@ -256,6 +256,10 @@ function setZhonyas(on) {
     }
 }
 
+function setMessageBoxText(text) {
+    $('#messageBox').text(text);
+}
+
 $('#closeRuneInfoModal').click(function() {
     postRuneInfoModal();
 });

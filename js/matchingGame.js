@@ -195,6 +195,7 @@ function cpuAttacks() {
     var rand = Math.random() * 10000;
     if (playerStats.moveSpeed > rand) {
         console.log("Enemy attack dodged!!!");
+        setMessageBoxText("Enemy attack dodged!");
 
         //Fleet Footwork - Dodging an attack deals 20% of the enemy's Max HP as magic damage and increases evasion rate by 10% for 10 seconds.
         if (playerHasRune(8021)) {
@@ -983,11 +984,13 @@ function tryCast(key) {
 
     if (isStunned) {
         console.log("You are currently stunned and cannot take any actions!");
+        setMessageBoxText("You are currently stunned and cannot take any actions!");
         return;
     }
 
     if (!playerStats.abilities[key]) {
         console.log("You do not have this ability!");
+        setMessageBoxText("You do not have this ability!");
         return;
     }
 
@@ -1019,15 +1022,18 @@ function tryCast(key) {
     } else if (game.time.now < playerStats.abilities[key].cooldown * 1000 + playerStats.abilities[key].lastCastTime) {
         if (!playerHasRune(8306) || key !== "Q") {
             console.log("You may not cast this ability yet!");
+            setMessageBoxText("You may not cast this ability yet!");
             return;
         } else {
             isHexQ = true;
         }
     } else if (playerStats.abilities[key].redPotions && playerStats.redPotions < playerStats.abilities[key].redPotions) {
         console.log("You are out of red potions!");
+        setMessageBoxText("You are out of red potions!");
         return;
     } else if (playerStats.abilities[key].bluePotions && playerStats.bluePotions < playerStats.abilities[key].bluePotions) {
         console.log("You are out of blue potions!");
+        setMessageBoxText("You are out of blue potions!");
         return;
     }
 
@@ -1195,6 +1201,7 @@ function castEffect(key, isHexQ) {
 
         if (runeRelatedData["8316"] && runeRelatedData["8316"] <= 0) {
             console.log("You don't have any more dematerializers!");
+            setMessageBoxText("You don't have any more dematerializers!");
             return;
         }
 
