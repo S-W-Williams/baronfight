@@ -47,7 +47,7 @@ For example, use the Perfect Timing rune to put your player into stasis for seve
 
 With the Zombie Ward rune, yellow, blue, and red trinkets are able to appear as pieces in game. When cleared, they reappear as zombie wards that can be cleared as if they were ANY color!
 
-##Technology
+## Technology
 
 To create Bust-A-Baron, we used [Phaser](https://phaser.io/), an open source framework for Canvas and WebGL powered browser games. Phaser was used for the entire game, the matching logic, the visual effects, and everything that could be seen on the canvas in the center of the webpage. We chose Phaser because it is one of the most well documented frameworks for Javascript games, with countless numbers of examples out there for users to follow and hundreds of pages of documentation.
 
