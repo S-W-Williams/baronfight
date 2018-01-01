@@ -43,9 +43,9 @@ Take advantage of your runes' crazy effects to defeat all 8 Baron Nashors and pr
 
 For example, use the Perfect Timing rune to put your player into stasis for several seconds!
 
-![With the Zombie Ward rune, yellow, blue, and red trinkets are able to appear as pieces in game. When cleared, they reappear as zombie wards that can be cleared as if they wre ANY color!](https://media.giphy.com/media/3o75299Qopjy9TtWQo/giphy.gif)
+![With the Zombie Ward rune, yellow, blue, and red trinkets are able to appear as pieces in game. When cleared, they reappear as zombie wards that can be cleared as if they were ANY color!](https://media.giphy.com/media/3o75299Qopjy9TtWQo/giphy.gif)
 
-With the Zombie Ward rune, yellow, blue, and red trinkets are able to appear as pieces in game. When cleared, they reappear as zombie wards that can be cleared as if they wre ANY color!
+With the Zombie Ward rune, yellow, blue, and red trinkets are able to appear as pieces in game. When cleared, they reappear as zombie wards that can be cleared as if they were ANY color!
 
 ## Challenges
 
