@@ -1,5 +1,7 @@
 # Bust-A-Baron
 
+See the site live at [http://www.bustabaron.com/](http://www.bustabaron.com/)
+
 Bust-A-Baron is a League of Legends minigame designed to teach players about the new changes to the Rune system. With its quick-pace gameplay and diversity in strategies, it is a surefire way to get any player to familiarize themselves with each and every rune and have fun while doing so!
 
 ## Gameplay
@@ -39,6 +41,7 @@ Take advantage of your runes' crazy effects to defeat all 8 Baron Nashors and pr
 
 ![Use the Perfect Timing rune to put your player into stasis for several seconds!](https://media.giphy.com/media/l49JIjbN8eokl6igU/giphy.gif)
 
+For example, use the Perfect Timing rune to put your player into stasis for several seconds!
 
 ## Challenges
 
