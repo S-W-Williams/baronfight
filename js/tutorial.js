@@ -25,8 +25,8 @@ function intro3() {
 
 function intro4() {
     $('html,body').animate({scrollTop: $("#phaser").offset().top - 300}, 500);
-    $('#phaser').hop({color: '#2E4053', radius: 550, borderWidth: 10, borderColor: 'white', opacity: .9})
-    $('.hop-content').css({top:0, right: '100%', left: 'auto', width: 450}).html('<h2>This is the board!</h2><p>Here you will find the board. The board will contain orbs that look like this:</p>' +
+    $('#phaser').hop({color: '#2E4053', radius: 200, borderWidth: 10, borderColor: 'white', opacity: .9})
+    $('.hop-content').css({top:"-200px", right: '100%', left: 'auto', width: 450}).html('<h2>This is the board!</h2><p>Here you will find the board. The board will contain orbs that look like this:</p>' +
         '<img src=\'https://i.imgur.com/uSKC6YT.png\' style="width: 200px; height: 200px;" >' +
         '<p>To damage Baron, select 3 or more orbs in a row. The more orbs you select, the more damage you will deal.</p>' +
         '<a style="cursor:pointer" class="btn hopBtn" onclick="intro5()">Continue</a>');
@@ -40,8 +40,8 @@ function intro5() {
 }
 
 function intro6() {
-    $('html,body').animate({scrollTop: $("#mainTree").offset().top - 300}, 500);
-    $('#mainTree').hop({color: '#2E4053', radius: 250, borderWidth: 10, borderColor: 'white', opacity: .9})
+    $('html,body').animate({scrollTop: $("#runeTrees").offset().top - 300}, 500);
+    $('#runeTrees').hop({color: '#2E4053', radius: 250, borderWidth: 10, borderColor: 'white', opacity: .9})
     $('.hop-content').css({top:0, right: '100%', left: 'auto', width: 450}).html('<h2>Your Runes!</h2><p>Here you find the Runes that you pick. At the start you have the option to select a playstyle path. Each time you level up you will have the option to select a Rune from that tree. Each Rune has their own unique effect to help you out. ' +
         'Every time you select a Rune you will be prompted with helpful information about that Rune to help you remember them when on the Fields of Justice. </p>' +
         '<a style="cursor:pointer" class="btn hopBtn" onclick="intro7()">Continue</a>');
