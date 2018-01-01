@@ -14,7 +14,11 @@
 <body>
     <div class="container">
         <nav class="navbar bg-faded">
-            <a class="navbar-brand" href="#">Bust-A-Baron</a>
+            <div class="row">
+                <div class="col-md-4">
+                    <a class="navbar-brand" href="#" id="logo">Bust-A-Baron</a>
+                </div>
+            </div>
         </nav>
             <div class="jumbotron">
                 <span class="align-bottom">
@@ -60,7 +64,7 @@
                             </div>
                         </span>
                         <span class="col-md-3">
-                            <img src="resources/images/baron.gif" />
+                            <img id="baronImage" src="resources/images/baron.gif" />
                             <img class="stunned baronSide" src="resources/misc/stunned.png" />
                             <div class="health-bar">
                                 <div class="bar">
@@ -235,6 +239,7 @@
     <script src="js/nextBaron.js"></script>
 
     <script src="js/matchingGame.js"></script>
-
+    <script src="js/hop.js"></script>
+    <script src="js/tutorial.js"></script>
 </body>
 </html>

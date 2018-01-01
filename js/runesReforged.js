@@ -394,7 +394,7 @@ var runesReforged = [
                         "\n" +
                         "Energized attacks heal you for 5 - 50 (+0.100000 Bonus AD, +0.200000 AP) and grant +30% Movement Speed for 1s.\n" +
                         "Healing is 60% as effective when used on a minion.",
-                        "text": "https://www.youtube.com/embed/nbD_xmQIYRM"
+                        "video": "https://www.youtube.com/embed/nbD_xmQIYRM"
                     }
                 ]
             },
