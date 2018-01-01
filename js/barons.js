@@ -206,7 +206,7 @@ const barons =
                 attackDamage: 100,
                 attackDelay: 3000,
                 tenacity: 0.35,
-                stun: 0.50,
+                stun: 0.15,
                 physical: 0.5
             },
             {
