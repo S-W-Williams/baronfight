@@ -184,7 +184,7 @@ const barons =
                 physical: 0.8
             },
             {
-                name: "Grand Wizard Baron",
+                name: "Archmage Baron",
                 traits: ["Only deals magic damage", "High magic resistance", "Attacks frequently", "Sometimes stuns the player"],
                 health: 2500,
                 maxHP: 2500,
