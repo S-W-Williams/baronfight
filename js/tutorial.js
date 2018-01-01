@@ -25,8 +25,8 @@ function intro3() {
 
 function intro4() {
     $('html,body').animate({scrollTop: $("#phaser").offset().top - 300}, 500);
-    $('#phaser').hop({color: '#2E4053', radius: 200, borderWidth: 10, borderColor: 'white', opacity: .9})
-    $('.hop-content').css({top:"-200px", right: '100%', left: 'auto', width: 450}).html('<h2>This is the board!</h2><p>Here you will find the board. The board will contain orbs that look like this:</p>' +
+    $('#phaser').hop({color: '#2E4053', radius: 300, borderWidth: 10, borderColor: 'white', opacity: .9})
+    $('.hop-content').css({top:"-200px", right: '100%', left: 'auto', width: 400}).html('<h2>This is the board!</h2><p>Here you will find the board. The board will contain orbs that look like this:</p>' +
         '<img src=\'https://media.giphy.com/media/3o752ogU2SYWUygIWA/giphy.gif\' style="width: 200px; height: 200px;" >' +
         '<p>To damage Baron, select 3 or more orbs in a row. The more orbs you select, the more damage you will deal.</p>' +
         '<a style="cursor:pointer" class="btn hopBtn" onclick="intro5()">Continue</a>');
