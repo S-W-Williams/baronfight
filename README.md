@@ -71,5 +71,6 @@ If there was more time there are several changes we probably would have made and
 5) <b>Responsiveness: </b> One of the biggest issues with Bust-A-Baron is responsiveness. The game was really only optimized to look nice on screens with a width of over 900 pixels. It would be amazing to have a mobile version of this application so players could take this with them on-the-go, and would probably be one of our first priorities if there was additional time.
 
 
-## Credits
+## Resource Credits:
 - Health Bar: [Dominik Widomski](https://codepen.io/dwidomski)
+- hop: [Ahmad Moussawi](https://github.com/ahmad-moussawi/hop)
