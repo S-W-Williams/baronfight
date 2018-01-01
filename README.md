@@ -47,6 +47,15 @@ For example, use the Perfect Timing rune to put your player into stasis for seve
 
 With the Zombie Ward rune, yellow, blue, and red trinkets are able to appear as pieces in game. When cleared, they reappear as zombie wards that can be cleared as if they were ANY color!
 
+##Technology
+
+To create Bust-A-Baron, we used [Phaser](https://phaser.io/), an open source framework for Canvas and WebGL powered browser games. Phaser was used for the entire game, the matching logic, the visual effects, and everything that could be seen on the canvas in the center of the webpage. We chose Phaser because it is one of the most well documented frameworks for Javascript games, with countless numbers of examples out there for users to follow and hundreds of pages of documentation.
+
+We also decided not to have all the game elements in the Phaser canvas itself. We thought it'd be cool if it seemed like the entire website was a part of the game, so we brought many aspects of the game into the DOM, such as the player/enemy's resource bars, ability cooldown timers, and rune trees. This allowed us to focus on using Phaser specifically for gameplay and offered us the flexibility of using CSS to style and position these additional components. We used [jQuery](https://jquery.com/) to manipulate these elements from the game.
+
+The website itself was created using [Bootstrap](https://getbootstrap.com/) to help speed up the process of positioning elements and making the site look the way it is now so that we could spend more time focusing on actual gameplay. We also used an open source jQuery library called [Hop](https://github.com/ahmad-moussawi/hop) to create the full-page tutorial that you see whenever the page is loaded. 
+ 
+
 ## Challenges
 
 One of the biggest challenges in creating Bust-A-Baron was finding a way to translate the majority of mechanics in League of Legends to Bust-A-Baron. Traits such as Movement Speed, Attack Speed, and Ability Power were difficult to find uses for in Bust-A-Baron. While we tried to think outside-the-box to come up with ways to translate these League mechanics into our minigame, we also made it a priority to keep ALL of our "translations" as consistent as possible. 
