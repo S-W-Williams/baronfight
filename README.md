@@ -43,6 +43,10 @@ Take advantage of your runes' crazy effects to defeat all 8 Baron Nashors and pr
 
 For example, use the Perfect Timing rune to put your player into stasis for several seconds!
 
+![With the Zombie Ward rune, yellow, blue, and red trinkets are able to appear as pieces in game. When cleared, they reappear as zombie wards that can be cleared as if they wre ANY color!](https://media.giphy.com/media/3o75299Qopjy9TtWQo/giphy.gif)
+
+With the Zombie Ward rune, yellow, blue, and red trinkets are able to appear as pieces in game. When cleared, they reappear as zombie wards that can be cleared as if they wre ANY color!
+
 ## Challenges
 
 One of the biggest challenges in creating Bust-A-Baron was finding a way to translate the majority of mechanics in League of Legends to Bust-A-Baron. Traits such as Movement Speed, Attack Speed, and Ability Power were difficult to find uses for in Bust-A-Baron. While we tried to think outside-the-box to come up with ways to translate these League mechanics into our minigame, we also made it a priority to keep ALL of our "translations" as consistent as possible. 
