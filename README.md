@@ -1,6 +1,9 @@
 # Bust-A-Baron
 
-See the site live at [http://www.bustabaron.com/](http://www.bustabaron.com/)
+**We received an [honorable mention](
+https://developer.riotgames.com/api-challenge-december2017.html) from Riot Games!**
+
+Visit the live site at: [http://www.bustabaron.com/](http://www.bustabaron.com/)
 
 Bust-A-Baron is a League of Legends minigame designed to teach players about the new changes to the Rune system. With its quick-pace gameplay and diversity in strategies, it is a surefire way to get any player to familiarize themselves with each and every rune and have fun while doing so! Designed to make players think about what runes are appropriate for them in different situations, Bust-A-Baron aims to improve player knowledge of the new rune system in a way that is both noticeable, accessible, interesting, and unique.
 
